@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>1.0.4</Version>
+		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
+		<AssemblyTitle>ServiceBricks.Notification</AssemblyTitle>
+		<Authors>holomodular</Authors>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<Nullable>disable</Nullable>
+		<Copyright>Copyright © 2023 HoloModular LLC. All Rights Reserved. Visit http://HoloModular.com to learn more.</Copyright>
+		<PackageProjectUrl>http://ServiceBricks.com</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>service;bricks;notification</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>ServiceBricks.Notification.snk</AssemblyOriginatorKeyFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/holomodular/ServiceBricks</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\ServiceBricks.Notification\Api\NotifyMessageDto.cs" Link="NotifyMessageDto.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\BackgroundTask\NotificationSendTask.cs" Link="NotificationSendTask.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\BackgroundTask\NotificationSendTimer.cs" Link="NotificationSendTimer.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Controllers\NotifyMessageApiController.cs" Link="NotifyMessageApiController.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Interface\IEmailProvider.cs" Link="IEmailProvider.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Interface\INotifyMessageApiClient.cs" Link="INotifyMessageApiClient.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Interface\INotifyMessageApiController.cs" Link="INotifyMessageApiController.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Interface\INotifyMessageApiService.cs" Link="INotifyMessageApiService.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Interface\INotifyMessageProcessQueueService.cs" Link="INotifyMessageProcessQueueService.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Interface\ISmsProvider.cs" Link="ISmsProvider.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Mapping\NotifyMessageDtoMappingProfile.cs" Link="NotifyMessageDtoMappingProfile.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Mapping\SenderTypeMappingProfile.cs" Link="SenderTypeMappingProfile.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\ExampleEmailProvider.cs" Link="ExampleEmailProvider.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\ExampleSmsProvider.cs" Link="ExampleSmsProvider.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\NotificationConstants.cs" Link="NotificationConstants.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\NotificationModule.cs" Link="NotificationModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\NotificationOptions.cs" Link="NotificationOptions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\SenderType.cs" Link="SenderType.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\SmtpEmailProvider.cs" Link="SmtpEmailProvider.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Model\SmtpOptions.cs" Link="SmtpOptions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Process\SendNotificationProcess.cs" Link="SendNotificationProcess.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Rule\CreateApplicationEmailRule.cs" Link="CreateApplicationEmailRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Rule\CreateApplicationSmsRule.cs" Link="CreateApplicationSmsRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Rule\NotifyMessageDtoValidateSenderTypeRule.cs" Link="NotifyMessageDtoValidateSenderTypeRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Rule\SendNotificationProcessRule.cs" Link="SendNotificationProcessRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Service\NotifyMessageApiClient.cs" Link="NotifyMessageApiClient.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks" Version="1.0.4" />
+	</ItemGroup>
+</Project>

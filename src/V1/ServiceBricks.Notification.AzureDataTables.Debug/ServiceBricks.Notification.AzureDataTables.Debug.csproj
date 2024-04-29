@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>1.0.4</Version>
+		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
+		<AssemblyTitle>ServiceBricks.Notification.AzureDataTables</AssemblyTitle>
+		<Authors>holomodular</Authors>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<Nullable>disable</Nullable>
+		<Copyright>Copyright © 2023 HoloModular LLC. All Rights Reserved. Visit http://HoloModular.com to learn more.</Copyright>
+		<PackageProjectUrl>http://ServiceBricks.com</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>service;bricks;notification;azure;azuredatatables</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>ServiceBricks.Notification.AzureDataTables.snk</AssemblyOriginatorKeyFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/holomodular/ServiceBricks</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Domain\NotifyMessage.cs" Link="NotifyMessage.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Interface\INotifyMessageStorageRepository.cs" Link="INotifyMessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Mapping\NotifyMessageMappingProfile.cs" Link="NotifyMessageMappingProfile.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Model\NotificationAzureDataTablesConstants.cs" Link="NotificationAzureDataTablesConstants.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Model\NotificationAzureDataTablesModule.cs" Link="NotificationAzureDataTablesModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageCreateRule.cs" Link="NotifyMessageCreateRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageQueryRule.cs" Link="NotifyMessageQueryRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageRule.cs" Link="NotifyMessageRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageUpdateRule.cs" Link="NotifyMessageUpdateRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks.Storage.AzureDataTables" Version="1.0.4" />
+	</ItemGroup>
+</Project>

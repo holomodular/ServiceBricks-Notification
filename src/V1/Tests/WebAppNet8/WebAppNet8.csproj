@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ServiceBricks.Notification.AzureDataTables.Debug\ServiceBricks.Notification.AzureDataTables.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.Cosmos.Debug\ServiceBricks.Notification.Cosmos.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.InMemory.Debug\ServiceBricks.Notification.InMemory.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.MongoDb.Debug\ServiceBricks.Notification.MongoDb.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.Postgres.Debug\ServiceBricks.Notification.Postgres.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.Sqlite.Debug\ServiceBricks.Notification.Sqlite.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer.Debug\ServiceBricks.Notification.SqlServer.Debug.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks.Logging.InMemory" Version="1.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\TestFiles\webapp\appsettings.json" Link="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>

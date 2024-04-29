@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>1.0.4</Version>
+		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
+		<AssemblyTitle>ServiceBricks.Notification.MongoDb</AssemblyTitle>
+		<Authors>holomodular</Authors>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<Nullable>disable</Nullable>
+		<Copyright>Copyright © 2023 HoloModular LLC. All Rights Reserved. Visit http://HoloModular.com to learn more.</Copyright>
+		<PackageProjectUrl>http://ServiceBricks.com</PackageProjectUrl>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>service;bricks;notification;mongo;mongodb</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>ServiceBricks.Notification.MongoDb.snk</AssemblyOriginatorKeyFile>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/holomodular/ServiceBricks</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Domain\NotifyMessage.cs" Link="NotifyMessage.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Interface\INotifyMessageStorageRepository.cs" Link="INotifyMessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Mapping\NotifyMessageMappingProfile.cs" Link="NotifyMessageMappingProfile.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Model\NotificationMongoDbConstants.cs" Link="NotificationMongoDbConstants.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Model\NotificationMongoDbModule.cs" Link="NotificationMongoDbModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Rule\NotifyMessageUpdateRule.cs" Link="NotifyMessageUpdateRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Storage\MessageStorageRepository.cs" Link="MessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.0.4" />
+	</ItemGroup>
+</Project>
