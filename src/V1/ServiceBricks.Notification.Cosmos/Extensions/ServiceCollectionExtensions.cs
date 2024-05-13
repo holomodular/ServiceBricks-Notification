@@ -26,7 +26,7 @@ namespace ServiceBricks.Notification.Cosmos
             // Register Database
             var builder = new DbContextOptionsBuilder<NotificationCosmosContext>();
             string connectionString = configuration.GetCosmosConnectionString(
-                NotificationCosmosConstants.APPSETTING_CONNECTION);
+                NotificationCosmosConstants.APPSETTING_CONNECTION_STRING);
             string database = configuration.GetCosmosDatabase(
                 NotificationCosmosConstants.APPSETTING_DATABASE);
             builder.UseCosmos(connectionString, database);

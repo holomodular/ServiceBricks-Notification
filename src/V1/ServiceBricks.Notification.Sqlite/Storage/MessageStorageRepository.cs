@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ServiceBricks.Notification.EntityFrameworkCore;
+using ServiceQuery;
 
 namespace ServiceBricks.Notification.Sqlite
 {
@@ -20,20 +21,44 @@ namespace ServiceBricks.Notification.Sqlite
             try
             {
                 DateTimeOffset now = DateTimeOffset.UtcNow;
-                string sql = $"UPDATE TOP({batchNumberToTake}) SET " +
-                    $" [IsProcessing] = 1, [ProcessDate] = '{now}', UpdateDate='{now}'" +
-                    $" FROM [{NotificationEntityFrameworkCoreConstants.DATABASE_SCHEMA_NAME}].[{nameof(NotifyMessage)}] " +
-                    " WITH (UPDLOCK, READPAST) " +
-                    $" WHERE [IsComplete] = 0 AND [IsProcessing] = 0 AND [FutureProcessDate] <= '{now}' ";
+
+                ServiceQueryRequestBuilder qb = new ServiceQueryRequestBuilder();
+                qb.IsEqual(nameof(NotifyMessage.IsComplete), false.ToString())
+                    .And()
+                    .IsEqual(nameof(NotifyMessage.IsProcessing), false.ToString())
+                    .And()
+                    .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString());
                 if (pickupErrors)
-                    sql += $" AND [IsError] = 1 AND [ProcessDate] <= '{errorPickupCutoffDate}' ";
+                {
+                    qb.And()
+                    .IsEqual(nameof(NotifyMessage.IsError), true.ToString())
+                    .And()
+                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString());
+                }
                 else
-                    sql += " AND [IsError] = 0 ";
-                sql += "ORDER BY [CreateDate] ASC " +
-                    " OUTPUT INSERTED.*";
-                var list = await DbSet.FromSqlRaw(sql).ToListAsync();
-                await SaveChangesAsync();
-                response.List = list;
+                {
+                    qb.And()
+                    .IsEqual(nameof(NotifyMessage.IsError), false.ToString());
+                }
+                qb.Sort(nameof(NotifyMessage.CreateDate), true);
+                qb.Paging(1, batchNumberToTake, false);
+
+                var respQuery = await this.QueryAsync(qb.Build());
+                response.CopyFrom(respQuery);
+                if (response.Error)
+                    return response;
+
+                if (respQuery.Item.List != null && respQuery.Item.List.Count > 0)
+                {
+                    foreach (var item in respQuery.Item.List)
+                    {
+                        item.IsProcessing = true;
+                        item.ProcessDate = now;
+                        item.UpdateDate = now;
+                        await UpdateAsync(item);
+                    }
+                    response.List = respQuery.Item.List;
+                }
                 return response;
             }
             catch (Exception ex)

@@ -25,7 +25,7 @@ namespace ServiceBricks.Notification.Sqlite
             //Register Database
             var builder = new DbContextOptionsBuilder<NotificationSqliteContext>();
             string connectionString = configuration.GetSqliteConnectionString(
-                NotificationSqliteConstants.APPSETTING_DATABASE_CONNECTION);
+                NotificationSqliteConstants.APPSETTING_CONNECTION_STRING);
             builder.UseSqlite(connectionString, x =>
             {
                 x.MigrationsAssembly(typeof(ServiceCollectionExtensions).Assembly.GetName().Name);

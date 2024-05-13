@@ -24,16 +24,21 @@ namespace ServiceBricks.Notification.MongoDb
 
                 ServiceQueryRequestBuilder qb = new ServiceQueryRequestBuilder();
                 qb.IsEqual(nameof(NotifyMessage.IsComplete), false.ToString())
+                    .And()
                     .IsEqual(nameof(NotifyMessage.IsProcessing), false.ToString())
+                    .And()
                     .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString());
                 if (pickupErrors)
                 {
-                    qb.IsEqual(nameof(NotifyMessage.IsError), true.ToString())
-                      .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString());
+                    qb.And()
+                    .IsEqual(nameof(NotifyMessage.IsError), true.ToString())
+                    .And()
+                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString());
                 }
                 else
                 {
-                    qb.IsEqual(nameof(NotifyMessage.IsError), false.ToString());
+                    qb.And()
+                    .IsEqual(nameof(NotifyMessage.IsError), false.ToString());
                 }
                 qb.Sort(nameof(NotifyMessage.CreateDate), true);
                 qb.Paging(1, batchNumberToTake, false);

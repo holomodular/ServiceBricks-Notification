@@ -5,7 +5,7 @@
     /// </summary>
     public static class NotificationPostgresConstants
     {
-        public const string APPSETTING_DATABASE_CONNECTION = "ServiceBricks:Notification:Postgres:ConnectionString";
+        public const string APPSETTING_CONNECTION_STRING = "ServiceBricks:Notification:Storage:Postgres:ConnectionString";
 
         public const string DATABASE_SCHEMA_NAME = "Notification";
     }

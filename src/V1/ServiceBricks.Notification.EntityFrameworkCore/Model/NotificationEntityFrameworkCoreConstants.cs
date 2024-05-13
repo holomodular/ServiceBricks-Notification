@@ -5,8 +5,5 @@
     /// </summary>
     public static class NotificationEntityFrameworkCoreConstants
     {
-        public const string APPSETTING_DATABASE_CONNECTION = "ServiceBricks:Notification:EntityFrameworkCore:ConnectionString";
-
-        public const string DATABASE_SCHEMA_NAME = "Notification";
     }
 }

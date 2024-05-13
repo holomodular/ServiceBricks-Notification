@@ -5,8 +5,8 @@
     /// </summary>
     public static class NotificationMongoDbConstants
     {
-        public const string APPSETTINGS_CONNECTION_STRING = "ServiceBricks:Notification:MongoDb:ConnectionString";
-        public const string APPSETTINGS_DATABASE_NAME = "ServiceBricks:Notification:MongoDb:DatabaseName";
+        public const string APPSETTING_CONNECTION_STRING = "ServiceBricks:Notification:Storage:MongoDb:ConnectionString";
+        public const string APPSETTING_DATABASE = "ServiceBricks:Notification:Storage:MongoDb:Database";
 
         public const string COLLECTIONNAME_PREFIX = "Notification";
 

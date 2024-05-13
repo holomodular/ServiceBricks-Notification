@@ -5,7 +5,7 @@
     /// </summary>
     public static class NotificationAzureDataTablesConstants
     {
-        public const string APPSETTINGS_CONNECTION_STRING = "ServiceBricks:Notification:AzureDataTables:ConnectionString";
+        public const string APPSETTING_CONNECTION_STRING = "ServiceBricks:Notification:Storage:AzureDataTables:ConnectionString";
 
         public const string TABLENAME_PREFIX = "Notification";
 

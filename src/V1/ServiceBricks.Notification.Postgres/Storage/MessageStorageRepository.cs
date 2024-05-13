@@ -22,7 +22,7 @@ namespace ServiceBricks.Notification.Postgres
                 DateTimeOffset now = DateTimeOffset.UtcNow;
                 string sql = $"UPDATE TOP({batchNumberToTake}) SET " +
                     $" [IsProcessing] = 1, [ProcessDate] = '{now}', UpdateDate='{now}'" +
-                    $" FROM [{NotificationEntityFrameworkCoreConstants.DATABASE_SCHEMA_NAME}].[{nameof(NotifyMessage)}] " +
+                    $" FROM [{NotificationPostgresConstants.DATABASE_SCHEMA_NAME}].[{nameof(NotifyMessage)}] " +
                     " WITH (UPDLOCK, READPAST) " +
                     $" WHERE [IsComplete] = 0 AND [IsProcessing] = 0 AND [FutureProcessDate] <= '{now}' ";
                 if (pickupErrors)

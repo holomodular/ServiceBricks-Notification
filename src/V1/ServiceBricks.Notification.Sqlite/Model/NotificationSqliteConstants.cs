@@ -5,7 +5,7 @@
     /// </summary>
     public static class NotificationSqliteConstants
     {
-        public const string APPSETTING_DATABASE_CONNECTION = "ServiceBricks:Notification:Sqlite:ConnectionString";
+        public const string APPSETTING_CONNECTION_STRING = "ServiceBricks:Notification:Storage:Sqlite:ConnectionString";
 
         public const string DATABASE_SCHEMA_NAME = "Notification";
     }

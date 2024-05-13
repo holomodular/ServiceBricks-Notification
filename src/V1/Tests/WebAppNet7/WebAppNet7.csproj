@@ -8,7 +8,7 @@
 
   <ItemGroup>
 	  <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.13" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.18" />
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
@@ -30,6 +30,6 @@
     <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer.Debug\ServiceBricks.Notification.SqlServer.Debug.csproj" />
   </ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Logging.InMemory" Version="1.0.5" />
+		<PackageReference Include="ServiceBricks.Logging.InMemory" Version="1.0.6" />
 	</ItemGroup>
 </Project>

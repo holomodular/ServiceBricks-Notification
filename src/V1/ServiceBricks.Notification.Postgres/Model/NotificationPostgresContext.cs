@@ -29,7 +29,7 @@ namespace ServiceBricks.Notification.Postgres
 
             var builder = new DbContextOptionsBuilder<NotificationPostgresContext>();
             string connectionString = configuration.GetPostgresConnectionString(
-                NotificationPostgresConstants.APPSETTING_DATABASE_CONNECTION);
+                NotificationPostgresConstants.APPSETTING_CONNECTION_STRING);
             builder.UseNpgsql(connectionString, x =>
             {
                 x.MigrationsAssembly(typeof(NotificationPostgresContext).Assembly.GetName().Name);

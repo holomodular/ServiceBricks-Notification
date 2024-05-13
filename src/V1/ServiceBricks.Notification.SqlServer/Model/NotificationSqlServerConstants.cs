@@ -5,7 +5,7 @@
     /// </summary>
     public static class NotificationSqlServerConstants
     {
-        public const string APPSETTING_DATABASE_CONNECTION = "ServiceBricks:Notification:SqlServer:ConnectionString";
+        public const string APPSETTING_CONNECTION_STRING = "ServiceBricks:Notification:Storage:SqlServer:ConnectionString";
 
         public const string DATABASE_SCHEMA_NAME = "Notification";
     }

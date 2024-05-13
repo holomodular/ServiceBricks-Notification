@@ -18,7 +18,7 @@ namespace ServiceBricks.Notification.AzureDataTables
             : base(logFactory)
         {
             ConnectionString = configuration.GetAzureDataTablesConnectionString(
-                NotificationAzureDataTablesConstants.APPSETTINGS_CONNECTION_STRING);
+                NotificationAzureDataTablesConstants.APPSETTING_CONNECTION_STRING);
             TableName = NotificationAzureDataTablesConstants.GetTableName(typeof(TDomain).Name);
         }
     }

@@ -25,7 +25,7 @@ namespace ServiceBricks.Notification.Postgres
             //Register Database
             var builder = new DbContextOptionsBuilder<NotificationPostgresContext>();
             string connectionString = configuration.GetPostgresConnectionString(
-                NotificationPostgresConstants.APPSETTING_DATABASE_CONNECTION);
+                NotificationPostgresConstants.APPSETTING_CONNECTION_STRING);
             builder.UseNpgsql(connectionString, x =>
             {
                 x.MigrationsAssembly(typeof(ServiceCollectionExtensions).Assembly.GetName().Name);

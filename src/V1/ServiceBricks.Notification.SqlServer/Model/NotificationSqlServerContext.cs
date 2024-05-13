@@ -29,7 +29,7 @@ namespace ServiceBricks.Notification.SqlServer
 
             var builder = new DbContextOptionsBuilder<NotificationSqlServerContext>();
             string connectionString = configuration.GetSqlServerConnectionString(
-                NotificationSqlServerConstants.APPSETTING_DATABASE_CONNECTION);
+                NotificationSqlServerConstants.APPSETTING_CONNECTION_STRING);
             builder.UseSqlServer(connectionString, x =>
             {
                 x.MigrationsAssembly(typeof(NotificationSqlServerContext).Assembly.GetName().Name);
