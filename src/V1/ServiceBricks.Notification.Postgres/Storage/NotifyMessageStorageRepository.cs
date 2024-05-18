@@ -1,18 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ServiceBricks.Notification.EntityFrameworkCore;
 using ServiceQuery;
 
-namespace ServiceBricks.Notification.MongoDb
+namespace ServiceBricks.Notification.Postgres
 {
     /// <summary>
     /// This is a storage repository for the notification message domain object.
     /// </summary>
-    public class MessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
+    public class NotifyMessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
     {
-        public MessageStorageRepository(
+        public NotifyMessageStorageRepository(
             ILoggerFactory loggerFactory,
-            IConfiguration configuration)
-            : base(loggerFactory, configuration)
+            NotificationPostgresContext context) : base(loggerFactory, context)
         { }
 
         public async Task<IResponseList<NotifyMessage>> GetQueueItemsAsync(int batchNumberToTake, bool pickupErrors, DateTimeOffset errorPickupCutoffDate)
@@ -27,13 +27,13 @@ namespace ServiceBricks.Notification.MongoDb
                     .And()
                     .IsEqual(nameof(NotifyMessage.IsProcessing), false.ToString())
                     .And()
-                    .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString());
+                    .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString("o"));
                 if (pickupErrors)
                 {
                     qb.And()
                     .IsEqual(nameof(NotifyMessage.IsError), true.ToString())
                     .And()
-                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString());
+                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString("o"));
                 }
                 else
                 {

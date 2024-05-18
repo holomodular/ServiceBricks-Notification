@@ -35,9 +35,9 @@ namespace ServiceBricks.Notification.Sqlite
             services.AddDbContext<NotificationSqliteContext>(c => { c = builder; }, ServiceLifetime.Scoped);
 
             // Storage Services
-            services.AddScoped<IStorageRepository<NotifyMessage>, MessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, MessageStorageRepository>();
-            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, MessageStorageRepository>();
+            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
+            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
             return services;
         }

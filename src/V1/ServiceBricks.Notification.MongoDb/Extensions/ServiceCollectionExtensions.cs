@@ -22,9 +22,9 @@ namespace ServiceBricks.Notification.MongoDb
             services.Configure<NotificationOptions>(configuration.GetSection(nameof(NotificationOptions)));
 
             // Storage Services
-            services.AddScoped<IStorageRepository<NotifyMessage>, MessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, MessageStorageRepository>();
-            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, MessageStorageRepository>();
+            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
+            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
             // Services
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();

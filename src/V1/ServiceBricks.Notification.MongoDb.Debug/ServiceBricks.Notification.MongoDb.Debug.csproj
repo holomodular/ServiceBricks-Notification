@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
 		<AssemblyTitle>ServiceBricks.Notification.MongoDb</AssemblyTitle>
 		<Authors>holomodular</Authors>
@@ -32,13 +32,13 @@
 	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Rule\NotifyMessageUpdateRule.cs" Link="NotifyMessageUpdateRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Storage\MessageStorageRepository.cs" Link="MessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.MongoDb\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.0.6" />
+		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.0.7" />
 	</ItemGroup>
 </Project>

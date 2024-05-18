@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
 		<AssemblyTitle>ServiceBricks.Notification.InMemory</AssemblyTitle>
 		<Authors>holomodular</Authors>
@@ -27,7 +27,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Model\NotificationInMemoryConstants.cs" Link="NotificationInMemoryConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Model\NotificationInMemoryContext.cs" Link="NotificationInMemoryContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Model\NotificationInMemoryModule.cs" Link="NotificationInMemoryModule.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.InMemory\Storage\MessageStorageRepository.cs" Link="MessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.InMemory\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
 

@@ -2,16 +2,16 @@
 using Microsoft.Extensions.Logging;
 using ServiceBricks.Notification.EntityFrameworkCore;
 
-namespace ServiceBricks.Notification.Postgres
+namespace ServiceBricks.Notification.InMemory
 {
     /// <summary>
     /// This is a storage repository for the notification message domain object.
     /// </summary>
-    public class MessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
+    public class NotifyMessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
     {
-        public MessageStorageRepository(
+        public NotifyMessageStorageRepository(
             ILoggerFactory loggerFactory,
-            NotificationPostgresContext context) : base(loggerFactory, context)
+            NotificationInMemoryContext context) : base(loggerFactory, context)
         { }
 
         public async Task<IResponseList<NotifyMessage>> GetQueueItemsAsync(int batchNumberToTake, bool pickupErrors, DateTimeOffset errorPickupCutoffDate)
@@ -20,18 +20,23 @@ namespace ServiceBricks.Notification.Postgres
             try
             {
                 DateTimeOffset now = DateTimeOffset.UtcNow;
-                string sql = $"UPDATE TOP({batchNumberToTake}) SET " +
-                    $" [IsProcessing] = 1, [ProcessDate] = '{now}', UpdateDate='{now}'" +
-                    $" FROM [{NotificationPostgresConstants.DATABASE_SCHEMA_NAME}].[{nameof(NotifyMessage)}] " +
-                    " WITH (UPDLOCK, READPAST) " +
-                    $" WHERE [IsComplete] = 0 AND [IsProcessing] = 0 AND [FutureProcessDate] <= '{now}' ";
+                var inmemoryquery = DbSet.Where(x =>
+                        !x.IsComplete &&
+                        !x.IsProcessing &&
+                        x.FutureProcessDate <= now);
                 if (pickupErrors)
-                    sql += $" AND [IsError] = 1 AND [ProcessDate] <= '{errorPickupCutoffDate}' ";
+                    inmemoryquery = inmemoryquery.Where(x => x.IsError && x.ProcessDate <= errorPickupCutoffDate);
                 else
-                    sql += " AND [IsError] = 0 ";
-                sql += "ORDER BY [CreateDate] ASC " +
-                    " OUTPUT INSERTED.*";
-                var list = await DbSet.FromSqlRaw(sql).ToListAsync();
+                    inmemoryquery = inmemoryquery.Where(x => !x.IsError);
+                var list = inmemoryquery.OrderBy(x => x.CreateDate).Take(batchNumberToTake).ToList();
+
+                foreach (var item in list)
+                {
+                    item.IsProcessing = true;
+                    item.ProcessDate = now;
+                    item.UpdateDate = now;
+                }
+
                 await SaveChangesAsync();
                 response.List = list;
                 return response;

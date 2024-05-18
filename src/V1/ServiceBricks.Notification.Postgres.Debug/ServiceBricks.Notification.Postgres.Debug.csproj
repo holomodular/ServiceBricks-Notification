@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
 		<AssemblyTitle>ServiceBricks.Notification.Postgres</AssemblyTitle>
 		<Authors>holomodular</Authors>
@@ -25,7 +25,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresConstants.cs" Link="NotificationPostgresConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresContext.cs" Link="NotificationPostgresContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresModule.cs" Link="NotificationPostgresModule.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Postgres\Storage\MessageStorageRepository.cs" Link="MessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Postgres\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
 
@@ -34,14 +34,14 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.18" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.18" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
 	</ItemGroup>
 </Project>

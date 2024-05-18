@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<Description>ServiceBricks is the cornerstone for building a microservices foundation. Visit http://ServiceBricks.com to learn more.</Description>
 		<AssemblyTitle>ServiceBricks.Notification.Sqlite</AssemblyTitle>
 		<Authors>holomodular</Authors>
@@ -27,7 +27,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteConstants.cs" Link="NotificationSqliteConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteContext.cs" Link="NotificationSqliteContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteModule.cs" Link="NotificationSqliteModule.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Storage\MessageStorageRepository.cs" Link="MessageStorageRepository.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
 
@@ -36,14 +36,14 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.18" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.19" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.18" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.19" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
 	</ItemGroup>
 </Project>

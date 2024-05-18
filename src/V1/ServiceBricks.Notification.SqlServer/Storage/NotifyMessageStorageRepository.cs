@@ -3,16 +3,16 @@ using Microsoft.Extensions.Logging;
 using ServiceBricks.Notification.EntityFrameworkCore;
 using ServiceQuery;
 
-namespace ServiceBricks.Notification.Sqlite
+namespace ServiceBricks.Notification.SqlServer
 {
     /// <summary>
     /// This is a storage repository for the notification message domain object.
     /// </summary>
-    public class MessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
+    public class NotifyMessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
     {
-        public MessageStorageRepository(
+        public NotifyMessageStorageRepository(
             ILoggerFactory loggerFactory,
-            NotificationSqliteContext context) : base(loggerFactory, context)
+            NotificationSqlServerContext context) : base(loggerFactory, context)
         { }
 
         public async Task<IResponseList<NotifyMessage>> GetQueueItemsAsync(int batchNumberToTake, bool pickupErrors, DateTimeOffset errorPickupCutoffDate)
@@ -27,13 +27,13 @@ namespace ServiceBricks.Notification.Sqlite
                     .And()
                     .IsEqual(nameof(NotifyMessage.IsProcessing), false.ToString())
                     .And()
-                    .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString());
+                    .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString("o"));
                 if (pickupErrors)
                 {
                     qb.And()
                     .IsEqual(nameof(NotifyMessage.IsError), true.ToString())
                     .And()
-                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString());
+                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString("o"));
                 }
                 else
                 {

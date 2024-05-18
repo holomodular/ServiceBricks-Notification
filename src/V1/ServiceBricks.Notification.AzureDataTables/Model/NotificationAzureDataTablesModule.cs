@@ -6,9 +6,6 @@ namespace ServiceBricks.Notification.AzureDataTables
     {
         public NotificationAzureDataTablesModule()
         {
-            AdminHtml = string.Empty;
-            Name = "Notification AzureDataTables Brick";
-            Description = @"The Notification AzureDataTables Brick implements the AzureDataTables provider.";
             AutomapperAssemblies = new List<Assembly>()
             {
                 typeof(NotificationAzureDataTablesModule).Assembly
@@ -19,9 +16,6 @@ namespace ServiceBricks.Notification.AzureDataTables
             };
         }
 
-        public string Name { get; }
-        public string Description { get; }
-        public string AdminHtml { get; }
         public List<Assembly> AutomapperAssemblies { get; }
         public List<Assembly> ViewAssemblies { get; }
 

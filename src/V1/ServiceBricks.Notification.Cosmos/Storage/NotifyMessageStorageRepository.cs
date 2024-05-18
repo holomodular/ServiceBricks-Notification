@@ -8,9 +8,9 @@ namespace ServiceBricks.Notification.Cosmos
     /// <summary>
     /// This is a storage repository for the notification message domain object.
     /// </summary>
-    public class MessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
+    public class NotifyMessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
     {
-        public MessageStorageRepository(
+        public NotifyMessageStorageRepository(
             ILoggerFactory loggerFactory,
             NotificationCosmosContext context) : base(loggerFactory, context)
         { }

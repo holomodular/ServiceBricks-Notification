@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ServiceBricks.Notification.EntityFrameworkCore;
 using ServiceQuery;
 
-namespace ServiceBricks.Notification.AzureDataTables
+namespace ServiceBricks.Notification.Sqlite
 {
     /// <summary>
     /// This is a storage repository for the notification message domain object.
@@ -11,8 +12,7 @@ namespace ServiceBricks.Notification.AzureDataTables
     {
         public NotifyMessageStorageRepository(
             ILoggerFactory loggerFactory,
-            IConfiguration configuration)
-            : base(loggerFactory, configuration)
+            NotificationSqliteContext context) : base(loggerFactory, context)
         { }
 
         public async Task<IResponseList<NotifyMessage>> GetQueueItemsAsync(int batchNumberToTake, bool pickupErrors, DateTimeOffset errorPickupCutoffDate)

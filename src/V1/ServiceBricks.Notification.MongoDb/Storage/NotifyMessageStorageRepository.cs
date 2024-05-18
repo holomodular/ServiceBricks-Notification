@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ServiceQuery;
 
-namespace ServiceBricks.Notification.AzureDataTables
+namespace ServiceBricks.Notification.MongoDb
 {
     /// <summary>
     /// This is a storage repository for the notification message domain object.

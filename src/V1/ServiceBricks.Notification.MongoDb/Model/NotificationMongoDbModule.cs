@@ -6,9 +6,6 @@ namespace ServiceBricks.Notification.MongoDb
     {
         public NotificationMongoDbModule()
         {
-            AdminHtml = string.Empty;
-            Name = "Notification MongoDB Brick";
-            Description = @"The Notification MongoDB Brick implements the MongoDB provider.";
             AutomapperAssemblies = new List<Assembly>()
             {
                 typeof(NotificationMongoDbModule).Assembly
@@ -19,9 +16,6 @@ namespace ServiceBricks.Notification.MongoDb
             };
         }
 
-        public string Name { get; }
-        public string Description { get; }
-        public string AdminHtml { get; }
         public List<Assembly> AutomapperAssemblies { get; }
         public List<Assembly> ViewAssemblies { get; }
 
