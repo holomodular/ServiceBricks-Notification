@@ -18,6 +18,7 @@
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/holomodular/ServiceBricks</RepositoryUrl>
+		<IsPackable>False</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
