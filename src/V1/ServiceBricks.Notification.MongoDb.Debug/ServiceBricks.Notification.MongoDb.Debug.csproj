@@ -40,6 +40,6 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.0.9" />
+		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.0.10" />
 	</ItemGroup>
 </Project>

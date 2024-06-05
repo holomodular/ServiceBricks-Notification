@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceBricks;
+using ServiceBricks.Notification;
+using ServiceBricks.Notification.SendGrid;
 
 using WebApp.ViewModel.Home;
 
@@ -14,10 +16,17 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private IServiceBus _serviceBus;
+        private IEmailProvider _emailProvider;
+        private IBusinessRuleService _businessRuleService;
 
-        public HomeController(IServiceBus serviceBus)
+        public HomeController(
+            IServiceBus serviceBus,
+            IEmailProvider emailProvider,
+            IBusinessRuleService businessRuleService)
         {
             _serviceBus = serviceBus;
+            _emailProvider = emailProvider;
+            _businessRuleService = businessRuleService;
         }
 
         [HttpGet]
@@ -27,6 +36,27 @@ namespace WebApp.Controllers
         {
             HomeViewModel model = new HomeViewModel();
             return View(model);
+        }
+
+        [HttpGet]
+        [Route("SendGrid")]
+        public async Task<IActionResult> SendGrid()
+        {
+            // Email
+            NotifyMessageDto msg = new NotifyMessageDto()
+            {
+                Body = "Test Body",
+                Subject = "Test Subject",
+                BodyHtml = "Test BodyHtml",
+                SenderTypeKey = 1,
+                ToAddress = "support@holomodular.com",
+            };
+
+            SendNotificationProcess process = new SendNotificationProcess(msg);
+            var respProcess = await _businessRuleService.ExecuteProcessAsync(process);
+
+            HomeViewModel model = new HomeViewModel();
+            return View("Index", model);
         }
 
         [HttpGet]

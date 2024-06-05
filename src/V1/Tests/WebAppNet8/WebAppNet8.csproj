@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\ServiceBricks.Notification.InMemory.Debug\ServiceBricks.Notification.InMemory.Debug.csproj" />
     <ProjectReference Include="..\..\ServiceBricks.Notification.MongoDb.Debug\ServiceBricks.Notification.MongoDb.Debug.csproj" />
     <ProjectReference Include="..\..\ServiceBricks.Notification.Postgres.Debug\ServiceBricks.Notification.Postgres.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.SendGrid.Debug\ServiceBricks.Notification.SendGrid.Debug.csproj" />
     <ProjectReference Include="..\..\ServiceBricks.Notification.Sqlite.Debug\ServiceBricks.Notification.Sqlite.Debug.csproj" />
     <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer.Debug\ServiceBricks.Notification.SqlServer.Debug.csproj" />
   </ItemGroup>
