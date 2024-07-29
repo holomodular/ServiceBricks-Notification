@@ -39,6 +39,6 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.EntityFrameworkCore" Version="1.0.10" />
+		<PackageReference Include="ServiceBricks.Storage.EntityFrameworkCore" Version="1.0.11" />
 	</ItemGroup>
 </Project>
