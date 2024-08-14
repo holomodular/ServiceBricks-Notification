@@ -4,10 +4,17 @@ using ServiceBricks.Storage.AzureDataTables;
 
 namespace ServiceBricks.Notification.AzureDataTables
 {
-    public class NotifyMessageMappingProfile : Profile
+    /// <summary>
+    /// Mapping profile for NotifyMessage and NotifyMessageDto.
+    /// </summary>
+    public partial class NotifyMessageMappingProfile : Profile
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public NotifyMessageMappingProfile()
         {
+            // AI: Create a automapper mapping for the NotifyMessage and NotifyMessageDto.
             CreateMap<NotifyMessageDto, NotifyMessage>()
                 .ForMember(x => x.CreateDate, y => y.Ignore())
                 .ForMember(x => x.PartitionKey, y => y.MapFrom<PartitionKeyResolver>())

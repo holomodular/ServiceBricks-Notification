@@ -1,22 +1,27 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
-using System;
 
 namespace ServiceBricks.Notification.SendGrid
 {
     /// <summary>
-    /// IServiceCollection extensions for the Notification Brick.
+    /// Extension methods for configuring the ServiceBricks Notification SendGrid module.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds the ServiceBricks Notification SendGrid module to the application.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationSendGrid(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add to module registry
+            // AI: Add the module to the ModuleRegistry
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationSendGridModule), new NotificationSendGridModule());
 
+            // AI: register the email provider
             services.AddScoped<IEmailProvider, SendGridEmailProviderService>();
+
             return services;
         }
     }

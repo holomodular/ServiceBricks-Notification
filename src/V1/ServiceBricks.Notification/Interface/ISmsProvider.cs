@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace ServiceBricks.Notification
+﻿namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This is a provider that can send SMS.
+    /// This is a provider that can send a SMS message.
     /// </summary>
     public partial interface ISmsProvider
     {

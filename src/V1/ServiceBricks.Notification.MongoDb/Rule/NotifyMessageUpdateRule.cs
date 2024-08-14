@@ -1,19 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using ServiceBricks.Storage.MongoDb;
 
 namespace ServiceBricks.Notification.MongoDb
 {
     /// <summary>
-    /// This is a business rule for the LogMessage object to set the
-    /// partitionkey and rowkey of the object before create.
+    /// This is a business rule for the NotifyMessage object to make sure dates are in the correct format.
     /// </summary>
-    public partial class NotifyMessageUpdateRule : BusinessRule
+    public sealed class NotifyMessageUpdateRule : BusinessRule
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
-        protected readonly ILogger _logger;
-
+        private readonly ILogger _logger;
         private readonly ITimezoneService _timezoneService;
 
         /// <summary>
@@ -50,11 +44,12 @@ namespace ServiceBricks.Notification.MongoDb
 
             try
             {
+                // AI: Make sure the context object is the correct type
                 if (context.Object is DomainCreateBeforeEvent<NotifyMessage> ei)
                 {
                     var item = ei.DomainObject;
 
-                    // Convert each to valid UTC zero
+                    // AI: Convert each to valid UTC zero
                     if (item.ProcessDate.Offset != TimeSpan.Zero)
                         item.ProcessDate = _timezoneService.ConvertPostBackToUTC(item.ProcessDate);
                     if (item.FutureProcessDate.Offset != TimeSpan.Zero)

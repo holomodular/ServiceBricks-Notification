@@ -7,28 +7,37 @@ using ServiceBricks.Storage.AzureDataTables;
 namespace ServiceBricks.Notification.AzureDataTables
 {
     /// <summary>
-    /// IApplicationBuilder extensions for the Notification Brick.
+    /// Extension methods for starting the ServiceBricks Notification Azure Data Tables module.
     /// </summary>
     public static partial class ApplicationBuilderExtensions
     {
+        /// <summary>
+        /// Flag to determine if the module has started.
+        /// </summary>
         public static bool ModuleStarted = false;
 
+        /// <summary>
+        /// Start the ServiceBricks Notification Azure Data Tables module.
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <returns></returns>
         public static IApplicationBuilder StartServiceBricksNotificationAzureDataTables(this IApplicationBuilder applicationBuilder)
         {
+            // AI: Get the connection string
             var configuration = applicationBuilder.ApplicationServices.GetRequiredService<IConfiguration>();
-
             var connectionString = configuration.GetAzureDataTablesConnectionString(
                 NotificationAzureDataTablesConstants.APPSETTING_CONNECTION_STRING);
 
-            // Create each table if not exists
+            // AI: Create each table in the module
             TableClient tableClient = new TableClient(
                 connectionString,
                 NotificationAzureDataTablesConstants.GetTableName(nameof(NotifyMessage)));
             tableClient.CreateIfNotExists();
 
+            // AI: Set the module started flag
             ModuleStarted = true;
 
-            // Start core
+            // AI: Start parent module
             applicationBuilder.StartServiceBricksNotification();
 
             return applicationBuilder;

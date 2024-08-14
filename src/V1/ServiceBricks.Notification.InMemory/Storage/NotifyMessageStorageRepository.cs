@@ -1,19 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using ServiceBricks.Notification.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.InMemory
 {
     /// <summary>
-    /// This is a storage repository for the notification message domain object.
+    /// This is a storage repository for the NotifyMessage domain object.
     /// </summary>
-    public class NotifyMessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
+    public partial class NotifyMessageStorageRepository : NotificationStorageRepository<NotifyMessage>, INotifyMessageStorageRepository
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="context"></param>
         public NotifyMessageStorageRepository(
             ILoggerFactory loggerFactory,
             NotificationInMemoryContext context) : base(loggerFactory, context)
         { }
 
+        /// <summary>
+        /// Get a list of queue items.
+        /// </summary>
+        /// <param name="batchNumberToTake"></param>
+        /// <param name="pickupErrors"></param>
+        /// <param name="errorPickupCutoffDate"></param>
+        /// <returns></returns>
         public async Task<IResponseList<NotifyMessage>> GetQueueItemsAsync(int batchNumberToTake, bool pickupErrors, DateTimeOffset errorPickupCutoffDate)
         {
             ResponseList<NotifyMessage> response = new ResponseList<NotifyMessage>();

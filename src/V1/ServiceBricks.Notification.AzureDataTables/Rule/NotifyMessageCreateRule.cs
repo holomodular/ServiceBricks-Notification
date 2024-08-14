@@ -4,16 +4,12 @@ using ServiceBricks.Storage.AzureDataTables;
 namespace ServiceBricks.Notification.AzureDataTables
 {
     /// <summary>
-    /// This is a business rule for the LogMessage object to set the
-    /// partitionkey and rowkey of the object before create.
+    /// This is a business rule for the NotifyMessage object to set the key, partitionkey and rowkey of the object before create.
+    /// It additionally makes sure dates are within bounds and are stored in UTC zero.
     /// </summary>
-    public partial class NotifyMessageCreateRule : BusinessRule
+    public sealed class NotifyMessageCreateRule : BusinessRule
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
-        protected readonly ILogger _logger;
-
+        private readonly ILogger _logger;
         private readonly ITimezoneService _timezoneService;
 
         /// <summary>
@@ -24,8 +20,8 @@ namespace ServiceBricks.Notification.AzureDataTables
             ILoggerFactory loggerFactory,
             ITimezoneService timezoneService)
         {
-            _logger = loggerFactory.CreateLogger<NotifyMessageCreateRule>();
             _timezoneService = timezoneService;
+            _logger = loggerFactory.CreateLogger<NotifyMessageCreateRule>();
             Priority = PRIORITY_LOW;
         }
 
@@ -50,25 +46,30 @@ namespace ServiceBricks.Notification.AzureDataTables
 
             try
             {
+                // AI: Make sure the context object is the correct type
                 if (context.Object is DomainCreateBeforeEvent<NotifyMessage> ei)
                 {
-                    // CreateDate is already in UTC format (due to previous rule)
+                    // AI: Set the Key, PartitionKey, and RowKey
+                    // AI: CreateDate is already in UTC format (due to previous rule)
                     var item = ei.DomainObject;
                     item.Key = Guid.NewGuid();
 
+                    // AI: Set the PartitionKey to be the year and month so that the data is partitioned
                     item.PartitionKey = item.CreateDate.ToString("yyyyMM");
+
+                    // AI: Set the RowKey to be the reverse date and time so that the newest items are at the top when querying
                     var reverseDate = DateTimeOffset.MaxValue.Ticks - item.CreateDate.Ticks;
                     item.RowKey = reverseDate.ToString("d19") +
                         StorageAzureDataTablesConstants.KEY_DELIMITER +
                         item.Key.ToString();
 
-                    // Check within bounds
+                    // AI: Check to make sure date is within bounds
                     if (item.ProcessDate < StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE)
                         item.ProcessDate = StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE;
                     if (item.FutureProcessDate < StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE)
                         item.FutureProcessDate = StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE;
 
-                    // Convert each to valid UTC zero
+                    // AI: Make sure we always store to UTC zero
                     if (item.ProcessDate.Offset != TimeSpan.Zero)
                         item.ProcessDate = _timezoneService.ConvertPostBackToUTC(item.ProcessDate);
                     if (item.FutureProcessDate.Offset != TimeSpan.Zero)

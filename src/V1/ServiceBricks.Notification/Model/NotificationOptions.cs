@@ -1,12 +1,12 @@
 ﻿namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// Notification options.
+    /// Options class for Notification configurations.
     /// </summary>
     public partial class NotificationOptions
     {
         /// <summary>
-        /// If development environment, if so, remove all senders and use DevelopmentEmailTo or DevelopmentSmsTo
+        /// If development environment, remove all senders from message and use DevelopmentEmailTo or DevelopmentSmsTo
         /// </summary>
         public bool IsDevelopment { get; set; }
 
@@ -23,11 +23,11 @@
         /// <summary>
         /// The default from adddress.
         /// </summary>
-        public virtual string EmailFromDefault { get; set; }
+        public string EmailFromDefault { get; set; }
 
         /// <summary>
         /// The default from address.
         /// </summary>
-        public virtual string SmsFromDefault { get; set; }
+        public string SmsFromDefault { get; set; }
     }
 }

@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ServiceBricks.Notification.Postgres\ServiceBricks.Notification.Postgres.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.Sqlite\ServiceBricks.Notification.Sqlite.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer\ServiceBricks.Notification.SqlServer.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.Postgres.Debug\ServiceBricks.Notification.Postgres.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.Sqlite.Debug\ServiceBricks.Notification.Sqlite.Debug.csproj" />
+    <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer.Debug\ServiceBricks.Notification.SqlServer.Debug.csproj" />
   </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.2" />

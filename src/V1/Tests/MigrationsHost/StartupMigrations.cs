@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using ServiceBricks;
-using ServiceBricks.Notification;
-using System.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
 using ServiceBricks.Notification.SqlServer;
-using ServiceBricks.Notification.Sqlite;
-using ServiceBricks.Notification.Postgres;
 
 namespace ServiceBricks.Xunit
 {

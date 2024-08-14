@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
 namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This business rule occurs when an email needs to be created.
+    /// This business rule occurs when an CreateApplicationEmailBroadcast is received from the service bus.
     /// </summary>
-    public partial class CreateApplicationEmailRule : BusinessRule
+    public sealed class CreateApplicationEmailRule : BusinessRule
     {
         private readonly INotifyMessageApiService _messageApiService;
         private readonly IMapper _mapper;
@@ -57,14 +54,20 @@ namespace ServiceBricks.Notification
 
             try
             {
+                // AI: Make sure the context object is the correct type
                 var e = context.Object as CreateApplicationEmailBroadcast;
                 if (e == null || e.DomainObject == null)
                     return response;
 
-                // Map and Create
+                // AI: Map the domain object to the DTO
                 var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
+
+                // AI: Call the API service to store the message
                 var respCreate = await _messageApiService.CreateAsync(message);
+
+                // AI: Copy the API response to the business rule response
                 response.CopyFrom(respCreate);
+
                 return response;
             }
             catch (Exception ex)

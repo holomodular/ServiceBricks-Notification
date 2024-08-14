@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ServiceQuery;
-using ServiceBricks.Notification;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ServiceBricks.Notification;
+using ServiceQuery;
 
 namespace ServiceBricks.Xunit
 {
@@ -98,7 +97,7 @@ namespace ServiceBricks.Xunit
 
             Assert.True(serviceDto.RetryCount == clientDto.RetryCount);
 
-            Assert.True(serviceDto.SenderTypeKey == clientDto.SenderTypeKey);
+            Assert.True(serviceDto.SenderType == clientDto.SenderType);
 
             Assert.True(serviceDto.Subject == clientDto.Subject);
 
@@ -123,7 +122,7 @@ namespace ServiceBricks.Xunit
         {
             return new NotifyMessageDto()
             {
-                SenderTypeKey = SenderType.Email //MessageRule
+                SenderType = SenderType.Email_TEXT //MessageRule
             };
         }
 
@@ -145,7 +144,7 @@ namespace ServiceBricks.Xunit
                 Priority = Guid.NewGuid().ToString(),
                 ProcessDate = DateTimeOffset.UtcNow.AddDays(-1),
                 RetryCount = 1,
-                SenderTypeKey = SenderType.Email, //MessageRule
+                SenderType = SenderType.Email_TEXT, //MessageRule
                 Subject = Guid.NewGuid().ToString(),
                 ToAddress = Guid.NewGuid().ToString(),
                 UpdateDate = DateTimeOffset.UtcNow
@@ -200,7 +199,7 @@ namespace ServiceBricks.Xunit
             dto.Priority = Guid.NewGuid().ToString();
             dto.ProcessDate = DateTimeOffset.UtcNow.AddDays(-1);
             dto.RetryCount = 2;
-            dto.SenderTypeKey = SenderType.SMS; //MessageRule
+            dto.SenderType = SenderType.SMS_TEXT; //MessageRule
             dto.Subject = Guid.NewGuid().ToString();
             dto.ToAddress = Guid.NewGuid().ToString();
         }
@@ -255,7 +254,7 @@ namespace ServiceBricks.Xunit
 
             Assert.True(serviceDto.RetryCount == clientDto.RetryCount);
 
-            Assert.True(serviceDto.SenderTypeKey == clientDto.SenderTypeKey);
+            Assert.True(serviceDto.SenderType == clientDto.SenderType);
 
             Assert.True(serviceDto.Subject == clientDto.Subject);
 
@@ -329,7 +328,7 @@ namespace ServiceBricks.Xunit
             queries.Add(qb.Build());
 
             qb = ServiceQueryRequestBuilder.New().
-                IsEqual(nameof(NotifyMessageDto.SenderTypeKey), dto.SenderTypeKey.ToString());
+                IsEqual(nameof(NotifyMessageDto.SenderType), dto.SenderType);
             queries.Add(qb.Build());
 
             qb = ServiceQueryRequestBuilder.New().

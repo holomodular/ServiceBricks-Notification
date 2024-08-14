@@ -1,42 +1,46 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
 
 namespace ServiceBricks.Notification.AzureDataTables
 {
     /// <summary>
-    /// IServiceCollection extensions for the Notification Brick.
+    /// Extension methods for adding the ServiceBricks Notification Azure Data Tables module to the DI container.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add the ServiceBricks Notification Azure Data Tables module to the DI container.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationAzureDataTables(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add to module registry
+            // AI: Add the module to the ModuleRegistry
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationAzureDataTablesModule), new NotificationAzureDataTablesModule());
 
-            // Add core
+            // AI: Add parent module
             services.AddServiceBricksNotification(configuration);
 
-            // Configs
+            // AI: Configure all options for the module
             services.Configure<NotificationOptions>(configuration.GetSection(nameof(NotificationOptions)));
 
-            // Storage Services
+            // AI: Add storage services for the module. Each domain object should have its own storage repository
             services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
             services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
             services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
-            // Services
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
-
-            // API Services
+            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
             services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
-            // Business Rules
+            // AI: Add any miscellaneous services for the module
+            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
+
+            // AI: Register business rules for the module
             DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
             DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
             ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-            NotifyMessageRule.RegisterRule(BusinessRuleRegistry.Instance);
             NotifyMessageCreateRule.RegisterRule(BusinessRuleRegistry.Instance);
             NotifyMessageUpdateRule.RegisterRule(BusinessRuleRegistry.Instance);
             NotifyMessageQueryRule.RegisterRule(BusinessRuleRegistry.Instance);

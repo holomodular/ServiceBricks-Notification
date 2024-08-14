@@ -1,17 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
-
 
 namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This is a provider for sending SMTP emails.
+    /// This is a provider for sending emails via a SMTP provider.
     /// </summary>
-    public partial class SmtpEmailProvider : IEmailProvider
+    public sealed class SmtpEmailProvider : IEmailProvider
     {
         private readonly ILogger _logger;
         private readonly SmtpOptions _smtpOptions;
@@ -34,17 +31,22 @@ namespace ServiceBricks.Notification
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public virtual async Task<IResponse> SendEmailAsync(NotifyMessageDto message)
+        public async Task<IResponse> SendEmailAsync(NotifyMessageDto message)
         {
             var response = new Response();
             try
             {
+                // AI: Create an smtp client and setup network defaults
                 SmtpClient client = new SmtpClient(_smtpOptions.EmailServer, _smtpOptions.EmailPort);
                 client.EnableSsl = _smtpOptions.EmailEnableSsl;
                 if (!string.IsNullOrEmpty(_smtpOptions.EmailUsername))
                     client.Credentials = new NetworkCredential(_smtpOptions.EmailUsername, _smtpOptions.EmailPassword);
+
+                // AI: Create a mail message and set the recipients
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(message.FromAddress);
+
+                if (!string.IsNullOrEmpty(message.FromAddress))
+                    mailMessage.From = new MailAddress(message.FromAddress);
 
                 if (!string.IsNullOrEmpty(message.ToAddress))
                 {
@@ -65,12 +67,14 @@ namespace ServiceBricks.Notification
                         mailMessage.Bcc.Add(item);
                 }
 
+                // AI: Set the mail message properties
                 mailMessage.Body = message.Body;
                 mailMessage.Subject = message.Subject;
                 mailMessage.IsBodyHtml = message.IsHtml;
                 if (message.IsHtml && !string.IsNullOrEmpty(message.BodyHtml))
                     mailMessage.Body = message.BodyHtml;
 
+                // AI: Set the mail message priority
                 if (!string.IsNullOrEmpty(message.Priority))
                 {
                     if (string.Compare(message.Priority, MailPriority.High.ToString(), true) == 0)
@@ -81,6 +85,7 @@ namespace ServiceBricks.Notification
                         mailMessage.Priority = MailPriority.Normal;
                 }
 
+                // AI: Send the email
                 await client.SendMailAsync(mailMessage);
             }
             catch (Exception ex)
@@ -96,7 +101,7 @@ namespace ServiceBricks.Notification
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        protected virtual string[] GetEmails(string source)
+        private string[] GetEmails(string source)
         {
             return source.Split(",");
         }

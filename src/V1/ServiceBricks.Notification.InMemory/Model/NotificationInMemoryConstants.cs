@@ -1,9 +1,9 @@
 ﻿namespace ServiceBricks.Notification.InMemory
 {
     /// <summary>
-    /// This is constants for the Security module.
+    /// These are constants for the ServiceBricks.Notification.InMemory module.
     /// </summary>
-    public static class NotificationInMemoryConstants
+    public static partial class NotificationInMemoryConstants
     {
     }
 }

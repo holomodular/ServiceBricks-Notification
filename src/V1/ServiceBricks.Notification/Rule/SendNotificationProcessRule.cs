@@ -1,22 +1,25 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Threading.Tasks;
 
 namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This business rule occurs when an email needs to be sent.
+    /// This business rule occurs when an SendNotificationProcess is executed.
     /// </summary>
-    public partial class SendNotificationProcessRule : BusinessRule
+    public sealed class SendNotificationProcessRule : BusinessRule
     {
         private readonly IEmailProvider _emailProvider;
         private readonly ISmsProvider _smsProvider;
         private readonly ILogger<SendNotificationProcessRule> _logger;
         private readonly NotificationOptions _notificationOptions;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="emailProvider"></param>
+        /// <param name="smsProvider"></param>
+        /// <param name="notificationOptions"></param>
         public SendNotificationProcessRule(
             ILoggerFactory loggerFactory,
             IEmailProvider emailProvider,
@@ -61,50 +64,54 @@ namespace ServiceBricks.Notification
 
             try
             {
+                // AI: Make sure the context object is the correct type
                 var p = context.Object as SendNotificationProcess;
                 if (p == null || p.DomainObject == null)
                     return response;
 
+                // AI: Switch based on the sendertype and invoke the appropriate provider
                 var msg = p.DomainObject;
-
-                switch (p.DomainObject.SenderTypeKey)
+                if (string.Compare(msg.SenderType, SenderType.Email_TEXT, true) == 0)
                 {
-                    case SenderType.Email:
+                    // AI: Set defaults defined by options
+                    if (!string.IsNullOrEmpty(_notificationOptions.EmailFromDefault))
+                        msg.FromAddress = _notificationOptions.EmailFromDefault;
+                    if (_notificationOptions.IsDevelopment)
+                    {
+                        msg.ToAddress = _notificationOptions.DevelopmentEmailTo;
+                        msg.CcAddress = null;
+                        msg.BccAddress = null;
+                    }
 
-                        // Set defaults defined by options
-                        if (!string.IsNullOrEmpty(_notificationOptions.EmailFromDefault))
-                            msg.FromAddress = _notificationOptions.EmailFromDefault;
-                        if (_notificationOptions.IsDevelopment)
-                        {
-                            msg.ToAddress = _notificationOptions.DevelopmentEmailTo;
-                            msg.CcAddress = null;
-                            msg.BccAddress = null;
-                        }
+                    // AI: Send the email
+                    var respEmail = await _emailProvider.SendEmailAsync(msg);
 
-                        var respEmail = await _emailProvider.SendEmailAsync(msg);
-                        response.CopyFrom(respEmail);
-                        break;
-
-                    case SenderType.SMS:
-
-                        // Set defaults defined by options
-                        if (!string.IsNullOrEmpty(_notificationOptions.SmsFromDefault))
-                            msg.FromAddress = _notificationOptions.SmsFromDefault;
-                        if (_notificationOptions.IsDevelopment)
-                        {
-                            msg.ToAddress = _notificationOptions.DevelopmentSmsTo;
-                            msg.CcAddress = null;
-                            msg.BccAddress = null;
-                        }
-
-                        var respSMS = await _smsProvider.SendSmsAsync(msg);
-                        response.CopyFrom(respSMS);
-                        break;
-
-                    default:
-                        _logger.LogError($"SenderTypeKey not defined for {msg.SenderTypeKey}");
-                        break;
+                    // AI: Copy the response to the main response
+                    response.CopyFrom(respEmail);
+                    return response;
                 }
+
+                if (string.Compare(msg.SenderType, SenderType.Email_TEXT, true) == 0)
+                {
+                    // AI: Set defaults defined by options
+                    if (!string.IsNullOrEmpty(_notificationOptions.SmsFromDefault))
+                        msg.FromAddress = _notificationOptions.SmsFromDefault;
+                    if (_notificationOptions.IsDevelopment)
+                    {
+                        msg.ToAddress = _notificationOptions.DevelopmentSmsTo;
+                        msg.CcAddress = null;
+                        msg.BccAddress = null;
+                    }
+
+                    // AI: Send the SMS
+                    var respSMS = await _smsProvider.SendSmsAsync(msg);
+
+                    // AI: Copy the response to the main response
+                    response.CopyFrom(respSMS);
+                    return response;
+                }
+
+                // AI: Register new rules to process against the SendNotificationProcess via the IBusinessRuleRegistry
 
                 return response;
             }

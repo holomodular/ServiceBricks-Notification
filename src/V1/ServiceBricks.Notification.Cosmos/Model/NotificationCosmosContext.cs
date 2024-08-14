@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using ServiceBricks.Storage.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using ServiceBricks.Notification.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Cosmos
 {
@@ -11,9 +7,6 @@ namespace ServiceBricks.Notification.Cosmos
     /// </summary>
     public partial class NotificationCosmosContext : DbContext
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
         protected readonly DbContextOptions<NotificationCosmosContext> _options;
 
         /// <summary>
@@ -25,6 +18,9 @@ namespace ServiceBricks.Notification.Cosmos
             _options = options;
         }
 
+        /// <summary>
+        /// NotifyMessages.
+        /// </summary>
         public virtual DbSet<NotifyMessage> NotifyMessages { get; set; }
 
         /// <summary>
@@ -33,10 +29,14 @@ namespace ServiceBricks.Notification.Cosmos
         /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            // AI: Set the default container name
             builder.Model.SetDefaultContainer(NotificationCosmosConstants.DEFAULT_CONTAINER_NAME);
 
+            // AI: Create the model for each table
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderTypeKey, key.FutureProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderType, key.FutureProcessDate, key.CreateDate });
         }
 
         /// <summary>

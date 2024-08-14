@@ -1,24 +1,22 @@
-﻿using SendGrid;
-using SendGrid.Helpers.Mail;
-using System;
-using System.Threading.Tasks;
-using System.Text;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System.Linq;
-using System.IO;
-using System.Threading;
-using ServiceBricks.Notification;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace ServiceBricks.Notification.SendGrid
 {
-    public class SendGridEmailProviderService : IEmailProvider
+    /// <summary>
+    /// The email provider service for SendGrid.
+    /// </summary>
+    public sealed class SendGridEmailProviderService : IEmailProvider
     {
         private readonly ILogger<SendGridEmailProviderService> _logger;
         private readonly IConfiguration _configuration;
         private readonly string _apiKey;
 
+        /// <summary>
+        /// AppSetting key for the SendGrid API key.
+        /// </summary>
         public const string APPSETTING_SENDGRID_APIKEY = @"ServiceBricks:Notification:SendGrid:ApiKey";
 
         /// <summary>
@@ -34,6 +32,11 @@ namespace ServiceBricks.Notification.SendGrid
             _apiKey = _configuration.GetValue<string>(APPSETTING_SENDGRID_APIKEY);
         }
 
+        /// <summary>
+        /// Sends an email using SendGrid.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<IResponse> SendEmailAsync(NotifyMessageDto message)
         {
             Response resp = new Response();
@@ -93,7 +96,7 @@ namespace ServiceBricks.Notification.SendGrid
             }
         }
 
-        protected virtual string[] GetEmails(string source)
+        private string[] GetEmails(string source)
         {
             return source.Split(",");
         }

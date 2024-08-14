@@ -1,12 +1,18 @@
 ﻿using AutoMapper;
 
-
 namespace ServiceBricks.Notification
 {
-    public class SenderTypeMappingProfile : Profile
+    /// <summary>
+    /// This is a mapping profile for the SenderType.
+    /// </summary>
+    public partial class SenderTypeMappingProfile : Profile
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public SenderTypeMappingProfile() : base()
         {
+            // AI: Create a automapper mapping for the SenderType and DomainTypeDto.
             CreateMap<SenderType, DomainTypeDto>()
                 .ForMember(x => x.StorageKey, y => y.MapFrom(z => z.Key))
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));

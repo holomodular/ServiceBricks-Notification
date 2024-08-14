@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using ServiceBricks.Storage.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using ServiceBricks.Notification.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Sqlite
 {
@@ -14,9 +14,6 @@ namespace ServiceBricks.Notification.Sqlite
     /// </summary>
     public partial class NotificationSqliteContext : DbContext, IDesignTimeDbContextFactory<NotificationSqliteContext>
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
         protected readonly DbContextOptions<NotificationSqliteContext> _options;
 
         /// <summary>
@@ -47,7 +44,10 @@ namespace ServiceBricks.Notification.Sqlite
             _options = options;
         }
 
-        public virtual DbSet<NotifyMessage> NotifyMessage { get; set; }
+        /// <summary>
+        /// NotifyMessages
+        /// </summary>
+        public virtual DbSet<NotifyMessage> NotifyMessages { get; set; }
 
         /// <summary>
         /// OnModelCreating.
@@ -57,11 +57,12 @@ namespace ServiceBricks.Notification.Sqlite
         {
             base.OnModelCreating(builder);
 
-            //Set default schema
+            // AI: Set the default schema
             builder.HasDefaultSchema(NotificationSqliteConstants.DATABASE_SCHEMA_NAME);
 
+            // AI: Setup the entities to the model
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderTypeKey, key.FutureProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderType, key.FutureProcessDate, key.CreateDate });
         }
 
         /// <summary>
@@ -70,8 +71,12 @@ namespace ServiceBricks.Notification.Sqlite
         /// <param name="configurationBuilder"></param>
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
-            configurationBuilder.Properties<DateTimeOffset>()
-            .HaveConversion<DateTimeOffsetToBytesConverter>();
+            configurationBuilder
+                .Properties<DateTimeOffset>()
+                .HaveConversion<DateTimeOffsetToBytesConverter>();
+            configurationBuilder
+                .Properties<DateTimeOffset?>()
+                .HaveConversion<DateTimeOffsetToBytesConverter>();
         }
 
         /// <summary>

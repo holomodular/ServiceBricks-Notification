@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceBricks;
 using ServiceBricks.Notification;
-using ServiceBricks.Notification.SendGrid;
 
 using WebApp.ViewModel.Home;
 
@@ -48,7 +45,7 @@ namespace WebApp.Controllers
                 Body = "Test Body",
                 Subject = "Test Subject",
                 BodyHtml = "Test BodyHtml",
-                SenderTypeKey = 1,
+                SenderType = SenderType.Email_TEXT,
                 ToAddress = "support@holomodular.com",
             };
 

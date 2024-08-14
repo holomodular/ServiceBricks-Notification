@@ -4,13 +4,20 @@ using ServiceBricks.Storage.EntityFrameworkCore;
 namespace ServiceBricks.Notification.Cosmos
 {
     /// <summary>
-    /// This is the storage repository for the Notification module.
+    /// This is the storage repository for the ServiceBricks.Notification.Cosmos module.
     /// </summary>
     /// <typeparam name="TDomain"></typeparam>
-    public class NotificationStorageRepository<TDomain> : EntityFrameworkCoreStorageRepository<TDomain>, IRepository<TDomain>
+    public partial class NotificationStorageRepository<TDomain> : EntityFrameworkCoreStorageRepository<TDomain>, IRepository<TDomain>
         where TDomain : class, IEntityFrameworkCoreDomainObject<TDomain>, new()
     {
-        public NotificationStorageRepository(ILoggerFactory logFactory, NotificationCosmosContext context)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="logFactory"></param>
+        /// <param name="context"></param>
+        public NotificationStorageRepository(
+            ILoggerFactory logFactory,
+            NotificationCosmosContext context)
             : base(logFactory)
         {
             Context = context;

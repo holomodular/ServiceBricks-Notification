@@ -1,21 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using ServiceBricks.Storage.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ServiceBricks.Notification.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.InMemory
 {
-    // dotnet ef migrations add NotificationV1 --context NotificationInMemoryContext --startup-project ../Tests/WebApp
-
     /// <summary>
     /// This is the database context for the Notification module.
     /// </summary>
     public partial class NotificationInMemoryContext : DbContext, IDesignTimeDbContextFactory<NotificationInMemoryContext>
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
         protected readonly DbContextOptions<NotificationInMemoryContext> _options;
 
         /// <summary>
@@ -41,7 +35,10 @@ namespace ServiceBricks.Notification.InMemory
             _options = options;
         }
 
-        public virtual DbSet<NotifyMessage> NotifyMessage { get; set; }
+        /// <summary>
+        /// NotifyMessage.
+        /// </summary>
+        public virtual DbSet<NotifyMessage> NotifyMessages { get; set; }
 
         /// <summary>
         /// OnModelCreating.
@@ -51,11 +48,8 @@ namespace ServiceBricks.Notification.InMemory
         {
             base.OnModelCreating(builder);
 
-            //Set default schema
-            //builder.HasDefaultSchema(NotificationInMemoryConstants.DATABASE_SCHEMA_NAME);
-
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderTypeKey, key.FutureProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderType, key.FutureProcessDate, key.CreateDate });
         }
 
         /// <summary>

@@ -1,36 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ServiceBricks.Notification
+﻿namespace ServiceBricks.Notification
 {
-    public class SmtpOptions
+    /// <summary>
+    /// Options for the SMTP provider.
+    /// </summary>
+    public partial class SmtpOptions
     {
         /// <summary>
         /// Email setting for host name.
         /// </summary>
-        public virtual string EmailServer { get; set; }
+        public string EmailServer { get; set; }
 
         /// <summary>
         /// Port.
         /// </summary>
-        public virtual int EmailPort { get; set; }
+        public int EmailPort { get; set; }
 
         /// <summary>
         /// Determine if request should use SSL.
         /// </summary>
-        public virtual bool EmailEnableSsl { get; set; }
+        public bool EmailEnableSsl { get; set; }
 
         /// <summary>
         /// The username for authentication.
         /// </summary>
-        public virtual string EmailUsername { get; set; }
+        public string EmailUsername { get; set; }
 
         /// <summary>
         /// The password for authentication.
         /// </summary>
-        public virtual string EmailPassword { get; set; }
+        public string EmailPassword { get; set; }
     }
 }

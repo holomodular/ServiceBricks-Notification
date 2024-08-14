@@ -1,13 +1,18 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.EntityFrameworkCore
 {
     /// <summary>
-    /// This is an API service for the message domain object.
+    /// This is a REST API service for the NotifyMessage domain object.
     /// </summary>
-    public class NotifyMessageApiService : ApiService<NotifyMessage, NotifyMessageDto>, INotifyMessageApiService
+    public partial class NotifyMessageApiService : ApiService<NotifyMessage, NotifyMessageDto>, INotifyMessageApiService
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="mapper"></param>
+        /// <param name="businessRuleService"></param>
+        /// <param name="repository"></param>
         public NotifyMessageApiService(
             IMapper mapper,
             IBusinessRuleService businessRuleService,

@@ -6,24 +6,34 @@ using ServiceBricks.Notification.EntityFrameworkCore;
 namespace ServiceBricks.Notification.Sqlite
 {
     /// <summary>
-    /// IApplicationBuilder extensions for the Notification Brick.
+    /// Extension methods for configuring the ServiceBricks Notification Sqlite module.
     /// </summary>
     public static partial class ApplicationBuilderExtensions
     {
+        /// <summary>
+        /// Flag to indicate if the module has been started.
+        /// </summary>
         public static bool ModuleStarted = false;
 
+        /// <summary>
+        /// Starts the ServiceBricks Notification Sqlite module.
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <returns></returns>
         public static IApplicationBuilder StartServiceBricksNotificationSqlite(this IApplicationBuilder applicationBuilder)
         {
+            // AI: Migrate the database
             using (var serviceScope = applicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                // Migrate
                 var context = serviceScope.ServiceProvider.GetService<NotificationSqliteContext>();
                 context.Database.Migrate();
                 context.SaveChanges();
             }
+
+            // AI: Set the module started flag
             ModuleStarted = true;
 
-            // Start Core Notification
+            // AI: Start the parent module
             applicationBuilder.StartServiceBricksNotificationEntityFrameworkCore();
 
             return applicationBuilder;

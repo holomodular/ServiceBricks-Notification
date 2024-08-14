@@ -4,16 +4,11 @@ using ServiceBricks.Storage.AzureDataTables;
 namespace ServiceBricks.Notification.AzureDataTables
 {
     /// <summary>
-    /// This is a business rule for the LogMessage object to set the
-    /// partitionkey and rowkey of the object before create.
+    /// This is a business rule for NotifyMessage to make sure the dates are within bounds and stored in UTC zero.
     /// </summary>
-    public partial class NotifyMessageUpdateRule : BusinessRule
+    public sealed class NotifyMessageUpdateRule : BusinessRule
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
-        protected readonly ILogger _logger;
-
+        private readonly ILogger _logger;
         private readonly ITimezoneService _timezoneService;
 
         /// <summary>
@@ -50,17 +45,18 @@ namespace ServiceBricks.Notification.AzureDataTables
 
             try
             {
+                // AI: Make sure the context object is the correct type
                 if (context.Object is DomainCreateBeforeEvent<NotifyMessage> ei)
                 {
                     var item = ei.DomainObject;
 
-                    // Check within bounds
+                    // AI: Check to make sure date is within bounds
                     if (item.ProcessDate < StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE)
                         item.ProcessDate = StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE;
                     if (item.FutureProcessDate < StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE)
                         item.FutureProcessDate = StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE;
 
-                    // Convert each to valid UTC zero
+                    // AI: Make sure we always store to UTC zero
                     if (item.ProcessDate.Offset != TimeSpan.Zero)
                         item.ProcessDate = _timezoneService.ConvertPostBackToUTC(item.ProcessDate);
                     if (item.FutureProcessDate.Offset != TimeSpan.Zero)

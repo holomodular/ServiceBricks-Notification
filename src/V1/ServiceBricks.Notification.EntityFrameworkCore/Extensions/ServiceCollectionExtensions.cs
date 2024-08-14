@@ -1,44 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.EntityFrameworkCore
 {
     /// <summary>
-    /// IServiceCollection extensions for the Notification Brick.
+    /// Extension methods to add the ServiceBricks.Notification.EntityFrameworkCore module to the service collection.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
-        private static void AddCommonServices(IServiceCollection services, IConfiguration configuration)
-        {
-        }
-
+        /// <summary>
+        /// Add the ServiceBricks.Notification.EntityFrameworkCore module to the service collection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationEntityFrameworkCore(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add to module registry
+            // AI: Add the module to the ModuleRegistry
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationEntityFrameworkCoreModule), new NotificationEntityFrameworkCoreModule());
 
-            // Add Core
+            // AI: Add the parent module
             services.AddServiceBricksNotification(configuration);
 
-            // Configs
-            services.Configure<NotificationOptions>(configuration.GetSection(nameof(NotificationOptions)));
-
-            // Services
+            // AI: Add any miscellaneous services for the module
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
-            // API Services
+            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
             services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
-            // Business Rules
+            // AI: Register business rules for the module
             DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
             DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance,
                 nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
             ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-            NotifyMessageDtoValidateSenderTypeRule.RegisterRule(BusinessRuleRegistry.Instance);
             DomainQueryPropertyRenameRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, "StorageKey", "Key");
 
             return services;

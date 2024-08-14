@@ -1,33 +1,34 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
-using System;
 
 namespace ServiceBricks.Notification
 {
     /// <summary>
     /// IServiceCollection extensions for the Notification Brick.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         public static IServiceCollection AddServiceBricksNotification(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add to module registry
+            // AI: Add the module to the ModuleRegistry
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationModule), new NotificationModule());
 
-            // Configs
+            // AI: Add any custom requirements for the module
+
+            // AI: Add hosted services for the module
+            services.AddHostedService<NotificationSendTimer>();
+
+            // AI: Add workers for tasks in the module
+            services.AddScoped<NotificationSendTask.Worker>();
+
+            // AI: Configure all options for the module
             services.Configure<NotificationOptions>(configuration.GetSection(NotificationConstants.APPSETTINGS_NOTIFICATION_OPTIONS));
             services.Configure<SmtpOptions>(configuration.GetSection(NotificationConstants.APPSETTINGS_SMTP_PROVIDER_OPTIONS));
 
-            // Backgound Tasks
-            services.AddHostedService<NotificationSendTimer>();
-            services.AddScoped<NotificationSendTask.Worker>();
-
-            // API Controllers
+            // AI: Add API Controllers for each DTO in the module
             services.AddScoped<INotifyMessageApiController, NotifyMessageApiController>();
 
-            // Services
+            // AI: Add any miscellaneous services for the module
             var emailProvider = services.Where(x => x.ServiceType == typeof(IEmailProvider)).FirstOrDefault();
             if (emailProvider == null)
                 services.AddScoped<IEmailProvider, ExampleEmailProvider>();
@@ -35,22 +36,31 @@ namespace ServiceBricks.Notification
             if (smsProvider == null)
                 services.AddScoped<ISmsProvider, ExampleSmsProvider>();
 
-            // Business Rules
+            // AI: Register business rules for the module
             SendNotificationProcessRule.RegisterRule(BusinessRuleRegistry.Instance);
 
-            // ServiceBus Rules
+            // AI: Register servicebus subscriptions for the module
             using (var serviceScope = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var serviceBus = serviceScope.ServiceProvider.GetRequiredService<IServiceBus>();
                 CreateApplicationEmailRule.RegisterServiceBus(serviceBus);
                 CreateApplicationSmsRule.RegisterServiceBus(serviceBus);
             }
+
             return services;
         }
 
+        /// <summary>
+        /// Add the Notification Client to the service collection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationClient(this IServiceCollection services, IConfiguration configuration)
         {
+            // AI: Add clients for the module for each DTO
             services.AddScoped<INotifyMessageApiClient, NotifyMessageApiClient>();
+
             return services;
         }
     }

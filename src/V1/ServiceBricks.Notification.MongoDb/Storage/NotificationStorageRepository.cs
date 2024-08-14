@@ -8,9 +8,14 @@ namespace ServiceBricks.Notification.MongoDb
     /// This is the storage repository for the Notification module.
     /// </summary>
     /// <typeparam name="TDomain"></typeparam>
-    public class NotificationStorageRepository<TDomain> : MongoDbStorageRepository<TDomain>
+    public partial class NotificationStorageRepository<TDomain> : MongoDbStorageRepository<TDomain>
         where TDomain : class, IMongoDbDomainObject<TDomain>, new()
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="logFactory"></param>
+        /// <param name="configuration"></param>
         public NotificationStorageRepository(
             ILoggerFactory logFactory,
             IConfiguration configuration)

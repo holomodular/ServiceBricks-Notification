@@ -1,19 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-
 
 namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This is an example Email Provider.
+    /// This is an example Email Provider that writes messages to the log.
     /// </summary>
-    public partial class ExampleEmailProvider : IEmailProvider
+    public sealed class ExampleEmailProvider : IEmailProvider
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
-        protected readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Constructor.
@@ -29,7 +24,7 @@ namespace ServiceBricks.Notification
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public virtual Task<IResponse> SendEmailAsync(NotifyMessageDto message)
+        public Task<IResponse> SendEmailAsync(NotifyMessageDto message)
         {
             _logger.LogInformation("Sending Email: " + JsonConvert.SerializeObject(message));
             return Task.FromResult<IResponse>(new Response());

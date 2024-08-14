@@ -1,9 +1,9 @@
 ﻿namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This is an API service for the notification message domain object.
+    /// This is a REST API service for the NotifyMessageDto.
     /// </summary>
-    public interface INotifyMessageApiClient : IApiClient<NotifyMessageDto>, INotifyMessageApiService
+    public partial interface INotifyMessageApiClient : IApiClient<NotifyMessageDto>, INotifyMessageApiService
     {
     }
 }

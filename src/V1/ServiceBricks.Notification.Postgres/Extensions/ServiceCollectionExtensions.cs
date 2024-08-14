@@ -1,28 +1,31 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using ServiceBricks.Storage.EntityFrameworkCore;
 using ServiceBricks.Notification.EntityFrameworkCore;
+using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Postgres
 {
     /// <summary>
-    /// IServiceCollection extensions for the Notification Brick.
+    /// Extensions to add the ServiceBricks Notification Postgres module to the service collection.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add the ServiceBricks Notification Postgres module to the service collection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationPostgres(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add to module registry
+            // AI: Add the module to the ModuleRegistry
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationPostgresModule), new NotificationPostgresModule());
 
-            // Add Core service
+            // AI: Add parent module
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
-            //Register Database
+            // AI: Register the database for the module
             var builder = new DbContextOptionsBuilder<NotificationPostgresContext>();
             string connectionString = configuration.GetPostgresConnectionString(
                 NotificationPostgresConstants.APPSETTING_CONNECTION_STRING);
@@ -35,7 +38,7 @@ namespace ServiceBricks.Notification.Postgres
             services.AddSingleton<DbContextOptions<NotificationPostgresContext>>(builder.Options);
             services.AddDbContext<NotificationPostgresContext>(c => { c = builder; }, ServiceLifetime.Scoped);
 
-            // Storage Services
+            // AI: Add storage services for the module. Each domain object should have its own storage repository.
             services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
             services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
             services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();

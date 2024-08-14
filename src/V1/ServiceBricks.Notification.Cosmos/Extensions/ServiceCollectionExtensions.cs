@@ -1,29 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ServiceBricks.Notification.EntityFrameworkCore;
 using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Cosmos
 {
     /// <summary>
-    /// IServiceCollection extensions for the Notification Brick.
+    /// Extensions to add the ServiceBricks Notification Cosmos module to the service collection.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
-        private static void AddCommonServices(IServiceCollection services, IConfiguration configuration)
-        {
-        }
-
+        /// <summary>
+        /// Add the ServiceBricks Notification Cosmos module to the service collection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationCosmos(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add to module registry for automapper
+            // AI: Add the module to the ModuleRegistry
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationCosmosModule), new NotificationCosmosModule());
 
-            // Add Core
-            services.AddServiceBricksNotification(configuration);
+            // AI: Add the parent module
+            // AI: If the primary keys of the Cosmos models do not match the EFC module, we can't use EFC rules, so skip EFC and call start on the core module instead.
+            services.AddServiceBricksNotification(configuration); // Skip EFC
 
-            // Register Database
+            // AI: Register the database for the module
             var builder = new DbContextOptionsBuilder<NotificationCosmosContext>();
             string connectionString = configuration.GetCosmosConnectionString(
                 NotificationCosmosConstants.APPSETTING_CONNECTION_STRING);
@@ -34,28 +36,29 @@ namespace ServiceBricks.Notification.Cosmos
             services.AddSingleton<DbContextOptions<NotificationCosmosContext>>(builder.Options);
             services.AddDbContext<NotificationCosmosContext>(c => { c = builder; }, ServiceLifetime.Scoped);
 
-            // Configs
+            // AI: Storage Services for the module for each domain object
+            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
+            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+
+            // AI: Configure all options for the module
             services.Configure<NotificationOptions>(configuration.GetSection(nameof(NotificationOptions)));
 
-            // Services
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
-
-            // API Services
-            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
-            services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
-
-            // Business Rules
+            // AI: Register business rules for the module
+            // AI: If the primary keys of the Cosmos models match the EFC module, we can use the EFC rules
             DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
             DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance,
                 nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
             ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-            NotifyMessageDtoValidateSenderTypeRule.RegisterRule(BusinessRuleRegistry.Instance);
             DomainQueryPropertyRenameRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, "StorageKey", "Key");
 
-            // Storage Services
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
+            // AI: If the primary keys of the Cosmos models match the EFC module, we can use the EFC rules
+            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
+            services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
+
+            // AI: Add any miscellaneous services for the module
+            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
             return services;
         }

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace ServiceBricks.Notification
+﻿namespace ServiceBricks.Notification
 {
     /// <summary>
     /// This is a provider that can send emails.

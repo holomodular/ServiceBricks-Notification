@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Hosting;
-using ServiceBricks;
-using ServiceBricks.Notification;
-using ServiceBricks.Notification.SqlServer;
-using System.Configuration;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
+using ServiceBricks.Notification;
+using ServiceBricks.Notification.SqlServer;
 
 namespace ServiceBricks.Xunit
 {

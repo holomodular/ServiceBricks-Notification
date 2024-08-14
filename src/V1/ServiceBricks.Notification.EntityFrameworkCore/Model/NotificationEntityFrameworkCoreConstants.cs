@@ -1,9 +1,9 @@
 ﻿namespace ServiceBricks.Notification.EntityFrameworkCore
 {
     /// <summary>
-    /// This is constants for the Notification module.
+    /// These are constants for the ServiceBricks.Notification.EntityFrameworkCore module.
     /// </summary>
-    public static class NotificationEntityFrameworkCoreConstants
+    public static partial class NotificationEntityFrameworkCoreConstants
     {
     }
 }

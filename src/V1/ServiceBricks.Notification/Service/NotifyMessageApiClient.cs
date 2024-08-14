@@ -1,15 +1,19 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace ServiceBricks.Notification
 {
-    public class NotifyMessageApiClient : ApiClient<NotifyMessageDto>, INotifyMessageApiClient
+    /// <summary>
+    /// This is a REST API client for the NotifyMessageDto.
+    /// </summary>
+    public partial class NotifyMessageApiClient : ApiClient<NotifyMessageDto>, INotifyMessageApiClient
     {
-        protected readonly IConfiguration _configuration;
-
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="httpClientFactory"></param>
+        /// <param name="configuration"></param>
         public NotifyMessageApiClient(
             ILoggerFactory loggerFactory,
             IHttpClientFactory httpClientFactory,

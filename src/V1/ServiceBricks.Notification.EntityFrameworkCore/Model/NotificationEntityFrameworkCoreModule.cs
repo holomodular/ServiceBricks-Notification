@@ -2,8 +2,14 @@
 
 namespace ServiceBricks.Notification.EntityFrameworkCore
 {
-    public class NotificationEntityFrameworkCoreModule : IModule
+    /// <summary>
+    /// The module definition for the ServiceBricks.Notification.EntityFrameworkCore module.
+    /// </summary>
+    public partial class NotificationEntityFrameworkCoreModule : IModule
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public NotificationEntityFrameworkCoreModule()
         {
             AutomapperAssemblies = new List<Assembly>()
@@ -16,9 +22,19 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
             };
         }
 
-        public List<Assembly> AutomapperAssemblies { get; }
-        public List<Assembly> ViewAssemblies { get; }
-
+        /// <summary>
+        /// The list of dependent modules.
+        /// </summary>
         public List<IModule> DependentModules { get; }
+
+        /// <summary>
+        /// The list of Automapper assemblies.
+        /// </summary>
+        public List<Assembly> AutomapperAssemblies { get; }
+
+        /// <summary>
+        /// The list of view assemblies.
+        /// </summary>
+        public List<Assembly> ViewAssemblies { get; }
     }
 }

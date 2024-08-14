@@ -6,11 +6,10 @@ namespace ServiceBricks.Notification.AzureDataTables
     /// <summary>
     /// This is a service for processing a table like a queue.
     /// </summary>
-    public class NotifyMessageProcessQueueService : DomainObjectProcessQueueService<NotifyMessage>, INotifyMessageProcessQueueService
+    public sealed class NotifyMessageProcessQueueService : DomainObjectProcessQueueService<NotifyMessage>, INotifyMessageProcessQueueService
     {
-        protected readonly ILogger<NotifyMessageProcessQueueService> _logger;
-        protected readonly IMapper _mapper;
-        protected readonly IBusinessRuleService _businessRuleService;
+        private readonly IMapper _mapper;
+        private readonly IBusinessRuleService _businessRuleService;
 
         public NotifyMessageProcessQueueService(
             ILoggerFactory loggerFactory,
@@ -18,7 +17,6 @@ namespace ServiceBricks.Notification.AzureDataTables
             IMapper mapper,
             IBusinessRuleService businessRuleService) : base(loggerFactory, repo)
         {
-            _logger = loggerFactory.CreateLogger<NotifyMessageProcessQueueService>();
             _mapper = mapper;
             _businessRuleService = businessRuleService;
         }

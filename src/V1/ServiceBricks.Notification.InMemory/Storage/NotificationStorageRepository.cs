@@ -7,10 +7,17 @@ namespace ServiceBricks.Notification.InMemory
     /// This is the storage repository for the Notification module.
     /// </summary>
     /// <typeparam name="TDomain"></typeparam>
-    public class NotificationStorageRepository<TDomain> : EntityFrameworkCoreStorageRepository<TDomain>
+    public partial class NotificationStorageRepository<TDomain> : EntityFrameworkCoreStorageRepository<TDomain>
         where TDomain : class, IEntityFrameworkCoreDomainObject<TDomain>, new()
     {
-        public NotificationStorageRepository(ILoggerFactory logFactory, NotificationInMemoryContext context)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="logFactory"></param>
+        /// <param name="context"></param>
+        public NotificationStorageRepository(
+            ILoggerFactory logFactory,
+            NotificationInMemoryContext context)
             : base(logFactory)
         {
             Context = context;

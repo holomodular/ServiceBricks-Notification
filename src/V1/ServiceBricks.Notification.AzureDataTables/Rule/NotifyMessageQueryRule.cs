@@ -3,12 +3,12 @@ using ServiceBricks.Storage.AzureDataTables;
 
 namespace ServiceBricks.Notification.AzureDataTables
 {
-    public partial class NotifyMessageQueryRule : BusinessRule
+    /// <summary>
+    /// This is a business rule for the NotifyMessage when quering to change the storagekey to key.
+    /// </summary>
+    public sealed class NotifyMessageQueryRule : BusinessRule
     {
-        /// <summary>
-        /// Internal.
-        /// </summary>
-        protected readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Constructor.
@@ -41,11 +41,14 @@ namespace ServiceBricks.Notification.AzureDataTables
 
             try
             {
+                // AI: Make sure the context object is the correct type
                 if (context.Object is DomainQueryBeforeEvent<NotifyMessage> ei)
                 {
                     var item = ei.DomainObject;
                     if (ei.ServiceQueryRequest == null || ei.ServiceQueryRequest.Filters == null)
                         return response;
+
+                    // AI: Check for the StorageKey filter and replace it with Key
                     foreach (var filter in ei.ServiceQueryRequest.Filters)
                     {
                         bool found = false;
@@ -63,6 +66,7 @@ namespace ServiceBricks.Notification.AzureDataTables
                         }
                         if (found)
                         {
+                            // AI: Iterate through the values. Split each one using the delimiter and re-set the value to use the second part.
                             if (filter.Values != null && filter.Values.Count > 0)
                             {
                                 for (int i = 0; i < filter.Values.Count; i++)

@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Hosting;
 using ServiceBricks;
 using ServiceBricks.Logging.InMemory;
 using ServiceBricks.Notification.InMemory;
 using ServiceBricks.Notification.SendGrid;
-using System.Configuration;
 using WebApp.Extensions;
 
 namespace WebApp

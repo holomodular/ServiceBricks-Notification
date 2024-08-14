@@ -1,15 +1,34 @@
-﻿using System.Collections.Generic;
-
-namespace ServiceBricks.Notification
+﻿namespace ServiceBricks.Notification
 {
-    public class SenderType : DomainType
+    /// <summary>
+    /// A domain type for the Sender.
+    /// </summary>
+    public partial class SenderType : DomainType
     {
+        /// <summary>
+        /// Email
+        /// </summary>
         public const int Email = 1;
-        public const string Email_TEXT = "Email";
 
+        /// <summary>
+        /// Email
+        /// </summary>
+        public const string Email_TEXT = "email";
+
+        /// <summary>
+        /// SMS
+        /// </summary>
         public const int SMS = 2;
-        public const string SMS_TEXT = "SMS";
 
+        /// <summary>
+        /// SMS
+        /// </summary>
+        public const string SMS_TEXT = "sms";
+
+        /// <summary>
+        /// Get all SenderTypes.
+        /// </summary>
+        /// <returns></returns>
         public static List<SenderType> GetAll()
         {
             return new List<SenderType>()

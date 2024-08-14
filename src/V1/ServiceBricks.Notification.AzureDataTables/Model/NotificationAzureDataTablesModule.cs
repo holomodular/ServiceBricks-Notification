@@ -2,8 +2,14 @@
 
 namespace ServiceBricks.Notification.AzureDataTables
 {
-    public class NotificationAzureDataTablesModule : IModule
+    /// <summary>
+    /// The module definition for the NotificationAzureDataTables module.
+    /// </summary>
+    public partial class NotificationAzureDataTablesModule : IModule
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public NotificationAzureDataTablesModule()
         {
             AutomapperAssemblies = new List<Assembly>()
@@ -16,9 +22,19 @@ namespace ServiceBricks.Notification.AzureDataTables
             };
         }
 
-        public List<Assembly> AutomapperAssemblies { get; }
-        public List<Assembly> ViewAssemblies { get; }
-
+        /// <summary>
+        /// The list of dependent modules.
+        /// </summary>
         public List<IModule> DependentModules { get; }
+
+        /// <summary>
+        /// The list of Automapper assemblies.
+        /// </summary>
+        public List<Assembly> AutomapperAssemblies { get; }
+
+        /// <summary>
+        /// The list of view assemblies.
+        /// </summary>
+        public List<Assembly> ViewAssemblies { get; }
     }
 }
