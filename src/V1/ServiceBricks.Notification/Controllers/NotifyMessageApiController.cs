@@ -11,14 +11,19 @@ namespace ServiceBricks.Notification
     [Produces("application/json")]
     public partial class NotifyMessageApiController : AdminPolicyApiController<NotifyMessageDto>, INotifyMessageApiController
     {
-        protected readonly INotifyMessageApiService _messageApiService;
+        protected readonly INotifyMessageApiService _notifyMessageApiService;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="messageApiService"></param>
+        /// <param name="apiOptions"></param>
         public NotifyMessageApiController(
-            INotifyMessageApiService messageApiService,
+            INotifyMessageApiService notifyMessageApiService,
             IOptions<ApiOptions> apiOptions)
-            : base(messageApiService, apiOptions)
+            : base(notifyMessageApiService, apiOptions)
         {
-            _messageApiService = messageApiService;
+            _notifyMessageApiService = notifyMessageApiService;
         }
     }
 }

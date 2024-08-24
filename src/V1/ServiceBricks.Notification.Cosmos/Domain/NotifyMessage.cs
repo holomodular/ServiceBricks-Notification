@@ -14,6 +14,11 @@ namespace ServiceBricks.Notification.Cosmos
         public Guid Key { get; set; }
 
         /// <summary>
+        /// Internal Partition Key
+        /// </summary>
+        public string PartitionKey { get; set; }
+
+        /// <summary>
         /// The type of notification message.
         /// </summary>
         public string SenderType { get; set; }

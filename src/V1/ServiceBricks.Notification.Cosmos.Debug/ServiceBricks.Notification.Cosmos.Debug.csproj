@@ -15,6 +15,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosConstants.cs" Link="NotificationCosmosConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosContext.cs" Link="NotificationCosmosContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosModule.cs" Link="NotificationCosmosModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotifyMessageCreateRule.cs" Link="NotifyMessageCreateRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
@@ -25,15 +26,8 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.EntityFrameworkCore.Debug\ServiceBricks.Notification.EntityFrameworkCore.Debug.csproj" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="7.0.20" />
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks.Storage.Cosmos" Version="1.1.0-b" />
 	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="7.0.20" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="8.0.7" />
-	</ItemGroup>
+	
 </Project>

@@ -23,7 +23,6 @@ namespace ServiceBricks.Notification.AzureDataTables
             services.AddServiceBricksNotification(configuration);
 
             // AI: Configure all options for the module
-            services.Configure<NotificationOptions>(configuration.GetSection(nameof(NotificationOptions)));
 
             // AI: Add storage services for the module. Each domain object should have its own storage repository
             services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();

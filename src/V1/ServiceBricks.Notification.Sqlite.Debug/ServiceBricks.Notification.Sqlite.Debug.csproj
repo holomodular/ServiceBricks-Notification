@@ -9,6 +9,9 @@
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20240822223505_NotificationV1.cs" Link="20240822223505_NotificationV1.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20240822223505_NotificationV1.Designer.cs" Link="20240822223505_NotificationV1.Designer.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\NotificationSqliteContextModelSnapshot.cs" Link="NotificationSqliteContextModelSnapshot.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteConstants.cs" Link="NotificationSqliteConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteContext.cs" Link="NotificationSqliteContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteModule.cs" Link="NotificationSqliteModule.cs" />
@@ -20,15 +23,8 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.EntityFrameworkCore.Debug\ServiceBricks.Notification.EntityFrameworkCore.Debug.csproj" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.20" />
+	<ItemGroup>
+		<PackageReference Include="ServiceBricks.Storage.Sqlite" Version="1.1.0-b" />
 	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.20" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.7" />
-	</ItemGroup>
+	
 </Project>

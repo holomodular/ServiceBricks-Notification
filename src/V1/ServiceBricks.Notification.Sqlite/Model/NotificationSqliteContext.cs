@@ -7,7 +7,7 @@ using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Sqlite
 {
-    // dotnet ef migrations add NotificationV1 --context NotificationSqliteContext --startup-project ../Test/MigrationsHost
+    // dotnet ef migrations add NotificationV1 --context NotificationSqliteContext --startup-project ../Tests/MigrationsHost
 
     /// <summary>
     /// This is the database context for the Notification module.
@@ -58,11 +58,11 @@ namespace ServiceBricks.Notification.Sqlite
             base.OnModelCreating(builder);
 
             // AI: Set the default schema
-            builder.HasDefaultSchema(NotificationSqliteConstants.DATABASE_SCHEMA_NAME);
+            //builder.HasDefaultSchema(NotificationSqliteConstants.DATABASE_SCHEMA_NAME);
 
             // AI: Setup the entities to the model
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderType, key.FutureProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsProcessing, key.IsError, key.FutureProcessDate, key.ProcessDate, key.CreateDate });
         }
 
         /// <summary>

@@ -27,6 +27,6 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.AzureDataTables" Version="1.0.11" />
+		<PackageReference Include="ServiceBricks.Storage.AzureDataTables" Version="1.1.0-b" />
 	</ItemGroup>
 </Project>

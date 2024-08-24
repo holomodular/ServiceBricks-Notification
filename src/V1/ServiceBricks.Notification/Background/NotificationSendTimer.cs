@@ -6,7 +6,7 @@ namespace ServiceBricks.Notification
     /// This is a timer to execute the NotificationSendTask.
     /// Do not seal the class to allow for overriding values.
     /// </summary>
-    public class NotificationSendTimer : TaskTimerHostedService<NotificationSendTask.Detail, NotificationSendTask.Worker>
+    public partial class NotificationSendTimer : TaskTimerHostedService<NotificationSendTask.Detail, NotificationSendTask.Worker>
     {
         /// <summary>
         /// Constructor.
@@ -32,7 +32,7 @@ namespace ServiceBricks.Notification
         /// </summary>
         public override TimeSpan TimerDueTime
         {
-            get { return TimeSpan.FromSeconds(30); }
+            get { return TimeSpan.FromSeconds(5); }
         }
 
         /// <summary>

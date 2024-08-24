@@ -39,8 +39,6 @@ namespace ServiceBricks.Notification.MongoDb
             DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance,
                 nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
             ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-
-            NotifyMessageUpdateRule.RegisterRule(BusinessRuleRegistry.Instance);
             DomainQueryPropertyRenameRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, "StorageKey", "Key");
 
             return services;

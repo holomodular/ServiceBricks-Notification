@@ -50,7 +50,7 @@ namespace ServiceBricks.Notification.AzureDataTables
                 if (context.Object is DomainCreateBeforeEvent<NotifyMessage> ei)
                 {
                     // AI: Set the Key, PartitionKey, and RowKey
-                    // AI: CreateDate is already in UTC format (due to previous rule)
+                    // AI: CreateDate is already in UTC format (now - due to previous rule)
                     var item = ei.DomainObject;
                     item.Key = Guid.NewGuid();
 
@@ -63,6 +63,7 @@ namespace ServiceBricks.Notification.AzureDataTables
                         StorageAzureDataTablesConstants.KEY_DELIMITER +
                         item.Key.ToString();
 
+                    // TODO: THIS WILL BE REMOVED WITH NEW RULE
                     // AI: Check to make sure date is within bounds
                     if (item.ProcessDate < StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE)
                         item.ProcessDate = StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE;

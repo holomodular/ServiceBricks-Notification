@@ -3,7 +3,7 @@
     /// <summary>
     /// This is a background task that sends notification messages to the MessageProcessQueue service.
     /// </summary>
-    public static class NotificationSendTask
+    public static partial class NotificationSendTask
     {
         /// <summary>
         /// Queue the work to the background task queue.

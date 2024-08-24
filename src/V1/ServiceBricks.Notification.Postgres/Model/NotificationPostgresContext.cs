@@ -6,7 +6,7 @@ using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Postgres
 {
-    // dotnet ef migrations add NotificationV1 --context NotificationPostgresContext --startup-project ../Test/MigrationsHost
+    // dotnet ef migrations add NotificationV1 --context NotificationPostgresContext --startup-project ../Tests/MigrationsHost
 
     /// <summary>
     /// This is the database context for the Notification module.
@@ -63,7 +63,7 @@ namespace ServiceBricks.Notification.Postgres
 
             // AI: Setup the entities to the model
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderType, key.FutureProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsProcessing, key.IsError, key.FutureProcessDate, key.ProcessDate, key.CreateDate });
         }
 
         /// <summary>

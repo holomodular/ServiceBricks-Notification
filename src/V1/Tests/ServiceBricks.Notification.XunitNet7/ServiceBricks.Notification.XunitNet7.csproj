@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<Compile Include="..\TestFiles\NotifyMessageApiControllerTest.cs" Link="NotifyMessageApiControllerTest.cs" />
     <Compile Include="..\TestFiles\NotifyMessageTestManager.cs" Link="NotifyMessageTestManager.cs" />
   </ItemGroup>
 
@@ -18,7 +19,7 @@
 	  <ProjectReference Include="..\..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.0.11" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-b" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">

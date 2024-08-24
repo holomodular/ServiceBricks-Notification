@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceBricks.Notification.Postgres;
+using ServiceBricks.Notification.Sqlite;
 using ServiceBricks.Notification.SqlServer;
 
 namespace ServiceBricks.Xunit
@@ -21,8 +23,8 @@ namespace ServiceBricks.Xunit
             //UNCOMMENT THE ONE YOU NEED
             //**************************
             //services.AddServiceBricksNotificationPostgres(Configuration);
-            services.AddServiceBricksNotificationSqlServer(Configuration);
-            //services.AddServiceBricksNotificationSqlite(Configuration);
+            //services.AddServiceBricksNotificationSqlServer(Configuration);
+            services.AddServiceBricksNotificationSqlite(Configuration);
 
             // Remove all background tasks/timers for unit testing
 
@@ -38,8 +40,8 @@ namespace ServiceBricks.Xunit
             //UNCOMMENT THE ONE YOU NEED
             //**************************
             //app.StartServiceBricksNotificationPostgres();
-            app.StartServiceBricksNotificationSqlServer();
-            //app.StartServiceBricksNotificationSqlite();
+            //app.StartServiceBricksNotificationSqlServer();
+            app.StartServiceBricksNotificationSqlite();
         }
     }
 }

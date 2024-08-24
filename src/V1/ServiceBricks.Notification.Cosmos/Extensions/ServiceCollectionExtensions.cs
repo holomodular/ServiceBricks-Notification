@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceBricks.Notification.EntityFrameworkCore;
 using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Cosmos
@@ -22,8 +23,7 @@ namespace ServiceBricks.Notification.Cosmos
             ModuleRegistry.Instance.RegisterItem(typeof(NotificationCosmosModule), new NotificationCosmosModule());
 
             // AI: Add the parent module
-            // AI: If the primary keys of the Cosmos models do not match the EFC module, we can't use EFC rules, so skip EFC and call start on the core module instead.
-            services.AddServiceBricksNotification(configuration); // Skip EFC
+            services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
             // AI: Register the database for the module
             var builder = new DbContextOptionsBuilder<NotificationCosmosContext>();
@@ -41,21 +41,17 @@ namespace ServiceBricks.Notification.Cosmos
             services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
             services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
-            // AI: Configure all options for the module
-            services.Configure<NotificationOptions>(configuration.GetSection(nameof(NotificationOptions)));
+            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
+            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
+            services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
             // AI: Register business rules for the module
-            // AI: If the primary keys of the Cosmos models match the EFC module, we can use the EFC rules
             DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
             DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance,
                 nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
             ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
             DomainQueryPropertyRenameRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, "StorageKey", "Key");
-
-            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
-            // AI: If the primary keys of the Cosmos models match the EFC module, we can use the EFC rules
-            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
-            services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
+            NotifyMessageCreateRule.RegisterRule(BusinessRuleRegistry.Instance);
 
             // AI: Add any miscellaneous services for the module
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();

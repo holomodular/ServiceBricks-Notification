@@ -30,7 +30,7 @@ namespace ServiceBricks.Notification.AzureDataTables
         public static void RegisterRule(IBusinessRuleRegistry registry)
         {
             registry.RegisterItem(
-                typeof(DomainCreateBeforeEvent<NotifyMessage>),
+                typeof(DomainUpdateBeforeEvent<NotifyMessage>),
                 typeof(NotifyMessageUpdateRule));
         }
 
@@ -46,10 +46,11 @@ namespace ServiceBricks.Notification.AzureDataTables
             try
             {
                 // AI: Make sure the context object is the correct type
-                if (context.Object is DomainCreateBeforeEvent<NotifyMessage> ei)
+                if (context.Object is DomainUpdateBeforeEvent<NotifyMessage> ei)
                 {
                     var item = ei.DomainObject;
 
+                    // THIS WILL BE REMOVED WITH NEW RULE
                     // AI: Check to make sure date is within bounds
                     if (item.ProcessDate < StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE)
                         item.ProcessDate = StorageAzureDataTablesConstants.DATETIMEOFFSET_MINDATE;

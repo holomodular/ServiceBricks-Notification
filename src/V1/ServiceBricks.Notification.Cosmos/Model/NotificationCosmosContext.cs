@@ -31,12 +31,11 @@ namespace ServiceBricks.Notification.Cosmos
         {
             base.OnModelCreating(builder);
 
-            // AI: Set the default container name
-            builder.Model.SetDefaultContainer(NotificationCosmosConstants.DEFAULT_CONTAINER_NAME);
-
             // AI: Create the model for each table
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsError, key.IsProcessing, key.SenderType, key.FutureProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().HasPartitionKey(key => key.PartitionKey);
+            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsProcessing, key.IsError, key.FutureProcessDate, key.ProcessDate, key.CreateDate });
+            builder.Entity<NotifyMessage>().ToContainer(NotificationCosmosConstants.GetContainerName(nameof(NotifyMessage)));
         }
 
         /// <summary>

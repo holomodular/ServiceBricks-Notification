@@ -22,6 +22,8 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
             // AI: Add the parent module
             services.AddServiceBricksNotification(configuration);
 
+            // AI: Configure all options for the module
+
             // AI: Add any miscellaneous services for the module
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using AutoMapper;
 
 namespace ServiceBricks.Notification
 {
@@ -12,6 +13,7 @@ namespace ServiceBricks.Notification
         private readonly ISmsProvider _smsProvider;
         private readonly ILogger<SendNotificationProcessRule> _logger;
         private readonly NotificationOptions _notificationOptions;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Constructor.
@@ -20,17 +22,21 @@ namespace ServiceBricks.Notification
         /// <param name="emailProvider"></param>
         /// <param name="smsProvider"></param>
         /// <param name="notificationOptions"></param>
+        /// <param name="mapper"></param>
         public SendNotificationProcessRule(
             ILoggerFactory loggerFactory,
             IEmailProvider emailProvider,
             ISmsProvider smsProvider,
-            IOptions<NotificationOptions> notificationOptions)
+            IOptions<NotificationOptions> notificationOptions,
+            IMapper mapper
+            )
         {
             _logger = loggerFactory.CreateLogger<SendNotificationProcessRule>();
             _emailProvider = emailProvider;
             _smsProvider = smsProvider;
             Priority = PRIORITY_NORMAL;
             _notificationOptions = notificationOptions.Value;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -69,8 +75,11 @@ namespace ServiceBricks.Notification
                 if (p == null || p.DomainObject == null)
                     return response;
 
+                // Copy the object to avoid changing the original
+                NotifyMessageDto msg = new NotifyMessageDto();
+                msg = _mapper.Map(p.DomainObject, msg);
+
                 // AI: Switch based on the sendertype and invoke the appropriate provider
-                var msg = p.DomainObject;
                 if (string.Compare(msg.SenderType, SenderType.Email_TEXT, true) == 0)
                 {
                     // AI: Set defaults defined by options
@@ -91,7 +100,7 @@ namespace ServiceBricks.Notification
                     return response;
                 }
 
-                if (string.Compare(msg.SenderType, SenderType.Email_TEXT, true) == 0)
+                if (string.Compare(msg.SenderType, SenderType.SMS_TEXT, true) == 0)
                 {
                     // AI: Set defaults defined by options
                     if (!string.IsNullOrEmpty(_notificationOptions.SmsFromDefault))

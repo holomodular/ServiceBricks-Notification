@@ -15,6 +15,7 @@ namespace ServiceBricks.Notification.Cosmos
             // AI: Add mappings for the domain object
             CreateMap<NotifyMessageDto, NotifyMessage>()
                 .ForMember(x => x.CreateDate, y => y.Ignore())
+                .ForMember(x => x.PartitionKey, y => y.Ignore())
                 .ForMember(x => x.Key, y => y.MapFrom<KeyResolver>());
 
             CreateMap<NotifyMessage, NotifyMessageDto>()

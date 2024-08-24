@@ -12,6 +12,12 @@ namespace ServiceBricks.Notification
         private readonly IMapper _mapper;
         private readonly ILogger<CreateApplicationEmailRule> _logger;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="loggerFactory"></param>
+        /// <param name="messageApiService"></param>
+        /// <param name="mapper"></param>
         public CreateApplicationEmailRule(
             ILoggerFactory loggerFactory,
             INotifyMessageApiService messageApiService,

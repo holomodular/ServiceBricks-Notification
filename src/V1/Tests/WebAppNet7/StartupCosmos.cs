@@ -1,5 +1,6 @@
 using ServiceBricks;
-using ServiceBricks.Logging.InMemory;
+
+//using ServiceBricks.Logging.InMemory;
 using ServiceBricks.Notification.Cosmos;
 using WebApp.Extensions;
 
@@ -17,7 +18,7 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingInMemory(Configuration);
+            //services.AddServiceBricksLoggingInMemory(Configuration);
             services.AddServiceBricksNotificationCosmos(Configuration);
             services.AddCustomWebsite(Configuration);
 
@@ -27,7 +28,7 @@ namespace WebApp
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment webHostEnvironment)
         {
             app.StartServiceBricks();
-            app.StartServiceBricksLoggingInMemory();
+            //app.StartServiceBricksLoggingInMemory();
             app.StartServiceBricksNotificationCosmos();
             app.StartCustomWebsite(webHostEnvironment);
             var logger = app.ApplicationServices.GetRequiredService<ILogger<StartupCosmos>>();

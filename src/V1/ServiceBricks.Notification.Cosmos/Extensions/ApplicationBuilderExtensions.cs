@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceBricks.Notification.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Cosmos
 {
@@ -31,8 +32,7 @@ namespace ServiceBricks.Notification.Cosmos
             ModuleStarted = true;
 
             // AI: Start the parent module.
-            // AI: If the primary keys of the Cosmos models do not match the EFC module, we can't use it rules, so skip EFC and call start on the core module instead.
-            applicationBuilder.StartServiceBricksNotification(); // Skip EFC
+            applicationBuilder.StartServiceBricksNotificationEntityFrameworkCore();
 
             return applicationBuilder;
         }
