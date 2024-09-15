@@ -34,7 +34,7 @@ namespace ServiceBricks.Notification.InMemory
             // AI: Add the storage services for the module for each domain object
             services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
             services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
             return services;
         }

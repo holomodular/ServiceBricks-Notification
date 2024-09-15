@@ -41,7 +41,7 @@ namespace ServiceBricks.Notification.SqlServer
             // AI: Add storage services for the module. Each domain object should have its own storage repository.
             services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
             services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
             return services;
         }

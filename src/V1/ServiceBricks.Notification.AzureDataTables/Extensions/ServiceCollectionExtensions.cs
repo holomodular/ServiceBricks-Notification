@@ -27,7 +27,7 @@ namespace ServiceBricks.Notification.AzureDataTables
             // AI: Add storage services for the module. Each domain object should have its own storage repository
             services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
             services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainObjectProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
 
             // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();

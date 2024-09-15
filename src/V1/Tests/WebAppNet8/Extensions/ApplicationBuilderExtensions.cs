@@ -10,7 +10,7 @@ namespace WebApp.Extensions
         {
             //app.UseMiddleware<CustomLoggerMiddleware>();
             //app.UseMiddleware<WebRequestMessageMiddleware>();
-            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<TrapExceptionResponseMiddleware>();
             return app;
         }
 

@@ -50,6 +50,16 @@ namespace ServiceBricks.Notification
         }
 
         /// <summary>
+        /// UnRegister the business rule.
+        /// </summary>
+        public static void UnRegisterRule(IBusinessRuleRegistry registry)
+        {
+            registry.UnRegisterItem(
+                typeof(SendNotificationProcess),
+                typeof(SendNotificationProcessRule));
+        }
+
+        /// <summary>
         /// Execute the business rule.
         /// </summary>
         /// <param name="context"></param>

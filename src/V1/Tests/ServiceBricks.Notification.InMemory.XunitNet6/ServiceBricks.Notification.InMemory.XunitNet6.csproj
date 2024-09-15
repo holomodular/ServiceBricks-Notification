@@ -10,18 +10,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\TestFiles\MappingTestInMemory.cs" Link="MappingTestInMemory.cs" />
+    <Compile Include="..\TestFiles\MappingTestInMemory.cs" Link="MappingTestInMemory.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="..\TestFiles\NotifyMessageApiControllerTestInMemory.cs" Link="NotifyMessageApiControllerTestInMemory.cs" />
+	  <Compile Include="..\TestFiles\NotifyMessageStubApiClientTests.cs" Link="NotifyMessageStubApiClientTests.cs" />
+	  <Compile Include="..\TestFiles\ObjectTests.cs" Link="ObjectTests.cs" />
     <Compile Include="..\TestFiles\StartupInMemory.cs" Link="StartupInMemory.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\TestFiles\appsettings.json" Link="appsettings.json" />
+    <None Include="..\TestFiles\appsettings.json" Link="appsettings.json" />
   </ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.33" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 		<PackageReference Include="xunit" Version="2.9.0" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

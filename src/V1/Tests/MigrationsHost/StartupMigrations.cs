@@ -19,11 +19,8 @@ namespace ServiceBricks.Xunit
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
 
-            //**************************
-            //UNCOMMENT THE ONE YOU NEED
-            //**************************
-            //services.AddServiceBricksNotificationPostgres(Configuration);
-            //services.AddServiceBricksNotificationSqlServer(Configuration);
+            services.AddServiceBricksNotificationPostgres(Configuration);
+            services.AddServiceBricksNotificationSqlServer(Configuration);
             services.AddServiceBricksNotificationSqlite(Configuration);
 
             // Remove all background tasks/timers for unit testing
@@ -36,11 +33,8 @@ namespace ServiceBricks.Xunit
             base.CustomConfigure(app);
             app.StartServiceBricks();
 
-            //**************************
-            //UNCOMMENT THE ONE YOU NEED
-            //**************************
-            //app.StartServiceBricksNotificationPostgres();
-            //app.StartServiceBricksNotificationSqlServer();
+            app.StartServiceBricksNotificationPostgres();
+            app.StartServiceBricksNotificationSqlServer();
             app.StartServiceBricksNotificationSqlite();
         }
     }

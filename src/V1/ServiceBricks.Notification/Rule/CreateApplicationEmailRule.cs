@@ -40,13 +40,48 @@ namespace ServiceBricks.Notification
         }
 
         /// <summary>
+        /// Register the business rule.
+        /// </summary>
+        public static void UnRegisterServiceBus(IServiceBus serviceBus)
+        {
+            serviceBus.Unsubscribe(
+                typeof(CreateApplicationEmailBroadcast),
+                typeof(CreateApplicationEmailRule));
+        }
+
+        /// <summary>
         /// Execute the business rule.
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
         public override IResponse ExecuteRule(IBusinessRuleContext context)
         {
-            return ExecuteRuleAsync(context).GetAwaiter().GetResult();
+            var response = new Response();
+
+            try
+            {
+                // AI: Make sure the context object is the correct type
+                var e = context.Object as CreateApplicationEmailBroadcast;
+                if (e == null || e.DomainObject == null)
+                    return response;
+
+                // AI: Map the domain object to the DTO
+                var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
+
+                // AI: Call the API service to store the message
+                var respCreate = _messageApiService.Create(message);
+
+                // AI: Copy the API response to the business rule response
+                response.CopyFrom(respCreate);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.ERROR_BUSINESS_RULE));
+                return response;
+            }
         }
 
         /// <summary>

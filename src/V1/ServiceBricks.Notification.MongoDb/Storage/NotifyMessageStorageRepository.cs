@@ -32,30 +32,14 @@ namespace ServiceBricks.Notification.MongoDb
             ResponseList<NotifyMessage> response = new ResponseList<NotifyMessage>();
             try
             {
+                var query = DomainProcessQueueService<NotifyMessage>.GetQueueItemsQuery(
+                    batchNumberToTake,
+                    pickupErrors,
+                    errorPickupCutoffDate);
+
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
-                ServiceQueryRequestBuilder qb = new ServiceQueryRequestBuilder();
-                qb.IsEqual(nameof(NotifyMessage.IsComplete), false.ToString())
-                    .And()
-                    .IsEqual(nameof(NotifyMessage.IsProcessing), false.ToString())
-                    .And()
-                    .IsLessThanOrEqual(nameof(NotifyMessage.FutureProcessDate), now.ToString("o"));
-                if (pickupErrors)
-                {
-                    qb.And()
-                    .IsEqual(nameof(NotifyMessage.IsError), true.ToString())
-                    .And()
-                    .IsLessThanOrEqual(nameof(NotifyMessage.ProcessDate), errorPickupCutoffDate.ToString("o"));
-                }
-                else
-                {
-                    qb.And()
-                    .IsEqual(nameof(NotifyMessage.IsError), false.ToString());
-                }
-                qb.Sort(nameof(NotifyMessage.CreateDate), true);
-                qb.Paging(1, batchNumberToTake, false);
-
-                var respQuery = await this.QueryAsync(qb.Build());
+                var respQuery = await this.QueryAsync(query);
                 response.CopyFrom(respQuery);
                 if (response.Error)
                     return response;

@@ -6,7 +6,7 @@ namespace ServiceBricks.Notification.Cosmos
     /// <summary>
     /// This is a service for processing a table like a queue.
     /// </summary>
-    public sealed class NotifyMessageProcessQueueService : DomainObjectProcessQueueService<NotifyMessage>, INotifyMessageProcessQueueService
+    public sealed class NotifyMessageProcessQueueService : DomainProcessQueueService<NotifyMessage>, INotifyMessageProcessQueueService
     {
         private readonly IMapper _mapper;
         private readonly IBusinessRuleService _businessRuleService;
@@ -20,7 +20,7 @@ namespace ServiceBricks.Notification.Cosmos
         /// <param name="businessRuleService"></param>
         public NotifyMessageProcessQueueService(
             ILoggerFactory loggerFactory,
-            IDomainObjectProcessQueueStorageRepository<NotifyMessage> repo,
+            IDomainProcessQueueStorageRepository<NotifyMessage> repo,
             IMapper mapper,
             IBusinessRuleService businessRuleService) : base(loggerFactory, repo)
         {

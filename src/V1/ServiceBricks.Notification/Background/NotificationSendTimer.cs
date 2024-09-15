@@ -24,7 +24,7 @@ namespace ServiceBricks.Notification
         /// </summary>
         public override TimeSpan TimerTickInterval
         {
-            get { return TimeSpan.FromSeconds(30); }
+            get { return TimeSpan.FromSeconds(15); }
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ServiceBricks.Notification
         /// </summary>
         public override TimeSpan TimerDueTime
         {
-            get { return TimeSpan.FromSeconds(5); }
+            get { return TimeSpan.FromSeconds(1); }
         }
 
         /// <summary>

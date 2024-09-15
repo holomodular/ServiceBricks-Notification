@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.1.0-b</Version>
+		<Version>1.1.0-f</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Notification.MongoDb</PackageId>
 		<Title>ServiceBricks.Notification.MongoDb</Title>
@@ -33,9 +33,9 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Notification" Version="1.1.0-b" />
+		<PackageReference Include="ServiceBricks.Notification" Version="1.1.0-f" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.1.0-b" />
+		<PackageReference Include="ServiceBricks.Storage.MongoDb" Version="1.1.0-f" />
 	</ItemGroup>
 </Project>

@@ -30,6 +30,7 @@ namespace ServiceBricks.Notification.InMemory
             ResponseList<NotifyMessage> response = new ResponseList<NotifyMessage>();
             try
             {
+                // In memory operates a little differently
                 DateTimeOffset now = DateTimeOffset.UtcNow;
                 var inmemoryquery = DbSet.Where(x =>
                         !x.IsComplete &&
