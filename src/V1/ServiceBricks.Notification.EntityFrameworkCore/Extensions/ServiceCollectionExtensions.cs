@@ -32,11 +32,10 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
             services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
             // AI: Register business rules for the module
-            DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
-            DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance,
-                nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
-            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-            DomainQueryPropertyRenameRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, "StorageKey", "Key");
+            DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
+            DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
+            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.Register(BusinessRuleRegistry.Instance);
+            DomainQueryPropertyRenameRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, "StorageKey", "Key");
 
             return services;
         }

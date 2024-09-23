@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.1.0-f</Version>
+		<Version>1.1.0-g</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Notification.Sqlite</PackageId>
 		<Title>ServiceBricks.Notification.Sqlite</Title>
@@ -34,12 +34,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Notification.EntityFrameworkCore" Version="1.1.0-f" />
+		<PackageReference Include="ServiceBricks.Notification.EntityFrameworkCore" Version="1.1.0-g" />
 	</ItemGroup>
 
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.Sqlite" Version="1.1.0-f" />
+		<PackageReference Include="ServiceBricks.Storage.Sqlite" Version="1.1.0-g" />
 	</ItemGroup>
 	
 </Project>

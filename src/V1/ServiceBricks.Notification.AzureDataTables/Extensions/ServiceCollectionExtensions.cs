@@ -37,12 +37,12 @@ namespace ServiceBricks.Notification.AzureDataTables
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
             // AI: Register business rules for the module
-            DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
-            DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
-            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-            NotifyMessageCreateRule.RegisterRule(BusinessRuleRegistry.Instance);
-            NotifyMessageUpdateRule.RegisterRule(BusinessRuleRegistry.Instance);
-            NotifyMessageQueryRule.RegisterRule(BusinessRuleRegistry.Instance);
+            DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
+            DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
+            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.Register(BusinessRuleRegistry.Instance);
+            NotifyMessageCreateRule.Register(BusinessRuleRegistry.Instance);
+            NotifyMessageUpdateRule.Register(BusinessRuleRegistry.Instance);
+            NotifyMessageQueryRule.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

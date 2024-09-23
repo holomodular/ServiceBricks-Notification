@@ -42,9 +42,9 @@ namespace ServiceBricks.Notification
         /// <summary>
         /// Register the business rule.
         /// </summary>
-        public static void RegisterRule(IBusinessRuleRegistry registry)
+        public static void Register(IBusinessRuleRegistry registry)
         {
-            registry.RegisterItem(
+            registry.Register(
                 typeof(SendNotificationProcess),
                 typeof(SendNotificationProcessRule));
         }
@@ -52,9 +52,9 @@ namespace ServiceBricks.Notification
         /// <summary>
         /// UnRegister the business rule.
         /// </summary>
-        public static void UnRegisterRule(IBusinessRuleRegistry registry)
+        public static void UnRegister(IBusinessRuleRegistry registry)
         {
-            registry.UnRegisterItem(
+            registry.UnRegister(
                 typeof(SendNotificationProcess),
                 typeof(SendNotificationProcessRule));
         }

@@ -46,12 +46,12 @@ namespace ServiceBricks.Notification.Cosmos
             services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
             // AI: Register business rules for the module
-            DomainCreateUpdateDateRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance);
-            DomainDateTimeOffsetRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance,
+            DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
+            DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance,
                 nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
-            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.RegisterRule(BusinessRuleRegistry.Instance);
-            DomainQueryPropertyRenameRule<NotifyMessage>.RegisterRule(BusinessRuleRegistry.Instance, "StorageKey", "Key");
-            NotifyMessageCreateRule.RegisterRule(BusinessRuleRegistry.Instance);
+            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.Register(BusinessRuleRegistry.Instance);
+            DomainQueryPropertyRenameRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, "StorageKey", "Key");
+            NotifyMessageCreateRule.Register(BusinessRuleRegistry.Instance);
 
             // AI: Add any miscellaneous services for the module
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();

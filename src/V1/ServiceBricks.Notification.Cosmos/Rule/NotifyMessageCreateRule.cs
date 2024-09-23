@@ -20,12 +20,23 @@ namespace ServiceBricks.Notification.Cosmos
         }
 
         /// <summary>
-        /// Register the business rule to the DomainCreateBeforeEvent.
+        /// Register the rule
         /// </summary>
         /// <param name="registry"></param>
-        public static void RegisterRule(IBusinessRuleRegistry registry)
+        public static void Register(IBusinessRuleRegistry registry)
         {
-            registry.RegisterItem(
+            registry.Register(
+                typeof(DomainCreateBeforeEvent<NotifyMessage>),
+                typeof(NotifyMessageCreateRule));
+        }
+
+        /// <summary>
+        /// Unregister the rule
+        /// </summary>
+        /// <param name="registry"></param>
+        public static void UnRegister(IBusinessRuleRegistry registry)
+        {
+            registry.UnRegister(
                 typeof(DomainCreateBeforeEvent<NotifyMessage>),
                 typeof(NotifyMessageCreateRule));
         }

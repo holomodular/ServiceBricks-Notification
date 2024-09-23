@@ -25,11 +25,22 @@ namespace ServiceBricks.Notification.AzureDataTables
         }
 
         /// <summary>
-        /// Register a rule for a domain object.
+        /// Register the rule
         /// </summary>
-        public static void RegisterRule(IBusinessRuleRegistry registry)
+        public static void Register(IBusinessRuleRegistry registry)
         {
-            registry.RegisterItem(
+            registry.Register(
+                typeof(DomainUpdateBeforeEvent<NotifyMessage>),
+                typeof(NotifyMessageUpdateRule));
+        }
+
+        /// <summary>
+        /// Unregister the rule
+        /// </summary>
+        /// <param name="registry"></param>
+        public static void UnRegister(IBusinessRuleRegistry registry)
+        {
+            registry.UnRegister(
                 typeof(DomainUpdateBeforeEvent<NotifyMessage>),
                 typeof(NotifyMessageUpdateRule));
         }

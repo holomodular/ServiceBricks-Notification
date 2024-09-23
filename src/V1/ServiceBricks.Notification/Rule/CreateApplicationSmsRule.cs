@@ -32,7 +32,7 @@ namespace ServiceBricks.Notification
         /// <summary>
         /// Register the business rule.
         /// </summary>
-        public static void RegisterServiceBus(IServiceBus serviceBus)
+        public static void Register(IServiceBus serviceBus)
         {
             serviceBus.Subscribe(
                 typeof(CreateApplicationSmsBroadcast),
@@ -42,9 +42,9 @@ namespace ServiceBricks.Notification
         /// <summary>
         /// UnRegister the business rule.
         /// </summary>
-        public static void UnRegisterServiceBus(IServiceBus serviceBus)
+        public static void UnRegister(IServiceBus serviceBus)
         {
-            serviceBus.Unsubscribe(
+            serviceBus.UnSubscribe(
                 typeof(CreateApplicationSmsBroadcast),
                 typeof(CreateApplicationSmsRule));
         }

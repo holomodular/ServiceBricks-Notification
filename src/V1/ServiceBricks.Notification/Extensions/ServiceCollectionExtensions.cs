@@ -37,14 +37,14 @@ namespace ServiceBricks.Notification
                 services.AddScoped<ISmsProvider, ExampleSmsProvider>();
 
             // AI: Register business rules for the module
-            SendNotificationProcessRule.RegisterRule(BusinessRuleRegistry.Instance);
+            SendNotificationProcessRule.Register(BusinessRuleRegistry.Instance);
 
             // AI: Register servicebus subscriptions for the module
             using (var serviceScope = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var serviceBus = serviceScope.ServiceProvider.GetRequiredService<IServiceBus>();
-                CreateApplicationEmailRule.RegisterServiceBus(serviceBus);
-                CreateApplicationSmsRule.RegisterServiceBus(serviceBus);
+                CreateApplicationEmailRule.Register(serviceBus);
+                CreateApplicationSmsRule.Register(serviceBus);
             }
 
             return services;
