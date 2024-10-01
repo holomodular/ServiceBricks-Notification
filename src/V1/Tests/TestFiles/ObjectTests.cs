@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ServiceBricks.Notification;
-using ServiceQuery;
-using static ServiceBricks.Xunit.BusinessRuleTests;
 
 namespace ServiceBricks.Xunit
 {
@@ -175,7 +172,6 @@ namespace ServiceBricks.Xunit
         public virtual async Task CreateApplicationEmailRuleTests()
         {
             CreateApplicationEmailRule rule = new CreateApplicationEmailRule(
-                SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>(),
                 SystemManager.ServiceProvider.GetRequiredService<INotifyMessageApiService>(),
                 SystemManager.ServiceProvider.GetRequiredService<IMapper>());
 
@@ -201,7 +197,6 @@ namespace ServiceBricks.Xunit
         public virtual async Task CreateApplicationSmsRuleTests()
         {
             CreateApplicationSmsRule rule = new CreateApplicationSmsRule(
-                SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>(),
                 SystemManager.ServiceProvider.GetRequiredService<INotifyMessageApiService>(),
                 SystemManager.ServiceProvider.GetRequiredService<IMapper>());
 
@@ -279,7 +274,7 @@ namespace ServiceBricks.Xunit
         {
             SenderType senderType = new SenderType();
             senderType.Name = "test";
-            senderType.Key = 1;
+            senderType.Key = "test";
 
             var list = SenderType.GetAll();
             Assert.True(list.Count == 2);

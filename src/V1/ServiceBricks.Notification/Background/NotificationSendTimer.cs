@@ -50,8 +50,7 @@ namespace ServiceBricks.Notification
         public override bool TimerTickShouldProcessRun()
         {
             // If scaling the application, consider using the Cache SingleServerProcess to ensure only one instance runs.
-            return ApplicationBuilderExtensions.ModuleStarted &&
-                !IsCurrentlyRunning;
+            return NotificationModule.Instance.Started && !IsCurrentlyRunning;
         }
     }
 }

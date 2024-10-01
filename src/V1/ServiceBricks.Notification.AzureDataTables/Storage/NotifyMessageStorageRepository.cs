@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using ServiceQuery;
 
 namespace ServiceBricks.Notification.AzureDataTables
 {

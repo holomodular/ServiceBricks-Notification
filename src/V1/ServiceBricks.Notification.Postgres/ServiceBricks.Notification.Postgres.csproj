@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Version>1.1.0-g</Version>
+		<Version>1.1.0-k</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Notification.Postgres</PackageId>
 		<Title>ServiceBricks.Notification.Postgres</Title>
@@ -32,11 +32,11 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Notification.EntityFrameworkCore" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Notification.EntityFrameworkCore" Version="1.1.0-k" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.Postgres" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.Postgres" Version="1.1.0-k" />
 	</ItemGroup>
 	
 </Project>

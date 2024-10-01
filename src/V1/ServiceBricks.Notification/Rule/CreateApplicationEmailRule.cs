@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
 
 namespace ServiceBricks.Notification
 {
@@ -10,20 +9,16 @@ namespace ServiceBricks.Notification
     {
         private readonly INotifyMessageApiService _messageApiService;
         private readonly IMapper _mapper;
-        private readonly ILogger<CreateApplicationEmailRule> _logger;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="loggerFactory"></param>
         /// <param name="messageApiService"></param>
         /// <param name="mapper"></param>
         public CreateApplicationEmailRule(
-            ILoggerFactory loggerFactory,
             INotifyMessageApiService messageApiService,
             IMapper mapper)
         {
-            _logger = loggerFactory.CreateLogger<CreateApplicationEmailRule>();
             _mapper = mapper;
             _messageApiService = messageApiService;
             Priority = PRIORITY_NORMAL;
@@ -32,19 +27,19 @@ namespace ServiceBricks.Notification
         /// <summary>
         /// Register the business rule.
         /// </summary>
-        public static void Register(IServiceBus serviceBus)
+        public static void Register(IBusinessRuleRegistry registry)
         {
-            serviceBus.Subscribe(
+            registry.Register(
                 typeof(CreateApplicationEmailBroadcast),
                 typeof(CreateApplicationEmailRule));
         }
 
         /// <summary>
-        /// Register the business rule.
+        /// UnRegister the business rule.
         /// </summary>
-        public static void UnRegister(IServiceBus serviceBus)
+        public static void UnRegister(IBusinessRuleRegistry registry)
         {
-            serviceBus.UnSubscribe(
+            registry.UnRegister(
                 typeof(CreateApplicationEmailBroadcast),
                 typeof(CreateApplicationEmailRule));
         }
@@ -58,30 +53,29 @@ namespace ServiceBricks.Notification
         {
             var response = new Response();
 
-            try
+            // AI: Make sure the context object is the correct type
+            if (context == null || context.Object == null)
             {
-                // AI: Make sure the context object is the correct type
-                var e = context.Object as CreateApplicationEmailBroadcast;
-                if (e == null || e.DomainObject == null)
-                    return response;
-
-                // AI: Map the domain object to the DTO
-                var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
-
-                // AI: Call the API service to store the message
-                var respCreate = _messageApiService.Create(message);
-
-                // AI: Copy the API response to the business rule response
-                response.CopyFrom(respCreate);
-
+                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
-            catch (Exception ex)
+            var e = context.Object as CreateApplicationEmailBroadcast;
+            if (e == null || e.DomainObject == null)
             {
-                _logger.LogError(ex, ex.Message);
-                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.ERROR_BUSINESS_RULE));
+                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
+
+            // AI: Map the domain object to the DTO
+            var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
+
+            // AI: Call the API service to store the message
+            var respCreate = _messageApiService.Create(message);
+
+            // AI: Copy the API response to the business rule response
+            response.CopyFrom(respCreate);
+
+            return response;
         }
 
         /// <summary>
@@ -93,30 +87,29 @@ namespace ServiceBricks.Notification
         {
             var response = new Response();
 
-            try
+            // AI: Make sure the context object is the correct type
+            if (context == null || context.Object == null)
             {
-                // AI: Make sure the context object is the correct type
-                var e = context.Object as CreateApplicationEmailBroadcast;
-                if (e == null || e.DomainObject == null)
-                    return response;
-
-                // AI: Map the domain object to the DTO
-                var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
-
-                // AI: Call the API service to store the message
-                var respCreate = await _messageApiService.CreateAsync(message);
-
-                // AI: Copy the API response to the business rule response
-                response.CopyFrom(respCreate);
-
+                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
-            catch (Exception ex)
+            var e = context.Object as CreateApplicationEmailBroadcast;
+            if (e == null || e.DomainObject == null)
             {
-                _logger.LogError(ex, ex.Message);
-                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.ERROR_BUSINESS_RULE));
+                response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
+
+            // AI: Map the domain object to the DTO
+            var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
+
+            // AI: Call the API service to store the message
+            var respCreate = await _messageApiService.CreateAsync(message);
+
+            // AI: Copy the API response to the business rule response
+            response.CopyFrom(respCreate);
+
+            return response;
         }
     }
 }

@@ -5,8 +5,13 @@ namespace ServiceBricks.Notification
     /// <summary>
     /// The module definition for the Notification module.
     /// </summary>
-    public partial class NotificationModule : IModule
+    public partial class NotificationModule : ServiceBricks.Module
     {
+        /// <summary>
+        /// Instance
+        /// </summary>
+        public static NotificationModule Instance = new NotificationModule();
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -17,20 +22,5 @@ namespace ServiceBricks.Notification
                 typeof(NotificationModule).Assembly
             };
         }
-
-        /// <summary>
-        /// The list of dependent modules.
-        /// </summary>
-        public List<IModule> DependentModules { get; }
-
-        /// <summary>
-        /// The list of Automapper assemblies.
-        /// </summary>
-        public List<Assembly> AutomapperAssemblies { get; }
-
-        /// <summary>
-        /// The list of view assemblies.
-        /// </summary>
-        public List<Assembly> ViewAssemblies { get; }
     }
 }

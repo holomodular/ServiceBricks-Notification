@@ -8,17 +8,7 @@
         /// <summary>
         /// Email
         /// </summary>
-        public const int Email = 1;
-
-        /// <summary>
-        /// Email
-        /// </summary>
         public const string Email_TEXT = "email";
-
-        /// <summary>
-        /// SMS
-        /// </summary>
-        public const int SMS = 2;
 
         /// <summary>
         /// SMS
@@ -33,8 +23,8 @@
         {
             return new List<SenderType>()
             {
-                new SenderType(){ Key = Email, Name = Email_TEXT },
-                new SenderType(){ Key = SMS, Name = SMS_TEXT },
+                new SenderType(){ Key = Email_TEXT, Name = Email_TEXT },
+                new SenderType(){ Key = SMS_TEXT, Name = SMS_TEXT },
             };
         }
     }

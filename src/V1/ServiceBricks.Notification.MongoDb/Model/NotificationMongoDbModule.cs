@@ -5,7 +5,7 @@ namespace ServiceBricks.Notification.MongoDb
     /// <summary>
     /// The module definition for the Notification MongoDb module.
     /// </summary>
-    public partial class NotificationMongoDbModule : IModule
+    public partial class NotificationMongoDbModule : ServiceBricks.Module
     {
         /// <summary>
         /// Constructor.
@@ -21,20 +21,5 @@ namespace ServiceBricks.Notification.MongoDb
                 new NotificationModule()
             };
         }
-
-        /// <summary>
-        /// The list of dependent modules.
-        /// </summary>
-        public List<IModule> DependentModules { get; }
-
-        /// <summary>
-        /// The list of assemblies that contain the Automapper mappings.
-        /// </summary>
-        public List<Assembly> AutomapperAssemblies { get; }
-
-        /// <summary>
-        /// The list of assemblies that contain views.
-        /// </summary>
-        public List<Assembly> ViewAssemblies { get; }
     }
 }

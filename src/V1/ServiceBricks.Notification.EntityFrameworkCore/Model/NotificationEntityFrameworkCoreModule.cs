@@ -5,7 +5,7 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
     /// <summary>
     /// The module definition for the ServiceBricks.Notification.EntityFrameworkCore module.
     /// </summary>
-    public partial class NotificationEntityFrameworkCoreModule : IModule
+    public partial class NotificationEntityFrameworkCoreModule : ServiceBricks.Module
     {
         /// <summary>
         /// Constructor.
@@ -21,20 +21,5 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
                 new NotificationModule()
             };
         }
-
-        /// <summary>
-        /// The list of dependent modules.
-        /// </summary>
-        public List<IModule> DependentModules { get; }
-
-        /// <summary>
-        /// The list of Automapper assemblies.
-        /// </summary>
-        public List<Assembly> AutomapperAssemblies { get; }
-
-        /// <summary>
-        /// The list of view assemblies.
-        /// </summary>
-        public List<Assembly> ViewAssemblies { get; }
     }
 }

@@ -8,12 +8,12 @@
 
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Domain\NotifyMessage.cs" Link="NotifyMessage.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Interface\INotifyMessageStorageRepository.cs" Link="INotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Mapping\NotifyMessageMappingProfile.cs" Link="NotifyMessageMappingProfile.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Model\NotificationEntityFrameworkCoreConstants.cs" Link="NotificationEntityFrameworkCoreConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Model\NotificationEntityFrameworkCoreModule.cs" Link="NotificationEntityFrameworkCoreModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Rule\NotificationEntityFrameworkCoreModuleAddRule.cs" Link="NotificationEntityFrameworkCoreModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.EntityFrameworkCore\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
 	</ItemGroup>
@@ -22,6 +22,6 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.EntityFrameworkCore" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.EntityFrameworkCore" Version="1.1.0-k" />
 	</ItemGroup>
 </Project>

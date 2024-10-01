@@ -8,15 +8,15 @@
 
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Domain\NotifyMessage.cs" Link="NotifyMessage.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Interface\INotifyMessageStorageRepository.cs" Link="INotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Mapping\NotifyMessageMappingProfile.cs" Link="NotifyMessageMappingProfile.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Model\NotificationAzureDataTablesConstants.cs" Link="NotificationAzureDataTablesConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Model\NotificationAzureDataTablesModule.cs" Link="NotificationAzureDataTablesModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotificationAzureDataTablesModuleAddRule.cs" Link="NotificationAzureDataTablesModuleAddRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotificationAzureDataTablesModuleStartRule.cs" Link="NotificationAzureDataTablesModuleStartRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageCreateRule.cs" Link="NotifyMessageCreateRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageQueryRule.cs" Link="NotifyMessageQueryRule.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Rule\NotifyMessageUpdateRule.cs" Link="NotifyMessageUpdateRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.AzureDataTables\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
@@ -27,6 +27,6 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.AzureDataTables" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.AzureDataTables" Version="1.1.0-k" />
 	</ItemGroup>
 </Project>

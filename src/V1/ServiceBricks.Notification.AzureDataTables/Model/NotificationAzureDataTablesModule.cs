@@ -5,7 +5,7 @@ namespace ServiceBricks.Notification.AzureDataTables
     /// <summary>
     /// The module definition for the NotificationAzureDataTables module.
     /// </summary>
-    public partial class NotificationAzureDataTablesModule : IModule
+    public partial class NotificationAzureDataTablesModule : ServiceBricks.Module
     {
         /// <summary>
         /// Constructor.
@@ -21,20 +21,5 @@ namespace ServiceBricks.Notification.AzureDataTables
                 new NotificationModule()
             };
         }
-
-        /// <summary>
-        /// The list of dependent modules.
-        /// </summary>
-        public List<IModule> DependentModules { get; }
-
-        /// <summary>
-        /// The list of Automapper assemblies.
-        /// </summary>
-        public List<Assembly> AutomapperAssemblies { get; }
-
-        /// <summary>
-        /// The list of view assemblies.
-        /// </summary>
-        public List<Assembly> ViewAssemblies { get; }
     }
 }

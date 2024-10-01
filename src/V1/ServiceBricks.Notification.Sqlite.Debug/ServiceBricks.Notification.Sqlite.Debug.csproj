@@ -7,7 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20240915153505_NotificationV1.cs" Link="20240915153505_NotificationV1.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20240915153505_NotificationV1.Designer.cs" Link="20240915153505_NotificationV1.Designer.cs" />
@@ -15,6 +14,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteConstants.cs" Link="NotificationSqliteConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteContext.cs" Link="NotificationSqliteContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteModule.cs" Link="NotificationSqliteModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Rule\NotificationSqliteModuleAddRule.cs" Link="NotificationSqliteModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.Sqlite" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.Sqlite" Version="1.1.0-k" />
 	</ItemGroup>
 	
 </Project>

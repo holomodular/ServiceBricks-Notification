@@ -16,26 +16,15 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
         /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationEntityFrameworkCore(this IServiceCollection services, IConfiguration configuration)
         {
-            // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.RegisterItem(typeof(NotificationEntityFrameworkCoreModule), new NotificationEntityFrameworkCoreModule());
-
             // AI: Add the parent module
             services.AddServiceBricksNotification(configuration);
 
-            // AI: Configure all options for the module
+            // AI: Add this module to the ModuleRegistry
+            ModuleRegistry.Instance.Register(new NotificationEntityFrameworkCoreModule());
 
-            // AI: Add any miscellaneous services for the module
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
-
-            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
-            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
-            services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
-
-            // AI: Register business rules for the module
-            DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
-            DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
-            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.Register(BusinessRuleRegistry.Instance);
-            DomainQueryPropertyRenameRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, "StorageKey", "Key");
+            // AI: Add module business rules
+            NotificationEntityFrameworkCoreModuleAddRule.Register(BusinessRuleRegistry.Instance);
+            ModuleSetStartedRule<NotificationEntityFrameworkCoreModule>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification;
 
 namespace ServiceBricks.Xunit

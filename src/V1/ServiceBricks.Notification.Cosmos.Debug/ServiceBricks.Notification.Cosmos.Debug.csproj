@@ -8,13 +8,14 @@
 
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Domain\NotifyMessage.cs" Link="NotifyMessage.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Interface\INotifyMessageStorageRepository.cs" Link="INotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Mapping\NotifyMessageMappingProfile.cs" Link="NotifyMessageMappingProfile.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosConstants.cs" Link="NotificationCosmosConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosContext.cs" Link="NotificationCosmosContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosModule.cs" Link="NotificationCosmosModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotificationCosmosModuleAddRule.cs" Link="NotificationCosmosModuleAddRule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotificationCosmosModuleStartRule.cs" Link="NotificationCosmosModuleStartRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotifyMessageCreateRule.cs" Link="NotifyMessageCreateRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
@@ -27,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.Cosmos" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.Cosmos" Version="1.1.0-k" />
 	</ItemGroup>
 	
 </Project>

@@ -27,14 +27,13 @@ namespace ServiceBricks.Xunit
             // Register TestManager
             services.AddScoped<ITestManager<NotifyMessageDto>, NotifyMessageTestManager>();
 
-            services.AddServiceBricksComplete();
+            services.AddServiceBricksComplete(Configuration);
         }
 
         public virtual void Configure(IApplicationBuilder app)
         {
             base.CustomConfigure(app);
             app.StartServiceBricks();
-            app.StartServiceBricksNotificationAzureDataTables();
         }
     }
 }

@@ -7,11 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\ServiceBricks.Notification.InMemory\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Model\NotificationInMemoryConstants.cs" Link="NotificationInMemoryConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Model\NotificationInMemoryContext.cs" Link="NotificationInMemoryContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Model\NotificationInMemoryModule.cs" Link="NotificationInMemoryModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.InMemory\Rule\NotificationInMemoryModuleAddRule.cs" Link="NotificationInMemoryModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.InMemory\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.InMemory" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.InMemory" Version="1.1.0-k" />
 	</ItemGroup>
 	
 </Project>

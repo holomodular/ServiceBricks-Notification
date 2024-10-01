@@ -5,7 +5,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Include="..\ServiceBricks.Notification.Postgres\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\20240915153435_NotificationV1.cs" Link="20240915153435_NotificationV1.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\20240915153435_NotificationV1.Designer.cs" Link="20240915153435_NotificationV1.Designer.cs" />
@@ -13,6 +12,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresConstants.cs" Link="NotificationPostgresConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresContext.cs" Link="NotificationPostgresContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresModule.cs" Link="NotificationPostgresModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Postgres\Rule\NotificationPostgresModuleAddRule.cs" Link="NotificationPostgresModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.Postgres" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.Postgres" Version="1.1.0-k" />
 	</ItemGroup>
 	
 </Project>

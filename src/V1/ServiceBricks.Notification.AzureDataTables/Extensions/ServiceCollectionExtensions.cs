@@ -16,33 +16,16 @@ namespace ServiceBricks.Notification.AzureDataTables
         /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationAzureDataTables(this IServiceCollection services, IConfiguration configuration)
         {
-            // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.RegisterItem(typeof(NotificationAzureDataTablesModule), new NotificationAzureDataTablesModule());
-
             // AI: Add parent module
             services.AddServiceBricksNotification(configuration);
 
-            // AI: Configure all options for the module
+            // AI: Add this module to the ModuleRegistry
+            ModuleRegistry.Instance.Register(new NotificationAzureDataTablesModule());
 
-            // AI: Add storage services for the module. Each domain object should have its own storage repository
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-
-            // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
-            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
-            services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
-
-            // AI: Add any miscellaneous services for the module
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
-
-            // AI: Register business rules for the module
-            DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
-            DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
-            ApiConcurrencyByUpdateDateRule<NotifyMessage, NotifyMessageDto>.Register(BusinessRuleRegistry.Instance);
-            NotifyMessageCreateRule.Register(BusinessRuleRegistry.Instance);
-            NotifyMessageUpdateRule.Register(BusinessRuleRegistry.Instance);
-            NotifyMessageQueryRule.Register(BusinessRuleRegistry.Instance);
+            // AI: Add module business rules
+            NotificationAzureDataTablesModuleAddRule.Register(BusinessRuleRegistry.Instance);
+            NotificationAzureDataTablesModuleStartRule.Register(BusinessRuleRegistry.Instance);
+            ModuleSetStartedRule<NotificationAzureDataTablesModule>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

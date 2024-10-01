@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification.EntityFrameworkCore;
-using ServiceBricks.Storage.EntityFrameworkCore;
+using ServiceBricks.Storage.Postgres;
 
 namespace ServiceBricks.Notification.Postgres
 {
@@ -19,29 +18,16 @@ namespace ServiceBricks.Notification.Postgres
         /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationPostgres(this IServiceCollection services, IConfiguration configuration)
         {
-            // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.RegisterItem(typeof(NotificationPostgresModule), new NotificationPostgresModule());
-
             // AI: Add parent module
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
-            // AI: Register the database for the module
-            var builder = new DbContextOptionsBuilder<NotificationPostgresContext>();
-            string connectionString = configuration.GetPostgresConnectionString(
-                NotificationPostgresConstants.APPSETTING_CONNECTION_STRING);
-            builder.UseNpgsql(connectionString, x =>
-            {
-                x.MigrationsAssembly(typeof(ServiceCollectionExtensions).Assembly.GetName().Name);
-                x.EnableRetryOnFailure();
-            });
-            services.Configure<DbContextOptions<NotificationPostgresContext>>(o => { o = builder.Options; });
-            services.AddSingleton<DbContextOptions<NotificationPostgresContext>>(builder.Options);
-            services.AddDbContext<NotificationPostgresContext>(c => { c = builder; }, ServiceLifetime.Scoped);
+            // AI: Add the module to the ModuleRegistry
+            ModuleRegistry.Instance.Register(new NotificationPostgresModule());
 
-            // AI: Add storage services for the module. Each domain object should have its own storage repository.
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            // AI: Add module business rules
+            NotificationPostgresModuleAddRule.Register(BusinessRuleRegistry.Instance);
+            ModuleSetStartedRule<NotificationPostgresModule>.Register(BusinessRuleRegistry.Instance);
+            PostgresDatabaseMigrationRule<NotificationPostgresModule, NotificationPostgresContext>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

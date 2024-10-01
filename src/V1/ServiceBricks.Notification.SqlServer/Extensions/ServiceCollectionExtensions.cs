@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification.EntityFrameworkCore;
-using ServiceBricks.Storage.EntityFrameworkCore;
+using ServiceBricks.Storage.SqlServer;
 
 namespace ServiceBricks.Notification.SqlServer
 {
@@ -19,29 +18,16 @@ namespace ServiceBricks.Notification.SqlServer
         /// <returns></returns>
         public static IServiceCollection AddServiceBricksNotificationSqlServer(this IServiceCollection services, IConfiguration configuration)
         {
-            // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.RegisterItem(typeof(NotificationSqlServerModule), new NotificationSqlServerModule());
-
             // AI: Add parent module
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
-            // AI: Register the database for the module
-            var builder = new DbContextOptionsBuilder<NotificationSqlServerContext>();
-            string connectionString = configuration.GetSqlServerConnectionString(
-                NotificationSqlServerConstants.APPSETTING_CONNECTION_STRING);
-            builder.UseSqlServer(connectionString, x =>
-            {
-                x.MigrationsAssembly(typeof(ServiceCollectionExtensions).Assembly.GetName().Name);
-                x.EnableRetryOnFailure();
-            });
-            services.Configure<DbContextOptions<NotificationSqlServerContext>>(o => { o = builder.Options; });
-            services.AddSingleton<DbContextOptions<NotificationSqlServerContext>>(builder.Options);
-            services.AddDbContext<NotificationSqlServerContext>(c => { c = builder; }, ServiceLifetime.Scoped);
+            // AI: Add the module to the ModuleRegistry
+            ModuleRegistry.Instance.Register(new NotificationSqlServerModule());
 
-            // AI: Add storage services for the module. Each domain object should have its own storage repository.
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            // AI: Add module business rules
+            NotificationSqlServerModuleAddRule.Register(BusinessRuleRegistry.Instance);
+            ModuleSetStartedRule<NotificationSqlServerModule>.Register(BusinessRuleRegistry.Instance);
+            SqlServerDatabaseMigrationRule<NotificationSqlServerModule, NotificationSqlServerContext>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

@@ -5,7 +5,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Extensions\ApplicationBuilderExtensions.cs" Link="ApplicationBuilderExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\20240915153541_NotificationV1.cs" Link="20240915153541_NotificationV1.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\20240915153541_NotificationV1.Designer.cs" Link="20240915153541_NotificationV1.Designer.cs" />
@@ -13,6 +12,7 @@
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Model\NotificationSqlServerConstants.cs" Link="NotificationSqlServerConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Model\NotificationSqlServerContext.cs" Link="NotificationSqlServerContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Model\NotificationSqlServerModule.cs" Link="NotificationSqlServerModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Rule\NotificationSqlServerModuleAddRule.cs" Link="NotificationSqlServerModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Storage\NotifyMessageStorageRepository.cs" Link="NotifyMessageStorageRepository.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Storage\NotificationStorageRepository.cs" Link="NotificationStorageRepository.cs" />
 	</ItemGroup>
@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.SqlServer" Version="1.1.0-g" />
+		<PackageReference Include="ServiceBricks.Storage.SqlServer" Version="1.1.0-k" />
 	</ItemGroup>
 	
 </Project>

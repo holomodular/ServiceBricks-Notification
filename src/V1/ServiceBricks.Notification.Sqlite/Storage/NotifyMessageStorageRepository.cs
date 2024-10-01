@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using ServiceBricks.Notification.EntityFrameworkCore;
-using ServiceQuery;
 
 namespace ServiceBricks.Notification.Sqlite
 {

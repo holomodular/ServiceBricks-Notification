@@ -23,7 +23,7 @@ namespace ServiceBricks.Notification.Client.Xunit
             // Register TestManagers
             services.AddScoped<ITestManager<NotifyMessageDto>, NotifyMessageTestManager>();
 
-            services.AddServiceBricksComplete();
+            services.AddServiceBricksComplete(Configuration);
         }
 
         public virtual void Configure(IApplicationBuilder app)

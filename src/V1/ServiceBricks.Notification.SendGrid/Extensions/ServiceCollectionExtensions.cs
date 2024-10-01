@@ -17,7 +17,7 @@ namespace ServiceBricks.Notification.SendGrid
         public static IServiceCollection AddServiceBricksNotificationSendGrid(this IServiceCollection services, IConfiguration configuration)
         {
             // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.RegisterItem(typeof(NotificationSendGridModule), new NotificationSendGridModule());
+            ModuleRegistry.Instance.Register(new NotificationSendGridModule());
 
             // AI: register the email provider
             services.AddScoped<IEmailProvider, SendGridEmailProviderService>();

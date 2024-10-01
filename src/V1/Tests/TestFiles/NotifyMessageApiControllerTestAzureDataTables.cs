@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification;
-using ServiceBricks.Notification.AzureDataTables;
 using ServiceBricks.Storage.AzureDataTables;
 
 namespace ServiceBricks.Xunit.Integration
