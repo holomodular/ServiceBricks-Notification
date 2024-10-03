@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification.EntityFrameworkCore;
+using ServiceBricks.Storage.EntityFrameworkCore;
 
 namespace ServiceBricks.Notification.Cosmos
 {
@@ -21,11 +22,11 @@ namespace ServiceBricks.Notification.Cosmos
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
             // AI: Add this module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationCosmosModule());
+            ModuleRegistry.Instance.Register(NotificationCosmosModule.Instance);
 
             // AI: Add module business rules
             NotificationCosmosModuleAddRule.Register(BusinessRuleRegistry.Instance);
-            NotificationCosmosModuleStartRule.Register(BusinessRuleRegistry.Instance);
+            EntityFrameworkCoreDatabaseEnsureCreatedRule<NotificationCosmosModule, NotificationCosmosContext>.Register(BusinessRuleRegistry.Instance);
             ModuleSetStartedRule<NotificationCosmosModule>.Register(BusinessRuleRegistry.Instance);
 
             return services;

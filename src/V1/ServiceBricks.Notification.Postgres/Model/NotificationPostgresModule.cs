@@ -8,6 +8,11 @@ namespace ServiceBricks.Notification.Postgres
     public partial class NotificationPostgresModule : ServiceBricks.Module
     {
         /// <summary>
+        /// Instance.
+        /// </summary>
+        public static NotificationPostgresModule Instance = new NotificationPostgresModule();
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public NotificationPostgresModule()

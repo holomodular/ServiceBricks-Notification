@@ -35,7 +35,7 @@ namespace ServiceBricks.Notification.MongoDb
         public override async Task<IResponse> ProcessItemAsync(NotifyMessage domainObject)
         {
             var msg = _mapper.Map<NotifyMessageDto>(domainObject);
-            SendNotificationProcess sendNotificationProcess = new SendNotificationProcess(msg);
+            NotificationSendProcess sendNotificationProcess = new NotificationSendProcess(msg);
             return await _businessRuleService.ExecuteProcessAsync(sendNotificationProcess);
         }
 

@@ -28,17 +28,8 @@ namespace ServiceBricks.Notification.AzureDataTables
         public override async Task<IResponse> ProcessItemAsync(NotifyMessage domainObject)
         {
             var msg = _mapper.Map<NotifyMessageDto>(domainObject);
-            SendNotificationProcess sendNotificationProcess = new SendNotificationProcess(msg);
+            NotificationSendProcess sendNotificationProcess = new NotificationSendProcess(msg);
             return await _businessRuleService.ExecuteProcessAsync(sendNotificationProcess);
-        }
-
-        /// <summary>
-        /// Execute the process.
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        public override async Task ExecuteAsync(CancellationToken cancellationToken)
-        {
-            await base.ExecuteAsync(cancellationToken);
         }
     }
 }

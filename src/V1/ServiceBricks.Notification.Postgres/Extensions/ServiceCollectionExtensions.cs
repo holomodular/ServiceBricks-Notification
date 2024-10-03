@@ -22,7 +22,7 @@ namespace ServiceBricks.Notification.Postgres
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
             // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationPostgresModule());
+            ModuleRegistry.Instance.Register(NotificationPostgresModule.Instance);
 
             // AI: Add module business rules
             NotificationPostgresModuleAddRule.Register(BusinessRuleRegistry.Instance);

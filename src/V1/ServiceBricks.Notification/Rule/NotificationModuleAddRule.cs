@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace ServiceBricks.Notification
 {
@@ -65,6 +64,7 @@ namespace ServiceBricks.Notification
             services.Configure<SmtpOptions>(configuration.GetSection(NotificationConstants.APPSETTINGS_SMTP_PROVIDER_OPTIONS));
 
             // AI: Add API Controllers for each DTO in the module
+            services.AddScoped<IApiController<NotifyMessageDto>, NotifyMessageApiController>();
             services.AddScoped<INotifyMessageApiController, NotifyMessageApiController>();
 
             // AI: Add any miscellaneous services for the module

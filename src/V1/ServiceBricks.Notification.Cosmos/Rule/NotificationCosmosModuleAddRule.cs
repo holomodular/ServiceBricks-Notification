@@ -10,13 +10,6 @@ namespace ServiceBricks.Notification.Cosmos
     public sealed class NotificationCosmosModuleAddRule : BusinessRule
     {
         /// <summary>
-        /// Constructor.
-        /// </summary>
-        public NotificationCosmosModuleAddRule()
-        {
-        }
-
-        /// <summary>
         /// Register the rule
         /// </summary>
         public static void Register(IBusinessRuleRegistry registry)

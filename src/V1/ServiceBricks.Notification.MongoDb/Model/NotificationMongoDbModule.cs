@@ -8,6 +8,11 @@ namespace ServiceBricks.Notification.MongoDb
     public partial class NotificationMongoDbModule : ServiceBricks.Module
     {
         /// <summary>
+        /// Instance.
+        /// </summary>
+        public static NotificationMongoDbModule Instance = new NotificationMongoDbModule();
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public NotificationMongoDbModule()

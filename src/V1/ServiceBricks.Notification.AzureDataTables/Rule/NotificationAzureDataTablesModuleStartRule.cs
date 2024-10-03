@@ -11,13 +11,6 @@ namespace ServiceBricks.Notification.AzureDataTables
     public sealed class NotificationAzureDataTablesModuleStartRule : BusinessRule
     {
         /// <summary>
-        /// Constructor.
-        /// </summary>
-        public NotificationAzureDataTablesModuleStartRule()
-        {
-        }
-
-        /// <summary>
         /// Register the rule
         /// </summary>
         public static void Register(IBusinessRuleRegistry registry)

@@ -3,9 +3,9 @@
     /// <summary>
     /// This is a process that sends a notification.
     /// </summary>
-    public partial class SendNotificationProcess : DomainProcess<NotifyMessageDto>
+    public partial class NotificationSendProcess : DomainProcess<NotifyMessageDto>
     {
-        public SendNotificationProcess(NotifyMessageDto message)
+        public NotificationSendProcess(NotifyMessageDto message)
         {
             DomainObject = message;
         }

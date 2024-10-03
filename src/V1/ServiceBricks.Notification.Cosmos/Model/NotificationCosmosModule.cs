@@ -7,6 +7,8 @@ namespace ServiceBricks.Notification.Cosmos
     /// </summary>
     public partial class NotificationCosmosModule : ServiceBricks.Module
     {
+        public static NotificationCosmosModule Instance = new NotificationCosmosModule();
+
         /// <summary>
         /// Constructor.
         /// </summary>

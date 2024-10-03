@@ -17,10 +17,11 @@ namespace ServiceBricks.Notification.SendGrid
         public static IServiceCollection AddServiceBricksNotificationSendGrid(this IServiceCollection services, IConfiguration configuration)
         {
             // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationSendGridModule());
+            ModuleRegistry.Instance.Register(NotificationSendGridModule.Instance);
 
-            // AI: register the email provider
-            services.AddScoped<IEmailProvider, SendGridEmailProviderService>();
+            // AI: Add module business rules
+            NotificationSendGridModuleAddRule.Register(BusinessRuleRegistry.Instance);
+            ModuleSetStartedRule<NotificationSendGridModule>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

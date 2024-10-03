@@ -7,6 +7,8 @@ namespace ServiceBricks.Notification.AzureDataTables
     /// </summary>
     public partial class NotificationAzureDataTablesModule : ServiceBricks.Module
     {
+        public static NotificationAzureDataTablesModule Instance = new NotificationAzureDataTablesModule();
+
         /// <summary>
         /// Constructor.
         /// </summary>

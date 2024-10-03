@@ -140,7 +140,7 @@ namespace ServiceBricks.Xunit
             var loggerFactory = SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>();
             var businessRuleService = SystemManager.ServiceProvider.GetRequiredService<IBusinessRuleService>();
 
-            SendNotificationProcess process = new SendNotificationProcess(new NotifyMessageDto()
+            NotificationSendProcess process = new NotificationSendProcess(new NotifyMessageDto()
             {
                 ToAddress = "test1@servicebricks.com,test2@servicebricks.com",
                 CcAddress = "test3@servicebricks.com,test4@servicebricks.com",

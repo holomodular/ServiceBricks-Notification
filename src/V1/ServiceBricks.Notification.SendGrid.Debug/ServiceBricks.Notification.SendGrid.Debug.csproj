@@ -9,6 +9,7 @@
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.SendGrid\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SendGrid\Model\NotificationSendGridModule.cs" Link="NotificationSendGridModule.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.SendGrid\Rule\NotificationSendGridModuleAddRule.cs" Link="NotificationSendGridModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SendGrid\Service\SendGridEmailProviderService.cs" Link="SendGridEmailProviderService.cs" />
 	</ItemGroup>
 

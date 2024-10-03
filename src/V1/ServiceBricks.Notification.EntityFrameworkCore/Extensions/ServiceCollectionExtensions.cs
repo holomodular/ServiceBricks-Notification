@@ -20,7 +20,7 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
             services.AddServiceBricksNotification(configuration);
 
             // AI: Add this module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationEntityFrameworkCoreModule());
+            ModuleRegistry.Instance.Register(NotificationEntityFrameworkCoreModule.Instance);
 
             // AI: Add module business rules
             NotificationEntityFrameworkCoreModuleAddRule.Register(BusinessRuleRegistry.Instance);

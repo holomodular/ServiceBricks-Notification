@@ -20,7 +20,7 @@ namespace ServiceBricks.Notification.AzureDataTables
             services.AddServiceBricksNotification(configuration);
 
             // AI: Add this module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationAzureDataTablesModule());
+            ModuleRegistry.Instance.Register(NotificationAzureDataTablesModule.Instance);
 
             // AI: Add module business rules
             NotificationAzureDataTablesModuleAddRule.Register(BusinessRuleRegistry.Instance);

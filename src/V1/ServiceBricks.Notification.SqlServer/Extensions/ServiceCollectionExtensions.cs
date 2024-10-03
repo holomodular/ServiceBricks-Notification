@@ -22,7 +22,7 @@ namespace ServiceBricks.Notification.SqlServer
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
             // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationSqlServerModule());
+            ModuleRegistry.Instance.Register(NotificationSqlServerModule.Instance);
 
             // AI: Add module business rules
             NotificationSqlServerModuleAddRule.Register(BusinessRuleRegistry.Instance);

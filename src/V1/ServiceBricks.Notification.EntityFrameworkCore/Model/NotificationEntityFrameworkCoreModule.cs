@@ -8,6 +8,11 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
     public partial class NotificationEntityFrameworkCoreModule : ServiceBricks.Module
     {
         /// <summary>
+        /// Instance.
+        /// </summary>
+        public static NotificationEntityFrameworkCoreModule Instance = new NotificationEntityFrameworkCoreModule();
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public NotificationEntityFrameworkCoreModule()

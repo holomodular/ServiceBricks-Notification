@@ -22,7 +22,7 @@ namespace ServiceBricks.Notification.Sqlite
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
             // AI: Add this module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationSqliteModule());
+            ModuleRegistry.Instance.Register(NotificationSqliteModule.Instance);
 
             // AI: Add module business rules
             NotificationSqliteModuleAddRule.Register(BusinessRuleRegistry.Instance);

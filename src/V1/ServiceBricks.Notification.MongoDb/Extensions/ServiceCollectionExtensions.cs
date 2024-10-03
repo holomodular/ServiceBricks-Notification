@@ -20,7 +20,7 @@ namespace ServiceBricks.Notification.MongoDb
             services.AddServiceBricksNotification(configuration);
 
             // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationMongoDbModule());
+            ModuleRegistry.Instance.Register(NotificationMongoDbModule.Instance);
 
             // AI: Add module business rules
             NotificationMongoDbModuleAddRule.Register(BusinessRuleRegistry.Instance);

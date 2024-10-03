@@ -6,6 +6,11 @@
     public partial class NotificationSendGridModule : ServiceBricks.Module
     {
         /// <summary>
+        /// Instance.
+        /// </summary>
+        public static NotificationSendGridModule Instance = new NotificationSendGridModule();
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public NotificationSendGridModule()

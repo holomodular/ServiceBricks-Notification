@@ -29,6 +29,7 @@ namespace ServiceBricks.Notification
         public static IServiceCollection AddServiceBricksNotificationClient(this IServiceCollection services, IConfiguration configuration)
         {
             // AI: Add clients for the module for each DTO
+            services.AddScoped<IApiClient<NotifyMessageDto>, NotifyMessageApiClient>();
             services.AddScoped<INotifyMessageApiClient, NotifyMessageApiClient>();
 
             return services;

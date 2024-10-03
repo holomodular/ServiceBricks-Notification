@@ -21,7 +21,7 @@ namespace ServiceBricks.Notification.InMemory
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
             // AI: Add the module to the ModuleRegistry
-            ModuleRegistry.Instance.Register(new NotificationInMemoryModule());
+            ModuleRegistry.Instance.Register(NotificationInMemoryModule.Instance);
 
             // AI: Add module business rules
             NotificationInMemoryModuleAddRule.Register(BusinessRuleRegistry.Instance);

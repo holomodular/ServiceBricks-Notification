@@ -8,6 +8,11 @@ namespace ServiceBricks.Notification.InMemory
     public partial class NotificationInMemoryModule : ServiceBricks.Module
     {
         /// <summary>
+        /// Instance
+        /// </summary>
+        public static NotificationInMemoryModule Instance = new NotificationInMemoryModule();
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public NotificationInMemoryModule()

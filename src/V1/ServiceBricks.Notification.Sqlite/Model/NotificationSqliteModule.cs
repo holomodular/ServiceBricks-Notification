@@ -8,6 +8,11 @@ namespace ServiceBricks.Notification.Sqlite
     public partial class NotificationSqliteModule : ServiceBricks.Module
     {
         /// <summary>
+        /// Instance.
+        /// </summary>
+        public static NotificationSqliteModule Instance = new NotificationSqliteModule();
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public NotificationSqliteModule()

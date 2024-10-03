@@ -15,7 +15,6 @@
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosContext.cs" Link="NotificationCosmosContext.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Model\NotificationCosmosModule.cs" Link="NotificationCosmosModule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotificationCosmosModuleAddRule.cs" Link="NotificationCosmosModuleAddRule.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotificationCosmosModuleStartRule.cs" Link="NotificationCosmosModuleStartRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Rule\NotifyMessageCreateRule.cs" Link="NotifyMessageCreateRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Service\NotifyMessageApiService.cs" Link="NotifyMessageApiService.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Cosmos\Service\NotifyMessageProcessQueueService.cs" Link="NotifyMessageProcessQueueService.cs" />
@@ -28,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Storage.Cosmos" Version="1.1.0-k" />
+		<PackageReference Include="ServiceBricks.Storage.Cosmos" Version="1.1.0-l" />
 	</ItemGroup>
 	
 </Project>

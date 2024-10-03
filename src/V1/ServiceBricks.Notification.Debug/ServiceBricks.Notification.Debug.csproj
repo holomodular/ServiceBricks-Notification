@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\ServiceBricks.Notification\Api\NotifyMessageDto.cs" Link="NotifyMessageDto.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Dto\NotifyMessageDto.cs" Link="NotifyMessageDto.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Background\NotificationSendTask.cs" Link="NotificationSendTask.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Background\NotificationSendTimer.cs" Link="NotificationSendTimer.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Controllers\NotifyMessageApiController.cs" Link="NotifyMessageApiController.cs" />
@@ -29,15 +29,15 @@
 	  <Compile Include="..\ServiceBricks.Notification\Model\SenderType.cs" Link="SenderType.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Model\SmtpEmailProvider.cs" Link="SmtpEmailProvider.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Model\SmtpOptions.cs" Link="SmtpOptions.cs" />
-	  <Compile Include="..\ServiceBricks.Notification\Process\SendNotificationProcess.cs" Link="SendNotificationProcess.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Process\NotificationSendProcess.cs" Link="NotificationSendProcess.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Rule\CreateApplicationEmailRule.cs" Link="CreateApplicationEmailRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Rule\CreateApplicationSmsRule.cs" Link="CreateApplicationSmsRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Rule\NotificationModuleAddRule.cs" Link="NotificationModuleAddRule.cs" />
 	  <Compile Include="..\ServiceBricks.Notification\Rule\SendNotificationProcessRule.cs" Link="SendNotificationProcessRule.cs" />
-	  <Compile Include="..\ServiceBricks.Notification\Service\NotifyMessageApiClient.cs" Link="NotifyMessageApiClient.cs" />
+	  <Compile Include="..\ServiceBricks.Notification\Client\NotifyMessageApiClient.cs" Link="NotifyMessageApiClient.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks" Version="1.1.0-k" />
+		<PackageReference Include="ServiceBricks" Version="1.1.0-l" />
 	</ItemGroup>
 </Project>

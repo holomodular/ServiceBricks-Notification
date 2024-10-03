@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using ServiceBricks.Notification.EntityFrameworkCore;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace ServiceBricks.Notification.Cosmos
+namespace ServiceBricks.Notification.SendGrid
 {
     /// <summary>
-    /// This rule is executed when the ServiceBricks module is added.
+    /// This rule is executed when the NotificationSendGridModule is added.
     /// </summary>
-    public sealed class NotificationCosmosModuleStartRule : BusinessRule
+    public sealed class NotificationSendGridModuleAddRule : BusinessRule
     {
         /// <summary>
         /// Register the rule
@@ -15,8 +13,8 @@ namespace ServiceBricks.Notification.Cosmos
         public static void Register(IBusinessRuleRegistry registry)
         {
             registry.Register(
-                typeof(ModuleStartEvent<NotificationCosmosModule>),
-                typeof(NotificationCosmosModuleStartRule));
+                typeof(ModuleAddEvent<NotificationSendGridModule>),
+                typeof(NotificationSendGridModuleAddRule));
         }
 
         /// <summary>
@@ -25,8 +23,8 @@ namespace ServiceBricks.Notification.Cosmos
         public static void UnRegister(IBusinessRuleRegistry registry)
         {
             registry.UnRegister(
-                typeof(ModuleStartEvent<NotificationCosmosModule>),
-                typeof(NotificationCosmosModuleStartRule));
+                typeof(ModuleAddEvent<NotificationSendGridModule>),
+                typeof(NotificationSendGridModuleAddRule));
         }
 
         /// <summary>
@@ -44,21 +42,19 @@ namespace ServiceBricks.Notification.Cosmos
                 response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
-            var e = context.Object as ModuleStartEvent<NotificationCosmosModule>;
-            if (e == null || e.DomainObject == null || e.ApplicationBuilder == null)
+            var e = context.Object as ModuleAddEvent<NotificationSendGridModule>;
+            if (e == null || e.DomainObject == null || e.ServiceCollection == null)
             {
                 response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
 
             // AI: Perform logic
+            var services = e.ServiceCollection;
+            //var configuration = e.Configuration;
 
-            // AI: Ensure the database is created
-            using (var scope = e.ApplicationBuilder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var dbcontext = scope.ServiceProvider.GetRequiredService<NotificationCosmosContext>();
-                dbcontext.Database.EnsureCreated();
-            }
+            // AI: register the email provider
+            services.AddScoped<IEmailProvider, SendGridEmailProviderService>();
 
             return response;
         }
