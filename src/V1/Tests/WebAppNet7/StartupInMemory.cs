@@ -2,6 +2,8 @@ using ServiceBricks;
 
 //using ServiceBricks.Logging.InMemory;
 using ServiceBricks.Notification.InMemory;
+
+//using ServiceBricks.Notification.SendGrid;
 using WebApp.Extensions;
 
 namespace WebApp
@@ -20,8 +22,10 @@ namespace WebApp
             services.AddServiceBricks(Configuration);
             //services.AddServiceBricksLoggingInMemory(Configuration);
             services.AddServiceBricksNotificationInMemory(Configuration);
-            services.AddCustomWebsite(Configuration);
+            //services.AddServiceBricksNotificationSendGrid(Configuration);
+            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);
+            services.AddCustomWebsite(Configuration);
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment webHostEnvironment)

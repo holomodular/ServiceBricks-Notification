@@ -27,7 +27,7 @@ namespace ServiceBricks.Notification.SqlServer
             // AI: Add module business rules
             NotificationSqlServerModuleAddRule.Register(BusinessRuleRegistry.Instance);
             ModuleSetStartedRule<NotificationSqlServerModule>.Register(BusinessRuleRegistry.Instance);
-            SqlServerDatabaseMigrationRule<NotificationSqlServerModule, NotificationSqlServerContext>.Register(BusinessRuleRegistry.Instance);
+            SqlServerDatabaseMigrationRule<NotificationModule, NotificationSqlServerContext>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

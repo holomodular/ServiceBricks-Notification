@@ -21,9 +21,10 @@ namespace WebApp
             services.AddServiceBricks(Configuration);
             //services.AddServiceBricksLoggingInMemory(Configuration);
             services.AddServiceBricksNotificationInMemory(Configuration);
-            services.AddServiceBricksNotificationSendGrid(Configuration);
-            services.AddCustomWebsite(Configuration);
+            //services.AddServiceBricksNotificationSendGrid(Configuration);
+            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);
+            services.AddCustomWebsite(Configuration);
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment webHostEnvironment)

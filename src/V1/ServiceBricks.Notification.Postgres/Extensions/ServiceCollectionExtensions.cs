@@ -27,7 +27,7 @@ namespace ServiceBricks.Notification.Postgres
             // AI: Add module business rules
             NotificationPostgresModuleAddRule.Register(BusinessRuleRegistry.Instance);
             ModuleSetStartedRule<NotificationPostgresModule>.Register(BusinessRuleRegistry.Instance);
-            PostgresDatabaseMigrationRule<NotificationPostgresModule, NotificationPostgresContext>.Register(BusinessRuleRegistry.Instance);
+            PostgresDatabaseMigrationRule<NotificationModule, NotificationPostgresContext>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

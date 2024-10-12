@@ -26,8 +26,8 @@ namespace ServiceBricks.Notification.Cosmos
 
             // AI: Add module business rules
             NotificationCosmosModuleAddRule.Register(BusinessRuleRegistry.Instance);
-            EntityFrameworkCoreDatabaseEnsureCreatedRule<NotificationCosmosModule, NotificationCosmosContext>.Register(BusinessRuleRegistry.Instance);
             ModuleSetStartedRule<NotificationCosmosModule>.Register(BusinessRuleRegistry.Instance);
+            EntityFrameworkCoreDatabaseEnsureCreatedRule<NotificationModule, NotificationCosmosContext>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

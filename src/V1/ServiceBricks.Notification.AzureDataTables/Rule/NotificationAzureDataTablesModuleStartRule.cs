@@ -11,12 +11,20 @@ namespace ServiceBricks.Notification.AzureDataTables
     public sealed class NotificationAzureDataTablesModuleStartRule : BusinessRule
     {
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        public NotificationAzureDataTablesModuleStartRule()
+        {
+            Priority = PRIORITY_HIGH;
+        }
+
+        /// <summary>
         /// Register the rule
         /// </summary>
         public static void Register(IBusinessRuleRegistry registry)
         {
             registry.Register(
-                typeof(ModuleStartEvent<NotificationAzureDataTablesModule>),
+                typeof(ModuleStartEvent<NotificationModule>),
                 typeof(NotificationAzureDataTablesModuleStartRule));
         }
 
@@ -26,7 +34,7 @@ namespace ServiceBricks.Notification.AzureDataTables
         public static void UnRegister(IBusinessRuleRegistry registry)
         {
             registry.UnRegister(
-                typeof(ModuleStartEvent<NotificationAzureDataTablesModule>),
+                typeof(ModuleStartEvent<NotificationModule>),
                 typeof(NotificationAzureDataTablesModuleStartRule));
         }
 
@@ -45,7 +53,7 @@ namespace ServiceBricks.Notification.AzureDataTables
                 response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
-            var e = context.Object as ModuleStartEvent<NotificationAzureDataTablesModule>;
+            var e = context.Object as ModuleStartEvent<NotificationModule>;
             if (e == null || e.DomainObject == null || e.ApplicationBuilder == null)
             {
                 response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));

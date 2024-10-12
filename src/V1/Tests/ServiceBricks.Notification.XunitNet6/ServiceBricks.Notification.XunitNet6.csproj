@@ -19,11 +19,11 @@
 	  <ProjectReference Include="..\..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-l" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-m" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.33" />
+		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.35" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 		<PackageReference Include="xunit" Version="2.9.2" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">

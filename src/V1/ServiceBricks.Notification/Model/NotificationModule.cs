@@ -21,6 +21,10 @@ namespace ServiceBricks.Notification
             {
                 typeof(NotificationModule).Assembly
             };
+            DataTransferObjects = new List<Type>()
+            {
+                typeof(NotifyMessageDto)
+            };
         }
     }
 }

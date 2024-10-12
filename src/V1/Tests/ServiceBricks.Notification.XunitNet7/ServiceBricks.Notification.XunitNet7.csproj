@@ -19,7 +19,7 @@
 	  <ProjectReference Include="..\..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-l" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-m" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">

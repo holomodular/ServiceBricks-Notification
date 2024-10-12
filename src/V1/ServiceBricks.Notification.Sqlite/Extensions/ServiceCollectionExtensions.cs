@@ -27,7 +27,7 @@ namespace ServiceBricks.Notification.Sqlite
             // AI: Add module business rules
             NotificationSqliteModuleAddRule.Register(BusinessRuleRegistry.Instance);
             ModuleSetStartedRule<NotificationSqliteModule>.Register(BusinessRuleRegistry.Instance);
-            SqliteDatabaseMigrationRule<NotificationSqliteModule, NotificationSqliteContext>.Register(BusinessRuleRegistry.Instance);
+            SqliteDatabaseMigrationRule<NotificationModule, NotificationSqliteContext>.Register(BusinessRuleRegistry.Instance);
 
             return services;
         }

@@ -38,6 +38,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks" Version="1.1.0-l" />
+		<PackageReference Include="ServiceBricks" Version="1.1.0-m" />
 	</ItemGroup>
 </Project>
