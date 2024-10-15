@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -14,7 +15,7 @@ namespace ServiceBricks.Notification.SqlServer.Migrations
                 name: "Notification");
 
             migrationBuilder.CreateTable(
-                name: "NotifyMessages",
+                name: "NotifyMessage",
                 schema: "Notification",
                 columns: table => new
                 {
@@ -42,13 +43,13 @@ namespace ServiceBricks.Notification.SqlServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NotifyMessages", x => x.Key);
+                    table.PrimaryKey("PK_NotifyMessage", x => x.Key);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_NotifyMessages_IsComplete_IsProcessing_IsError_FutureProcessDate_ProcessDate_CreateDate",
+                name: "IX_NotifyMessage_IsComplete_IsProcessing_IsError_FutureProcessDate_ProcessDate_CreateDate",
                 schema: "Notification",
-                table: "NotifyMessages",
+                table: "NotifyMessage",
                 columns: new[] { "IsComplete", "IsProcessing", "IsError", "FutureProcessDate", "ProcessDate", "CreateDate" });
         }
 
@@ -56,7 +57,7 @@ namespace ServiceBricks.Notification.SqlServer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "NotifyMessages",
+                name: "NotifyMessage",
                 schema: "Notification");
         }
     }

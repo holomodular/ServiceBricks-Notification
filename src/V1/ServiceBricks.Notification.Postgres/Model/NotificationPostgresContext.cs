@@ -48,7 +48,7 @@ namespace ServiceBricks.Notification.Postgres
         /// <summary>
         /// NotifyMessages
         /// </summary>
-        public virtual DbSet<NotifyMessage> NotifyMessages { get; set; }
+        public virtual DbSet<NotifyMessage> NotifyMessage { get; set; }
 
         /// <summary>
         /// OnModelCreating.

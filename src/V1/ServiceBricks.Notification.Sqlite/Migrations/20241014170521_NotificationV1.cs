@@ -11,7 +11,7 @@ namespace ServiceBricks.Notification.Sqlite.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "NotifyMessages",
+                name: "NotifyMessage",
                 columns: table => new
                 {
                     Key = table.Column<long>(type: "INTEGER", nullable: false)
@@ -38,12 +38,12 @@ namespace ServiceBricks.Notification.Sqlite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NotifyMessages", x => x.Key);
+                    table.PrimaryKey("PK_NotifyMessage", x => x.Key);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_NotifyMessages_IsComplete_IsProcessing_IsError_FutureProcessDate_ProcessDate_CreateDate",
-                table: "NotifyMessages",
+                name: "IX_NotifyMessage_IsComplete_IsProcessing_IsError_FutureProcessDate_ProcessDate_CreateDate",
+                table: "NotifyMessage",
                 columns: new[] { "IsComplete", "IsProcessing", "IsError", "FutureProcessDate", "ProcessDate", "CreateDate" });
         }
 
@@ -51,7 +51,7 @@ namespace ServiceBricks.Notification.Sqlite.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "NotifyMessages");
+                name: "NotifyMessage");
         }
     }
 }

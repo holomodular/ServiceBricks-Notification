@@ -21,6 +21,9 @@ namespace ServiceBricks.Notification.Cosmos
             // AI: Add the parent module
             services.AddServiceBricksNotificationEntityFrameworkCore(configuration);
 
+            // AI: Remove the EFC rule since we are using a different models
+            NotificationEntityFrameworkCoreModuleAddRule.UnRegister(BusinessRuleRegistry.Instance);
+
             // AI: Add this module to the ModuleRegistry
             ModuleRegistry.Instance.Register(NotificationCosmosModule.Instance);
 

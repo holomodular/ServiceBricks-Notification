@@ -6,8 +6,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\20240915153541_NotificationV1.cs" Link="20240915153541_NotificationV1.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\20240915153541_NotificationV1.Designer.cs" Link="20240915153541_NotificationV1.Designer.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\20241014170553_NotificationV1.cs" Link="20241014170553_NotificationV1.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\20241014170553_NotificationV1.Designer.cs" Link="20241014170553_NotificationV1.Designer.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Migrations\NotificationSqlServerContextModelSnapshot.cs" Link="NotificationSqlServerContextModelSnapshot.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Model\NotificationSqlServerConstants.cs" Link="NotificationSqlServerConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.SqlServer\Model\NotificationSqlServerContext.cs" Link="NotificationSqlServerContext.cs" />

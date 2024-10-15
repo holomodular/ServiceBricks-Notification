@@ -10,14 +10,14 @@ using ServiceBricks.Notification.Sqlite;
 namespace ServiceBricks.Notification.Sqlite.Migrations
 {
     [DbContext(typeof(NotificationSqliteContext))]
-    [Migration("20240915153505_NotificationV1")]
+    [Migration("20241014170521_NotificationV1")]
     partial class NotificationV1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
             modelBuilder.Entity("ServiceBricks.Notification.EntityFrameworkCore.NotifyMessage", b =>
                 {
@@ -90,7 +90,7 @@ namespace ServiceBricks.Notification.Sqlite.Migrations
 
                     b.HasIndex("IsComplete", "IsProcessing", "IsError", "FutureProcessDate", "ProcessDate", "CreateDate");
 
-                    b.ToTable("NotifyMessages");
+                    b.ToTable("NotifyMessage");
                 });
 #pragma warning restore 612, 618
         }

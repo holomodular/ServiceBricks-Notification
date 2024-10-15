@@ -18,7 +18,7 @@ namespace ServiceBricks.Notification.SqlServer.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("Notification")
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -92,7 +92,7 @@ namespace ServiceBricks.Notification.SqlServer.Migrations
 
                     b.HasIndex("IsComplete", "IsProcessing", "IsError", "FutureProcessDate", "ProcessDate", "CreateDate");
 
-                    b.ToTable("NotifyMessages", "Notification");
+                    b.ToTable("NotifyMessage", "Notification");
                 });
 #pragma warning restore 612, 618
         }

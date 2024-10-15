@@ -8,8 +8,8 @@
 
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20240915153505_NotificationV1.cs" Link="20240915153505_NotificationV1.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20240915153505_NotificationV1.Designer.cs" Link="20240915153505_NotificationV1.Designer.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20241014170521_NotificationV1.cs" Link="20241014170521_NotificationV1.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\20241014170521_NotificationV1.Designer.cs" Link="20241014170521_NotificationV1.Designer.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Migrations\NotificationSqliteContextModelSnapshot.cs" Link="NotificationSqliteContextModelSnapshot.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteConstants.cs" Link="NotificationSqliteConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Sqlite\Model\NotificationSqliteContext.cs" Link="NotificationSqliteContext.cs" />

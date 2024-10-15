@@ -6,8 +6,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Extensions\ServiceCollectionExtensions.cs" Link="ServiceCollectionExtensions.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\20240915153435_NotificationV1.cs" Link="20240915153435_NotificationV1.cs" />
-	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\20240915153435_NotificationV1.Designer.cs" Link="20240915153435_NotificationV1.Designer.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\20241014170449_NotificationV1.cs" Link="20241014170449_NotificationV1.cs" />
+	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\20241014170449_NotificationV1.Designer.cs" Link="20241014170449_NotificationV1.Designer.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Migrations\NotificationPostgresContextModelSnapshot.cs" Link="NotificationPostgresContextModelSnapshot.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresConstants.cs" Link="NotificationPostgresConstants.cs" />
 	  <Compile Include="..\ServiceBricks.Notification.Postgres\Model\NotificationPostgresContext.cs" Link="NotificationPostgresContext.cs" />
