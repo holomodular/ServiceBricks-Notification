@@ -40,8 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\ServiceBricks.Notification.AzureDataTables.Debug\ServiceBricks.Notification.AzureDataTables.Debug.csproj" />
 	  <ProjectReference Include="..\ServiceBricks.Notification.XunitNet7\ServiceBricks.Notification.XunitNet7.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.AzureDataTables\ServiceBricks.Notification.AzureDataTables.csproj" />
 	</ItemGroup>
 
 </Project>

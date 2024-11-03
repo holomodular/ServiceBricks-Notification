@@ -40,8 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer.Debug\ServiceBricks.Notification.SqlServer.Debug.csproj" />
 	  <ProjectReference Include="..\ServiceBricks.Notification.XunitNet6\ServiceBricks.Notification.XunitNet6.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer\ServiceBricks.Notification.SqlServer.csproj" />
 	</ItemGroup>
 
 </Project>

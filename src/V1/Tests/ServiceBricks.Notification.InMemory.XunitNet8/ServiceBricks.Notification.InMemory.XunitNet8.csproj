@@ -42,8 +42,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\ServiceBricks.Notification.InMemory.Debug\ServiceBricks.Notification.InMemory.Debug.csproj" />
 	  <ProjectReference Include="..\ServiceBricks.Notification.XunitNet8\ServiceBricks.Notification.XunitNet8.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.InMemory\ServiceBricks.Notification.InMemory.csproj" />
 	</ItemGroup>
 
 </Project>

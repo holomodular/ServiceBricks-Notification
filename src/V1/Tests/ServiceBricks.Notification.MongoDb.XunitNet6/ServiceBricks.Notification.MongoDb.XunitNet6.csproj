@@ -40,8 +40,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\ServiceBricks.Notification.MongoDb.Debug\ServiceBricks.Notification.MongoDb.Debug.csproj" />
 	  <ProjectReference Include="..\ServiceBricks.Notification.XunitNet6\ServiceBricks.Notification.XunitNet6.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.MongoDb\ServiceBricks.Notification.MongoDb.csproj" />
 	</ItemGroup>
 
 </Project>

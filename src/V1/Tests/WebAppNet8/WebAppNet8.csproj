@@ -10,22 +10,11 @@
 	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.10" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
 	</ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\ServiceBricks.Notification.AzureDataTables.Debug\ServiceBricks.Notification.AzureDataTables.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.Cosmos.Debug\ServiceBricks.Notification.Cosmos.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.InMemory.Debug\ServiceBricks.Notification.InMemory.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.MongoDb.Debug\ServiceBricks.Notification.MongoDb.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.Postgres.Debug\ServiceBricks.Notification.Postgres.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.SendGrid.Debug\ServiceBricks.Notification.SendGrid.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.Sqlite.Debug\ServiceBricks.Notification.Sqlite.Debug.csproj" />
-    <ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer.Debug\ServiceBricks.Notification.SqlServer.Debug.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -44,5 +33,14 @@
 	  <None Include="Views\Home\Index.cshtml" />
 	  <None Include="Views\_ViewStart.cshtml" />
 	</ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\..\ServiceBricks.Notification.AzureDataTables\ServiceBricks.Notification.AzureDataTables.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.Cosmos\ServiceBricks.Notification.Cosmos.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.InMemory\ServiceBricks.Notification.InMemory.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.MongoDb\ServiceBricks.Notification.MongoDb.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.Postgres\ServiceBricks.Notification.Postgres.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.Sqlite\ServiceBricks.Notification.Sqlite.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.SqlServer\ServiceBricks.Notification.SqlServer.csproj" />
+		<ProjectReference Include="..\..\ServiceBricks.Notification.SendGrid\ServiceBricks.Notification.SendGrid.csproj" />
+	</ItemGroup>
 </Project>

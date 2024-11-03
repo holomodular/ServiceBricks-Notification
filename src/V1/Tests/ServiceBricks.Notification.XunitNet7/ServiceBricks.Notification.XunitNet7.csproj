@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -13,13 +13,8 @@
 	<Compile Include="..\TestFiles\NotifyMessageApiControllerTest.cs" Link="NotifyMessageApiControllerTest.cs" />
     <Compile Include="..\TestFiles\NotifyMessageTestManager.cs" Link="NotifyMessageTestManager.cs" />
   </ItemGroup>
-
-
 	<ItemGroup>
-	  <ProjectReference Include="..\..\ServiceBricks.Notification.Debug\ServiceBricks.Notification.Debug.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-m" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-o" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
@@ -39,5 +34,8 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\ServiceBricks.Notification\ServiceBricks.Notification.csproj" />
+	</ItemGroup>
 </Project>
