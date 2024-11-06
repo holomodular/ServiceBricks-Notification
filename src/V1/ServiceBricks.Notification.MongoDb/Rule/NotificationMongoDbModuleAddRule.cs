@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
 
 namespace ServiceBricks.Notification.MongoDb
 {
@@ -52,6 +55,8 @@ namespace ServiceBricks.Notification.MongoDb
             // AI: Perform logic
             var services = e.ServiceCollection;
             //var configuration = e.Configuration;
+
+            BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
 
             // AI: Add any miscellaneous services for the module
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
