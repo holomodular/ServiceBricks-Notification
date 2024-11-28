@@ -14,7 +14,7 @@
     <Compile Include="..\TestFiles\NotifyMessageTestManager.cs" Link="NotifyMessageTestManager.cs" />
   </ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0-p" />
+		<PackageReference Include="ServiceBricks.Xunit" Version="1.1.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
