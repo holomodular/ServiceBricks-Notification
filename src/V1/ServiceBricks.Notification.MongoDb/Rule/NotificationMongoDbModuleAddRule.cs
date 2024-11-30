@@ -56,8 +56,6 @@ namespace ServiceBricks.Notification.MongoDb
             var services = e.ServiceCollection;
             //var configuration = e.Configuration;
 
-            BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-
             // AI: Add any miscellaneous services for the module
             services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
