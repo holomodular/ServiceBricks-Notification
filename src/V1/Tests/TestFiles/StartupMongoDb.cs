@@ -18,6 +18,7 @@ namespace ServiceBricks.Xunit
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
             services.AddServiceBricksNotificationMongoDb(Configuration);
+            services.AddServiceBricksComplete(Configuration);
 
             // Remove all background tasks/timers for unit testing
             var logtimer = services.Where(x => x.ImplementationType == typeof(NotificationSendTimer)).FirstOrDefault();
@@ -26,8 +27,6 @@ namespace ServiceBricks.Xunit
 
             // Register TestManager
             services.AddScoped<ITestManager<NotifyMessageDto>, MongoDbNotifyMessageTestManager>();
-
-            services.AddServiceBricksComplete(Configuration);
         }
 
         public virtual void Configure(IApplicationBuilder app)

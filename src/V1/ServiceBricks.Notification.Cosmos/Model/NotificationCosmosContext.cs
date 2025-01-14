@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace ServiceBricks.Notification.Cosmos
 {
@@ -21,7 +22,7 @@ namespace ServiceBricks.Notification.Cosmos
         /// <summary>
         /// NotifyMessages.
         /// </summary>
-        public virtual DbSet<NotifyMessage> NotifyMessages { get; set; }
+        public virtual DbSet<NotifyMessage> NotifyMessage { get; set; }
 
         /// <summary>
         /// OnModelCreating.
@@ -34,8 +35,20 @@ namespace ServiceBricks.Notification.Cosmos
             // AI: Create the model for each table
             builder.Entity<NotifyMessage>().HasKey(key => key.Key);
             builder.Entity<NotifyMessage>().HasPartitionKey(key => key.PartitionKey);
-            builder.Entity<NotifyMessage>().HasIndex(key => new { key.IsComplete, key.IsProcessing, key.IsError, key.FutureProcessDate, key.ProcessDate, key.CreateDate });
             builder.Entity<NotifyMessage>().ToContainer(NotificationCosmosConstants.GetContainerName(nameof(NotifyMessage)));
+        }
+
+        /// <summary>
+        /// OnConfiguring
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+#if NET9_0
+            optionsBuilder.ConfigureWarnings(w => w.Ignore(CosmosEventId.SyncNotSupported));
+#endif
+
+            base.OnConfiguring(optionsBuilder);
         }
 
         /// <summary>
