@@ -1,9 +1,7 @@
 using ServiceBricks;
-
-//using ServiceBricks.Logging.InMemory;
+using ServiceBricks.Cache.InMemory;
 using ServiceBricks.Notification.InMemory;
-
-//using ServiceBricks.Notification.SendGrid;
+using ServiceBricks.Notification.SendGrid;
 using WebApp.Extensions;
 
 namespace WebApp
@@ -20,7 +18,7 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            //services.AddServiceBricksLoggingInMemory(Configuration);
+            services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksNotificationInMemory(Configuration);
             //services.AddServiceBricksNotificationSendGrid(Configuration);
             ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration

@@ -40,7 +40,7 @@ namespace ServiceBricks.Notification
         public static void Register(IBusinessRuleRegistry registry)
         {
             registry.Register(
-                typeof(NotificationSendProcess),
+                typeof(SendNotificationProcess),
                 typeof(SendNotificationProcessRule));
         }
 
@@ -50,7 +50,7 @@ namespace ServiceBricks.Notification
         public static void UnRegister(IBusinessRuleRegistry registry)
         {
             registry.UnRegister(
-                typeof(NotificationSendProcess),
+                typeof(SendNotificationProcess),
                 typeof(SendNotificationProcessRule));
         }
 
@@ -79,7 +79,7 @@ namespace ServiceBricks.Notification
                 response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));
                 return response;
             }
-            var p = context.Object as NotificationSendProcess;
+            var p = context.Object as SendNotificationProcess;
             if (p == null || p.DomainObject == null)
             {
                 response.AddMessage(ResponseMessage.CreateError(LocalizationResource.PARAMETER_MISSING, "context"));

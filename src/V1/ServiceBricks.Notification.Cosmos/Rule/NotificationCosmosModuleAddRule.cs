@@ -67,9 +67,7 @@ namespace ServiceBricks.Notification.Cosmos
             services.AddDbContext<NotificationCosmosContext>(c => { c = builder; }, ServiceLifetime.Scoped);
 
             // AI: Storage Services for the module for each domain object
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<IStorageRepository<NotifyMessage>, NotificationStorageRepository<NotifyMessage>>();
 
             // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
@@ -84,7 +82,6 @@ namespace ServiceBricks.Notification.Cosmos
             NotifyMessageCreateRule.Register(BusinessRuleRegistry.Instance);
 
             // AI: Add any miscellaneous services for the module
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
             return response;
         }

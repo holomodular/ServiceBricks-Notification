@@ -5,7 +5,7 @@ namespace ServiceBricks.Notification.AzureDataTables
     /// <summary>
     /// This is a notification message.
     /// </summary>
-    public partial class NotifyMessage : AzureDataTablesDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpProcessQueue
+    public partial class NotifyMessage : AzureDataTablesDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpWorkProcess
     {
         /// <summary>
         /// Internal primary key.

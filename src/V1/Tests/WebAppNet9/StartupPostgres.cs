@@ -1,13 +1,14 @@
 using ServiceBricks;
-using ServiceBricks.Notification.AzureDataTables;
-using ServiceBricks.Cache.AzureDataTables;
+using ServiceBricks.Cache.Postgres;
+using ServiceBricks.Logging.Postgres;
+using ServiceBricks.Notification.Postgres;
 using WebApp.Extensions;
 
 namespace WebApp
 {
-    public class StartupAzureDataTables
+    public class StartupPostgres
     {
-        public StartupAzureDataTables(IConfiguration configuration)
+        public StartupPostgres(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -17,8 +18,9 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksCacheAzureDataTables(Configuration);
-            services.AddServiceBricksNotificationAzureDataTables(Configuration);
+            services.AddServiceBricksLoggingPostgres(Configuration);
+            services.AddServiceBricksCachePostgres(Configuration);
+            services.AddServiceBricksNotificationPostgres(Configuration);
             ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
@@ -28,7 +30,7 @@ namespace WebApp
         {
             app.StartServiceBricks();
             app.StartCustomWebsite(webHostEnvironment);
-            var logger = app.ApplicationServices.GetRequiredService<ILogger<StartupAzureDataTables>>();
+            var logger = app.ApplicationServices.GetRequiredService<ILogger<StartupPostgres>>();
             logger.LogInformation("Application Started");
         }
     }

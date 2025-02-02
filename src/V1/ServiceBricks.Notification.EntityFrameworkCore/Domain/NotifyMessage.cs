@@ -6,7 +6,7 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
     /// <summary>
     /// This is a notification message.
     /// </summary>
-    public partial class NotifyMessage : EntityFrameworkCoreDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpProcessQueue
+    public partial class NotifyMessage : EntityFrameworkCoreDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpWorkProcess
     {
         public NotifyMessage()
         {

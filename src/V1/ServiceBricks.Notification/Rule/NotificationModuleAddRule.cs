@@ -54,10 +54,11 @@ namespace ServiceBricks.Notification
             var configuration = e.Configuration;
 
             // AI: Add hosted services for the module
-            services.AddHostedService<NotificationSendTimer>();
+            services.AddHostedService<SendNotificationTimer>();
 
             // AI: Add workers for tasks in the module
-            services.AddScoped<NotificationSendTask.Worker>();
+            services.AddScoped<SendNotificationTask.Worker>();
+            services.AddScoped<NotifyMessageWorkService>();
 
             // AI: Configure all options for the module
             services.Configure<NotificationOptions>(configuration.GetSection(NotificationConstants.APPSETTINGS_NOTIFICATION_OPTIONS));

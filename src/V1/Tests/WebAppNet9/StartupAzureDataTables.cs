@@ -1,7 +1,7 @@
 using ServiceBricks;
-
-//using ServiceBricks.Logging.InMemory;
 using ServiceBricks.Notification.AzureDataTables;
+using ServiceBricks.Cache.AzureDataTables;
+using ServiceBricks.Logging.AzureDataTables;
 using WebApp.Extensions;
 
 namespace WebApp
@@ -18,7 +18,8 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            //services.AddServiceBricksLoggingInMemory(Configuration);
+            services.AddServiceBricksLoggingAzureDataTables(Configuration);
+            services.AddServiceBricksCacheAzureDataTables(Configuration);
             services.AddServiceBricksNotificationAzureDataTables(Configuration);
             ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);

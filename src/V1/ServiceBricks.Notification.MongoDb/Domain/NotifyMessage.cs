@@ -8,7 +8,7 @@ namespace ServiceBricks.Notification.MongoDb
     /// <summary>
     /// This is a notification message.
     /// </summary>
-    public partial class NotifyMessage : MongoDbDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpProcessQueue
+    public partial class NotifyMessage : MongoDbDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpWorkProcess
     {
         /// <summary>
         /// Internal primary key.

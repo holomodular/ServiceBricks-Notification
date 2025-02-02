@@ -1,3 +1,9 @@
+v1.3.0-a prerelease
+- Update all nuget package references
+- Remove IDpProcessQueue related files
+- Add new NotifyMessageWorkService
+- Notification microservice is now dependent on the Cache microservice due to the LockedWorkService and distributed semaphore usage for multi-instance deployments
+
 # 1.2.0
 - Upgrade ServiceBricks Version and all related packages to latest version
 - Fix for Cosmos to remove index from modelbuilder

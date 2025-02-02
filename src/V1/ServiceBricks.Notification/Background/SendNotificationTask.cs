@@ -3,7 +3,7 @@
     /// <summary>
     /// This is a background task that sends notification messages to the MessageProcessQueue service.
     /// </summary>
-    public static partial class NotificationSendTask
+    public static partial class SendNotificationTask
     {
         /// <summary>
         /// Queue the work to the background task queue.
@@ -27,16 +27,16 @@
         /// </summary>
         public class Worker : ITaskWork<Detail, Worker>
         {
-            private readonly INotifyMessageProcessQueueService _messageProcessQueueService;
+            private readonly NotifyMessageWorkService _notifyMessageWorkService;
 
             /// <summary>
             /// Constructor.
             /// </summary>
-            /// <param name="messageProcessQueueService"></param>
+            /// <param name="notifyMessageWorker"></param>
             public Worker(
-                INotifyMessageProcessQueueService messageProcessQueueService)
+                NotifyMessageWorkService notifyMessageWorkService)
             {
-                _messageProcessQueueService = messageProcessQueueService;
+                _notifyMessageWorkService = notifyMessageWorkService;
             }
 
             /// <summary>
@@ -47,7 +47,7 @@
             /// <returns></returns>
             public async Task DoWork(Detail detail, CancellationToken cancellationToken)
             {
-                await _messageProcessQueueService.ExecuteAsync(cancellationToken);
+                await _notifyMessageWorkService.ExecuteAsync(cancellationToken);
             }
         }
     }

@@ -15,9 +15,8 @@ It also subscribes to service bus messages for email and sms broadcasts, so that
 
 ### Supported Providers
 By default, dependency injection is registered with a dummy email and sms provider that does not send any message but simply logs them using an ILogger<> inteface.
-You must expliciting add a line of code to register the providers below.
+You must explicitly add a line of code to register the providers below.
 
-[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Extensions/ServiceCollectionExtensions.cs)
 
 #### Email
 
@@ -33,20 +32,11 @@ services.AddServiceBricksNotificationSendGrid();
 services.AddScoped<IEmailProvider, SmtpEmailProvider>();
 ```
 
-#### SMS
-
-Twilio Coming soon!
-
-```csharp
-services.AddScoped<ISmsProvider, YourProviderHere>();
-```
-
 
 ## Data Transfer Objects
 
 ### NotifyMessageDto - Admin Policy
-Used to store a notification message.
-Contains properties from [IDpProcessQueue](https://github.com/holomodular/ServiceBricks/blob/main/src/V1/ServiceBricks/Interface/DomainProperty/IDpProcessQueue.cs) for queue processng.
+Used to store a notification message. It additionally contains properties to support the IDpWorkProcess and WorkService for processing the table like a work queue.
 
 ```csharp
 
@@ -76,55 +66,24 @@ public class NotifyMessageDto : DataTransferObject
 
 ```
 
-#### Business Rules
+## Business Events and Processes
 
-* DomainCreateUpdateDateRule - CreateDate and UpdateDate property
-* DomainDateTimeOffsetRule - FutureProcessDate, ProcessDate properties
-* ApiConcurrencyByUpdateDateRule - UpdateDate property
-* NotifyMessageDtoValidateSenderTypeRule - SendTypeKey property is a valid value
+### SendNotificationProcess
+This process is used to send a notify message. The SendNotificationProcessRule class implements the functionality to send an email or sms sendertype.
+
 
 ## Background Tasks and Timers
 
-### NotificationSendTimer class
-This background timer runs by default every 30 seconds, with an initial delay of 30 seconds. Executes the NotificationSendTask.
+### SendNotificationTimer class
+This background timer runs every 10 seconds, with an initial delay of 1 second. Executes the SendNotificationTask.
 
-[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/BackgroundTask/NotificationSendTimer.cs)
+[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTimer.cs)
 
-### NotificationSendTask class
-This background task invokes the INotifyMessageProcessQueueService 
+### SendNotificationTask class
+This background task invokes the [NotifyMessageWorkService](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTask.cs)
 
-[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/BackgroundTask/NotificationSendTask.cs)
+[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTask.cs)
 
-## Events
-None
-
-## Processes
-
-### SendNotificationProcess
-This process is associated to the [SendNotificationProcessRule](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Rule/SendNotificationProcessRule.cs) Business Rule.
-
-Supply a NotifyMessageDto as a parameter and the process will use the configured email or sms provider and attempt to send the message with them. 
-
-```csharp
-
-public class SendNotificationProcess : DomainProcess<NotifyMessageDto>
-{
-    public SendNotificationProcess(NotifyMessageDto message)
-    {
-        DomainObject = message;
-    }
-}
-
-```
-
-To execute this process, use the following code:
-```csharp
-
-var businessRuleService = services.GetRequiredService<IBusinessRuleService>();
-var process = new SendNotificationProcess(message);
-var response = businessRuleService.ExecuteProcess(process);
-
-```
 
 ## Service Bus
 

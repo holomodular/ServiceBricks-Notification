@@ -49,7 +49,7 @@ namespace WebApp.Controllers
                 ToAddress = "support@holomodular.com",
             };
 
-            NotificationSendProcess process = new NotificationSendProcess(msg);
+            SendNotificationProcess process = new SendNotificationProcess(msg);
             var respProcess = await _businessRuleService.ExecuteProcessAsync(process);
 
             HomeViewModel model = new HomeViewModel();

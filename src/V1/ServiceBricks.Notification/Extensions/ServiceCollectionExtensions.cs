@@ -34,5 +34,20 @@ namespace ServiceBricks.Notification
 
             return services;
         }
+
+        /// <summary>
+        /// Add the ServiceBricks Notification clients to the service collection for the API Service references
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddServiceBricksNotificationClientForService(this IServiceCollection services, IConfiguration configuration)
+        {
+            // AI: Add clients for the API Services
+            services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiClient>();
+            services.AddScoped<INotifyMessageApiService, NotifyMessageApiClient>();
+
+            return services;
+        }
     }
 }

@@ -1,7 +1,7 @@
 using ServiceBricks;
-
-//using ServiceBricks.Logging.InMemory;
+using ServiceBricks.Cache.SqlServer;
 using ServiceBricks.Notification.SqlServer;
+using ServiceBricks.Logging.SqlServer;
 using WebApp.Extensions;
 
 namespace WebApp
@@ -18,7 +18,8 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            //services.AddServiceBricksLoggingInMemory(Configuration);
+            services.AddServiceBricksLoggingSqlServer(Configuration);
+            services.AddServiceBricksCacheSqlServer(Configuration);
             services.AddServiceBricksNotificationSqlServer(Configuration);
             ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);

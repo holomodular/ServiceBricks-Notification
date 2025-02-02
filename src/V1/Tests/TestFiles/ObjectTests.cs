@@ -18,6 +18,46 @@ namespace ServiceBricks.Xunit
         }
 
         [Fact]
+        public virtual async Task NotificationSendTaskQueueWorkTests()
+        {
+            var loggerFactory = SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>();
+            var taskQueue = SystemManager.ServiceProvider.GetRequiredService<ITaskQueue>();
+
+            var apiservice = SystemManager.ServiceProvider.GetRequiredService<INotifyMessageApiService>();
+
+            var startdto = new NotifyMessageDto()
+            {
+                SenderType = SenderType.Email_TEXT,
+                Body = "test",
+                ToAddress = "test@servicebricks.com"
+            };
+
+            var respcreate = await apiservice.CreateAsync(startdto);
+            Assert.True(respcreate.Success);
+            Assert.True(respcreate.Item != null);
+
+            var respg = await apiservice.GetAsync(respcreate.Item.StorageKey);
+            Assert.True(respg.Success);
+            Assert.True(respg.Item != null);
+
+            // Let background queue start it
+            SendNotificationTask.QueueWork(taskQueue);
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            cts.CancelAfter(5000);
+            while (!cts.Token.IsCancellationRequested)
+            {
+                var respTest = await apiservice.GetAsync(respcreate.Item.StorageKey);
+                if (respTest.Item.IsComplete)
+                    break;
+            }
+
+            respg = await apiservice.GetAsync(respcreate.Item.StorageKey);
+
+            Assert.True(respg.Item.IsComplete);
+        }
+
+        [Fact]
         public virtual async Task NotificationSendTaskTests()
         {
             var loggerFactory = SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>();
@@ -32,29 +72,29 @@ namespace ServiceBricks.Xunit
                 ToAddress = "test@servicebricks.com"
             };
 
-            var respcreate = apiservice.Create(startdto);
+            var respcreate = await apiservice.CreateAsync(startdto);
             Assert.True(respcreate.Success);
             Assert.True(respcreate.Item != null);
 
-            var respg = apiservice.Get(respcreate.Item.StorageKey);
+            var respg = await apiservice.GetAsync(respcreate.Item.StorageKey);
             Assert.True(respg.Success);
             Assert.True(respg.Item != null);
 
-            NotificationSendTask.QueueWork(taskQueue);
-            NotificationSendTask.Worker worker = new NotificationSendTask.Worker(
-                SystemManager.ServiceProvider.GetRequiredService<INotifyMessageProcessQueueService>());
-
-            await worker.DoWork(new NotificationSendTask.Detail(), CancellationToken.None);
+            // Invoke the method
+            SendNotificationTask.Worker worker = new SendNotificationTask.Worker(
+                SystemManager.ServiceProvider.GetRequiredService<NotifyMessageWorkService>());
+            await worker.DoWork(new SendNotificationTask.Detail(), CancellationToken.None);
 
             CancellationTokenSource cts = new CancellationTokenSource();
-            cts.CancelAfter(3000);
-            while (!apiservice.Get(respcreate.Item.StorageKey).Item.IsComplete)
+            cts.CancelAfter(5000);
+            while (!cts.Token.IsCancellationRequested)
             {
-                if (cts.Token.IsCancellationRequested)
+                var respTest = await apiservice.GetAsync(respcreate.Item.StorageKey);
+                if (respTest.Item.IsComplete)
                     break;
             }
 
-            respg = apiservice.Get(respcreate.Item.StorageKey);
+            respg = await apiservice.GetAsync(respcreate.Item.StorageKey);
 
             Assert.True(respg.Item.IsComplete);
         }
@@ -74,31 +114,33 @@ namespace ServiceBricks.Xunit
                 ToAddress = "test@servicebricks.com"
             };
 
-            var respcreate = apiservice.Create(startdto);
+            var respcreate = await apiservice.CreateAsync(startdto);
             Assert.True(respcreate.Success);
             Assert.True(respcreate.Item != null);
 
-            var respg = apiservice.Get(respcreate.Item.StorageKey);
+            var respg = await apiservice.GetAsync(respcreate.Item.StorageKey);
             Assert.True(respg.Success);
             Assert.True(respg.Item != null);
 
-            var timer = new NotificationSendTimer(
+            var timer = new SendNotificationTimer(
                 SystemManager.ServiceProvider,
                 SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>());
 
             await timer.StartAsync(CancellationToken.None);
 
             CancellationTokenSource cts = new CancellationTokenSource();
-            cts.CancelAfter(3000);
-            while (!apiservice.Get(respcreate.Item.StorageKey).Item.IsComplete)
+            cts.CancelAfter(5000);
+
+            while (!cts.IsCancellationRequested)
             {
-                if (cts.Token.IsCancellationRequested)
+                var respTest = await apiservice.GetAsync(respcreate.Item.StorageKey);
+                if (respTest.Item.IsComplete)
                     break;
             }
 
             await timer.StopAsync(CancellationToken.None);
 
-            respg = apiservice.Get(respcreate.Item.StorageKey);
+            respg = await apiservice.GetAsync(respcreate.Item.StorageKey);
 
             Assert.True(respg.Item.IsComplete);
         }
@@ -140,7 +182,7 @@ namespace ServiceBricks.Xunit
             var loggerFactory = SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>();
             var businessRuleService = SystemManager.ServiceProvider.GetRequiredService<IBusinessRuleService>();
 
-            NotificationSendProcess process = new NotificationSendProcess(new NotifyMessageDto()
+            SendNotificationProcess process = new SendNotificationProcess(new NotifyMessageDto()
             {
                 ToAddress = "test1@servicebricks.com,test2@servicebricks.com",
                 CcAddress = "test3@servicebricks.com,test4@servicebricks.com",
@@ -236,6 +278,26 @@ namespace ServiceBricks.Xunit
             var au = module.AutomapperAssemblies;
             var vi = module.ViewAssemblies;
 
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public virtual Task AddNotificationClientTests()
+        {
+            IServiceCollection services = new ServiceCollection();
+            IConfiguration config = new ConfigurationBuilder().Build();
+
+            services.AddServiceBricksNotificationClient(config);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public virtual Task AddNotificationClientForServiceTests()
+        {
+            IServiceCollection services = new ServiceCollection();
+            IConfiguration config = new ConfigurationBuilder().Build();
+
+            services.AddServiceBricksNotificationClientForService(config);
             return Task.CompletedTask;
         }
 

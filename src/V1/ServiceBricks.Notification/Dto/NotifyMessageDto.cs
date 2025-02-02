@@ -3,7 +3,7 @@
     /// <summary>
     /// This is a notification message data transfer object.
     /// </summary>
-    public partial class NotifyMessageDto : DataTransferObject
+    public partial class NotifyMessageDto : DataTransferObject, IDpWorkProcess
     {
         /// <summary>
         /// The type of notification message.

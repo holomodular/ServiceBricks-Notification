@@ -1,6 +1,6 @@
 using ServiceBricks;
-
-//using ServiceBricks.Logging.InMemory;
+using ServiceBricks.Cache.Cosmos;
+using ServiceBricks.Logging.Cosmos;
 using ServiceBricks.Notification.Cosmos;
 using WebApp.Extensions;
 
@@ -18,7 +18,8 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            //services.AddServiceBricksLoggingInMemory(Configuration);
+            services.AddServiceBricksLoggingCosmos(Configuration);
+            services.AddServiceBricksCacheCosmos(Configuration);
             services.AddServiceBricksNotificationCosmos(Configuration);
             ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);

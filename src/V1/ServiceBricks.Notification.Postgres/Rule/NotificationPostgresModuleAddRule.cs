@@ -70,9 +70,7 @@ namespace ServiceBricks.Notification.Postgres
             services.AddDbContext<NotificationPostgresContext>(c => { c = builder; }, ServiceLifetime.Scoped);
 
             // AI: Add storage services for the module. Each domain object should have its own storage repository.
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<IStorageRepository<NotifyMessage>, NotificationStorageRepository<NotifyMessage>>();
 
             return response;
         }

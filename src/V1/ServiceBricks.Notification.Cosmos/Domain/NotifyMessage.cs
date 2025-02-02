@@ -6,7 +6,7 @@ namespace ServiceBricks.Notification.Cosmos
     /// <summary>
     /// This is a notification message.
     /// </summary>
-    public partial class NotifyMessage : EntityFrameworkCoreDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpProcessQueue
+    public partial class NotifyMessage : EntityFrameworkCoreDomainObject<NotifyMessage>, IDpCreateDate, IDpUpdateDate, IDpWorkProcess
     {
         /// <summary>
         /// Internal primary key.

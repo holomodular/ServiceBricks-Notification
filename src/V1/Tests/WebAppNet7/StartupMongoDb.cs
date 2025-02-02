@@ -1,6 +1,5 @@
 using ServiceBricks;
-
-//using ServiceBricks.Logging.InMemory;
+using ServiceBricks.Cache.MongoDb;
 using ServiceBricks.Notification.MongoDb;
 using WebApp.Extensions;
 
@@ -18,7 +17,7 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            //services.AddServiceBricksLoggingInMemory(Configuration);
+            services.AddServiceBricksCacheMongoDb(Configuration);
             services.AddServiceBricksNotificationMongoDb(Configuration);
             ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
             services.AddServiceBricksComplete(Configuration);

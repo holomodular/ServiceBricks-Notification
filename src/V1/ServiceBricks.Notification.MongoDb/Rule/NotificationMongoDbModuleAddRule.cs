@@ -57,12 +57,9 @@ namespace ServiceBricks.Notification.MongoDb
             //var configuration = e.Configuration;
 
             // AI: Add any miscellaneous services for the module
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
             // AI: Add the storage services for the module for each domain object
-            services.AddScoped<IStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
-            services.AddScoped<INotifyMessageStorageRepository, NotifyMessageStorageRepository>();
-            services.AddScoped<IDomainProcessQueueStorageRepository<NotifyMessage>, NotifyMessageStorageRepository>();
+            services.AddScoped<IStorageRepository<NotifyMessage>, NotificationStorageRepository<NotifyMessage>>();
 
             // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();

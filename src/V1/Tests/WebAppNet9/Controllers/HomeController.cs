@@ -15,15 +15,18 @@ namespace WebApp.Controllers
         private IServiceBus _serviceBus;
         private IEmailProvider _emailProvider;
         private IBusinessRuleService _businessRuleService;
+        private INotifyMessageApiService _notifyMessageApiService;
 
         public HomeController(
             IServiceBus serviceBus,
             IEmailProvider emailProvider,
-            IBusinessRuleService businessRuleService)
+            IBusinessRuleService businessRuleService,
+            INotifyMessageApiService notifyMessageApiService)
         {
             _serviceBus = serviceBus;
             _emailProvider = emailProvider;
             _businessRuleService = businessRuleService;
+            _notifyMessageApiService = notifyMessageApiService;
         }
 
         [HttpGet]
@@ -33,6 +36,27 @@ namespace WebApp.Controllers
         {
             HomeViewModel model = new HomeViewModel();
             return View(model);
+        }
+
+        [HttpGet]
+        [Route("StartTest")]
+        public async Task<IActionResult> StartTest()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                NotifyMessageDto msg = new NotifyMessageDto()
+                {
+                    Body = "Test Body",
+                    Subject = "Test Subject",
+                    BodyHtml = "Test BodyHtml",
+                    SenderType = SenderType.Email_TEXT,
+                    ToAddress = "test@holomodular.com",
+                };
+                await _notifyMessageApiService.CreateAsync(msg);
+            }
+
+            HomeViewModel model = new HomeViewModel();
+            return View("Index", model);
         }
 
         [HttpGet]
@@ -46,10 +70,10 @@ namespace WebApp.Controllers
                 Subject = "Test Subject",
                 BodyHtml = "Test BodyHtml",
                 SenderType = SenderType.Email_TEXT,
-                ToAddress = "support@holomodular.com",
+                ToAddress = "support@servicebricks.com",
             };
 
-            NotificationSendProcess process = new NotificationSendProcess(msg);
+            SendNotificationProcess process = new SendNotificationProcess(msg);
             var respProcess = await _businessRuleService.ExecuteProcessAsync(process);
 
             HomeViewModel model = new HomeViewModel();

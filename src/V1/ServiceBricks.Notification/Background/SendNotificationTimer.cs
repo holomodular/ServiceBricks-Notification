@@ -3,17 +3,17 @@
 namespace ServiceBricks.Notification
 {
     /// <summary>
-    /// This is a timer to execute the NotificationSendTask.
+    /// This is a timer to execute the SendNotificationTask.
     /// Do not seal the class to allow for overriding values.
     /// </summary>
-    public partial class NotificationSendTimer : TaskTimerHostedService<NotificationSendTask.Detail, NotificationSendTask.Worker>
+    public partial class SendNotificationTimer : TaskTimerHostedService<SendNotificationTask.Detail, SendNotificationTask.Worker>
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="serviceProvider"></param>
         /// <param name="logger"></param>
-        public NotificationSendTimer(
+        public SendNotificationTimer(
             IServiceProvider serviceProvider,
             ILoggerFactory logger) : base(serviceProvider, logger)
         {
@@ -24,7 +24,7 @@ namespace ServiceBricks.Notification
         /// </summary>
         public override TimeSpan TimerTickInterval
         {
-            get { return TimeSpan.FromSeconds(15); }
+            get { return TimeSpan.FromSeconds(10); }
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace ServiceBricks.Notification
         /// <summary>
         /// The task detail for the timer that will be executed.
         /// </summary>
-        public override ITaskDetail<NotificationSendTask.Detail, NotificationSendTask.Worker> TaskDetail
+        public override ITaskDetail<SendNotificationTask.Detail, SendNotificationTask.Worker> TaskDetail
         {
-            get { return new NotificationSendTask.Detail(); }
+            get { return new SendNotificationTask.Detail(); }
         }
 
         /// <summary>
@@ -49,7 +49,6 @@ namespace ServiceBricks.Notification
         /// <returns></returns>
         public override bool TimerTickShouldProcessRun()
         {
-            // If scaling the application, consider using the Cache SingleServerProcess to ensure only one instance runs.
             return NotificationModule.Instance.Started && !IsCurrentlyRunning;
         }
     }

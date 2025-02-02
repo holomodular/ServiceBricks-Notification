@@ -24,10 +24,11 @@ namespace ServiceBricks.Notification
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public Task<IResponse> SendEmailAsync(NotifyMessageDto message)
+        public async Task<IResponse> SendEmailAsync(NotifyMessageDto message)
         {
+            await Task.Delay(100); // Add small delay to simulate processing
             _logger.LogInformation("Sending Email: " + JsonConvert.SerializeObject(message));
-            return Task.FromResult<IResponse>(new Response());
+            return new Response();
         }
     }
 }

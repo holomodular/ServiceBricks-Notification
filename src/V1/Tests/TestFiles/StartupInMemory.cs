@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification;
 using ServiceBricks.Notification.InMemory;
+using ServiceBricks.Cache.InMemory;
 
 namespace ServiceBricks.Xunit
 {
@@ -17,11 +18,12 @@ namespace ServiceBricks.Xunit
             base.CustomConfigureServices(services);
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
+            services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksNotificationInMemory(Configuration);
             services.AddServiceBricksComplete(Configuration);
 
             // Remove all background tasks/timers for unit testing
-            var logtimer = services.Where(x => x.ImplementationType == typeof(NotificationSendTimer)).FirstOrDefault();
+            var logtimer = services.Where(x => x.ImplementationType == typeof(SendNotificationTimer)).FirstOrDefault();
             if (logtimer != null)
                 services.Remove(logtimer);
 

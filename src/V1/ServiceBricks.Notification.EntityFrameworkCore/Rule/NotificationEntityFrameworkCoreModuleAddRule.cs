@@ -56,7 +56,6 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
             // AI: Configure all options for the module
 
             // AI: Add any miscellaneous services for the module
-            services.AddScoped<INotifyMessageProcessQueueService, NotifyMessageProcessQueueService>();
 
             // AI: Add API services for the module. Each DTO should have two registrations, one for the generic IApiService<> and one for the named interface
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
