@@ -1,4 +1,8 @@
-v1.3.0-a prerelease
+# 1.3.0-c prerelease
+- Update all nuget package references
+- Minor changes
+
+# 1.3.0-a prerelease
 - Update all nuget package references
 - Remove IDpProcessQueue related files
 - Add new NotifyMessageWorkService

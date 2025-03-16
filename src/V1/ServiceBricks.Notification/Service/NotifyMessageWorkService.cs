@@ -24,7 +24,7 @@ namespace ServiceBricks.Notification
             ISemaphoreService semaphoreService) : base(loggerFactory, apiService, semaphoreService)
         {
             _businessRuleService = businessRuleService;
-            NumberToBatchProcess = 50;
+            NumberToBatchProcess = 20;
         }
 
         /// <summary>
