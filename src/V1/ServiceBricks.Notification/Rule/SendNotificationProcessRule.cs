@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 namespace ServiceBricks.Notification
 {
@@ -10,7 +9,7 @@ namespace ServiceBricks.Notification
     {
         private readonly IEmailProvider _emailProvider;
         private readonly ISmsProvider _smsProvider;
-        private readonly NotificationOptions _notificationOptions;
+        private readonly SendOptions _sendOptions;
         private readonly IMapper _mapper;
 
         /// <summary>
@@ -18,18 +17,18 @@ namespace ServiceBricks.Notification
         /// </summary>
         /// <param name="emailProvider"></param>
         /// <param name="smsProvider"></param>
-        /// <param name="notificationOptions"></param>
+        /// <param name="sendOptions"></param>
         /// <param name="mapper"></param>
         public SendNotificationProcessRule(
             IEmailProvider emailProvider,
             ISmsProvider smsProvider,
-            IOptions<NotificationOptions> notificationOptions,
+            IOptions<SendOptions> sendOptions,
             IMapper mapper
             )
         {
             _emailProvider = emailProvider;
             _smsProvider = smsProvider;
-            _notificationOptions = notificationOptions.Value;
+            _sendOptions = sendOptions.Value;
             _mapper = mapper;
             Priority = PRIORITY_NORMAL;
         }
@@ -94,11 +93,11 @@ namespace ServiceBricks.Notification
             if (string.Compare(msg.SenderType, SenderType.Email_TEXT, true) == 0)
             {
                 // AI: Set defaults defined by options
-                if (!string.IsNullOrEmpty(_notificationOptions.EmailFromDefault))
-                    msg.FromAddress = _notificationOptions.EmailFromDefault;
-                if (_notificationOptions.IsDevelopment)
+                if (!string.IsNullOrEmpty(_sendOptions.EmailFromDefault))
+                    msg.FromAddress = _sendOptions.EmailFromDefault;
+                if (_sendOptions.IsDevelopment)
                 {
-                    msg.ToAddress = _notificationOptions.DevelopmentEmailTo;
+                    msg.ToAddress = _sendOptions.DevelopmentEmailTo;
                     msg.CcAddress = null;
                     msg.BccAddress = null;
                 }
@@ -114,11 +113,11 @@ namespace ServiceBricks.Notification
             if (string.Compare(msg.SenderType, SenderType.SMS_TEXT, true) == 0)
             {
                 // AI: Set defaults defined by options
-                if (!string.IsNullOrEmpty(_notificationOptions.SmsFromDefault))
-                    msg.FromAddress = _notificationOptions.SmsFromDefault;
-                if (_notificationOptions.IsDevelopment)
+                if (!string.IsNullOrEmpty(_sendOptions.SmsFromDefault))
+                    msg.FromAddress = _sendOptions.SmsFromDefault;
+                if (_sendOptions.IsDevelopment)
                 {
-                    msg.ToAddress = _notificationOptions.DevelopmentSmsTo;
+                    msg.ToAddress = _sendOptions.DevelopmentSmsTo;
                     msg.CcAddress = null;
                     msg.BccAddress = null;
                 }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -122,9 +121,11 @@ namespace ServiceBricks.Xunit
             Assert.True(respg.Success);
             Assert.True(respg.Item != null);
 
+            var sendOptions = new OptionsWrapper<SendOptions>(new SendOptions());
             var timer = new SendNotificationTimer(
                 SystemManager.ServiceProvider,
-                SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>());
+                SystemManager.ServiceProvider.GetRequiredService<ILoggerFactory>(),
+                sendOptions);
 
             await timer.StartAsync(CancellationToken.None);
 
@@ -275,7 +276,6 @@ namespace ServiceBricks.Xunit
             NotificationModule module = new NotificationModule();
 
             var dep = module.DependentModules;
-            var au = module.AutomapperAssemblies;
             var vi = module.ViewAssemblies;
 
             return Task.CompletedTask;

@@ -65,6 +65,9 @@ namespace ServiceBricks.Notification.AzureDataTables
 
             // AI: Add any miscellaneous services for the module
 
+            // AI: Register mappings
+            NotifyMessageMappingProfile.Register(MapperRegistry.Instance);
+
             // AI: Register business rules for the module
             DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
             AzureDataTablesDomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));

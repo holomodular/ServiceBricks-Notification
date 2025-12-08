@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification.MongoDb
+﻿namespace ServiceBricks.Notification.MongoDb
 {
     /// <summary>
     /// This is a REST API service for the NotifyMessageDto.

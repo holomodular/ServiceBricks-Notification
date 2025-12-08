@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification.Cosmos
+﻿namespace ServiceBricks.Notification.Cosmos
 {
     /// <summary>
     /// This is an API service for the message domain object.

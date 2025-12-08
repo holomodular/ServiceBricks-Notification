@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification
+﻿namespace ServiceBricks.Notification
 {
     /// <summary>
     /// This business rule occurs when an CreateApplicationEmailBroadcast is received from the service bus.
@@ -67,7 +65,7 @@ namespace ServiceBricks.Notification
             }
 
             // AI: Map the domain object to the DTO
-            var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
+            var message = _mapper.Map<ApplicationEmailDto, NotifyMessageDto>(e.DomainObject);
 
             // AI: Call the API service to store the message
             var respCreate = _messageApiService.Create(message);
@@ -101,7 +99,7 @@ namespace ServiceBricks.Notification
             }
 
             // AI: Map the domain object to the DTO
-            var message = _mapper.Map<NotifyMessageDto>(e.DomainObject);
+            var message = _mapper.Map<ApplicationEmailDto, NotifyMessageDto>(e.DomainObject);
 
             // AI: Call the API service to store the message
             var respCreate = await _messageApiService.CreateAsync(message);

@@ -14,10 +14,6 @@ namespace ServiceBricks.Notification.Cosmos
         /// </summary>
         public NotificationCosmosModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(NotificationCosmosModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 new NotificationModule()

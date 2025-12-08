@@ -17,10 +17,6 @@ namespace ServiceBricks.Notification.EntityFrameworkCore
         /// </summary>
         public NotificationEntityFrameworkCoreModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(NotificationEntityFrameworkCoreModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 new NotificationModule()

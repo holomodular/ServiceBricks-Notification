@@ -33,8 +33,7 @@
             /// Constructor.
             /// </summary>
             /// <param name="notifyMessageWorker"></param>
-            public Worker(
-                NotifyMessageWorkService notifyMessageWorkService)
+            public Worker(NotifyMessageWorkService notifyMessageWorkService)
             {
                 _notifyMessageWorkService = notifyMessageWorkService;
             }

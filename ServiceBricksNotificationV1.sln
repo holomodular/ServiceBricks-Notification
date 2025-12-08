@@ -97,25 +97,47 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net9", "Net9", "{01F0F18F-FA1F-42FB-83F9-4338A1B88ABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.AzureDataTables.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.AzureDataTables.XunitNet9\ServiceBricks.Notification.AzureDataTables.XunitNet9.csproj", "{46F8A86B-0CD2-46B4-8F82-A042F66E86E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.AzureDataTables.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.AzureDataTables.XunitNet9\ServiceBricks.Notification.AzureDataTables.XunitNet9.csproj", "{46F8A86B-0CD2-46B4-8F82-A042F66E86E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Client.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.Client.XunitNet9\ServiceBricks.Notification.Client.XunitNet9.csproj", "{B90ED104-B3C1-4964-8D69-38FFBFF0741B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Client.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.Client.XunitNet9\ServiceBricks.Notification.Client.XunitNet9.csproj", "{B90ED104-B3C1-4964-8D69-38FFBFF0741B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Cosmos.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.Cosmos.XunitNet9\ServiceBricks.Notification.Cosmos.XunitNet9.csproj", "{F0AFD895-FBB8-4C07-8671-728258E5251B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Cosmos.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.Cosmos.XunitNet9\ServiceBricks.Notification.Cosmos.XunitNet9.csproj", "{F0AFD895-FBB8-4C07-8671-728258E5251B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.InMemory.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.InMemory.XunitNet9\ServiceBricks.Notification.InMemory.XunitNet9.csproj", "{47C69F48-C1F8-48AC-9460-38A815E7224B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.InMemory.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.InMemory.XunitNet9\ServiceBricks.Notification.InMemory.XunitNet9.csproj", "{47C69F48-C1F8-48AC-9460-38A815E7224B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.MongoDb.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.MongoDb.XunitNet9\ServiceBricks.Notification.MongoDb.XunitNet9.csproj", "{F250A5AE-DB1D-422E-BDC5-D2D0A2F1E206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.MongoDb.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.MongoDb.XunitNet9\ServiceBricks.Notification.MongoDb.XunitNet9.csproj", "{F250A5AE-DB1D-422E-BDC5-D2D0A2F1E206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Postgres.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.Postgres.XunitNet9\ServiceBricks.Notification.Postgres.XunitNet9.csproj", "{F8CF19C8-9529-42FF-B7A3-CFC1C90B6149}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Postgres.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.Postgres.XunitNet9\ServiceBricks.Notification.Postgres.XunitNet9.csproj", "{F8CF19C8-9529-42FF-B7A3-CFC1C90B6149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Sqlite.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.Sqlite.XunitNet9\ServiceBricks.Notification.Sqlite.XunitNet9.csproj", "{F29BA2BE-C683-49F7-B290-B62B15422F23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Sqlite.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.Sqlite.XunitNet9\ServiceBricks.Notification.Sqlite.XunitNet9.csproj", "{F29BA2BE-C683-49F7-B290-B62B15422F23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.SqlServer.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.SqlServer.XunitNet9\ServiceBricks.Notification.SqlServer.XunitNet9.csproj", "{3D579EA3-9C70-4DE9-8E2A-427EF816D874}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.SqlServer.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.SqlServer.XunitNet9\ServiceBricks.Notification.SqlServer.XunitNet9.csproj", "{3D579EA3-9C70-4DE9-8E2A-427EF816D874}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.XunitNet9", "..\ServiceBricks-Notification\src\V1\Tests\ServiceBricks.Notification.XunitNet9\ServiceBricks.Notification.XunitNet9.csproj", "{9B4C5E83-C53F-4E99-8B5C-40A03CBF49E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.XunitNet9", "src\V1\Tests\ServiceBricks.Notification.XunitNet9\ServiceBricks.Notification.XunitNet9.csproj", "{9B4C5E83-C53F-4E99-8B5C-40A03CBF49E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppNet9", "..\ServiceBricks-Notification\src\V1\Tests\WebAppNet9\WebAppNet9.csproj", "{C21A0125-2853-4271-9F84-E4AF9FB9D33D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppNet9", "src\V1\Tests\WebAppNet9\WebAppNet9.csproj", "{C21A0125-2853-4271-9F84-E4AF9FB9D33D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net10", "Net10", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.AzureDataTables.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.AzureDataTables.XunitNet10\ServiceBricks.Notification.AzureDataTables.XunitNet10.csproj", "{6CB69C4D-F146-5DA4-501D-DDCA0EE25EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Client.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.Client.XunitNet10\ServiceBricks.Notification.Client.XunitNet10.csproj", "{53839C3D-D513-B9FB-DB00-277703922C8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Cosmos.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.Cosmos.XunitNet10\ServiceBricks.Notification.Cosmos.XunitNet10.csproj", "{7D938E3D-6A5B-3768-02A9-14C472C94698}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.InMemory.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.InMemory.XunitNet10\ServiceBricks.Notification.InMemory.XunitNet10.csproj", "{79308C23-DE30-3C8E-A0B7-1DCA59B7786D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.MongoDb.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.MongoDb.XunitNet10\ServiceBricks.Notification.MongoDb.XunitNet10.csproj", "{8D2BFEC5-78FE-E0B8-7C67-5C087E282EA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Postgres.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.Postgres.XunitNet10\ServiceBricks.Notification.Postgres.XunitNet10.csproj", "{39CEC76A-076F-9677-A888-E36DC92222FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Sqlite.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.Sqlite.XunitNet10\ServiceBricks.Notification.Sqlite.XunitNet10.csproj", "{6E0408D1-DABF-FF93-79A0-944718356DF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.SqlServer.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.SqlServer.XunitNet10\ServiceBricks.Notification.SqlServer.XunitNet10.csproj", "{CD1E20DF-8D63-E071-8D0F-861504AFCA95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.XunitNet10", "src\V1\Tests\ServiceBricks.Notification.XunitNet10\ServiceBricks.Notification.XunitNet10.csproj", "{FF27CEC0-1052-6349-1C2E-528E8B02C7B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppNet10", "src\V1\Tests\WebAppNet10\WebAppNet10.csproj", "{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -331,6 +353,46 @@ Global
 		{C21A0125-2853-4271-9F84-E4AF9FB9D33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C21A0125-2853-4271-9F84-E4AF9FB9D33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C21A0125-2853-4271-9F84-E4AF9FB9D33D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB69C4D-F146-5DA4-501D-DDCA0EE25EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB69C4D-F146-5DA4-501D-DDCA0EE25EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB69C4D-F146-5DA4-501D-DDCA0EE25EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB69C4D-F146-5DA4-501D-DDCA0EE25EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53839C3D-D513-B9FB-DB00-277703922C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53839C3D-D513-B9FB-DB00-277703922C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53839C3D-D513-B9FB-DB00-277703922C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53839C3D-D513-B9FB-DB00-277703922C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D938E3D-6A5B-3768-02A9-14C472C94698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D938E3D-6A5B-3768-02A9-14C472C94698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D938E3D-6A5B-3768-02A9-14C472C94698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D938E3D-6A5B-3768-02A9-14C472C94698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79308C23-DE30-3C8E-A0B7-1DCA59B7786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79308C23-DE30-3C8E-A0B7-1DCA59B7786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79308C23-DE30-3C8E-A0B7-1DCA59B7786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79308C23-DE30-3C8E-A0B7-1DCA59B7786D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2BFEC5-78FE-E0B8-7C67-5C087E282EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2BFEC5-78FE-E0B8-7C67-5C087E282EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2BFEC5-78FE-E0B8-7C67-5C087E282EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2BFEC5-78FE-E0B8-7C67-5C087E282EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CEC76A-076F-9677-A888-E36DC92222FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CEC76A-076F-9677-A888-E36DC92222FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CEC76A-076F-9677-A888-E36DC92222FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CEC76A-076F-9677-A888-E36DC92222FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E0408D1-DABF-FF93-79A0-944718356DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0408D1-DABF-FF93-79A0-944718356DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0408D1-DABF-FF93-79A0-944718356DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0408D1-DABF-FF93-79A0-944718356DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1E20DF-8D63-E071-8D0F-861504AFCA95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1E20DF-8D63-E071-8D0F-861504AFCA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1E20DF-8D63-E071-8D0F-861504AFCA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1E20DF-8D63-E071-8D0F-861504AFCA95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF27CEC0-1052-6349-1C2E-528E8B02C7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF27CEC0-1052-6349-1C2E-528E8B02C7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF27CEC0-1052-6349-1C2E-528E8B02C7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF27CEC0-1052-6349-1C2E-528E8B02C7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -381,6 +443,17 @@ Global
 		{3D579EA3-9C70-4DE9-8E2A-427EF816D874} = {01F0F18F-FA1F-42FB-83F9-4338A1B88ABA}
 		{9B4C5E83-C53F-4E99-8B5C-40A03CBF49E8} = {01F0F18F-FA1F-42FB-83F9-4338A1B88ABA}
 		{C21A0125-2853-4271-9F84-E4AF9FB9D33D} = {01F0F18F-FA1F-42FB-83F9-4338A1B88ABA}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {8562DADF-4034-4854-AEFE-C306451F0D66}
+		{6CB69C4D-F146-5DA4-501D-DDCA0EE25EAF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{53839C3D-D513-B9FB-DB00-277703922C8C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7D938E3D-6A5B-3768-02A9-14C472C94698} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{79308C23-DE30-3C8E-A0B7-1DCA59B7786D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8D2BFEC5-78FE-E0B8-7C67-5C087E282EA5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{39CEC76A-076F-9677-A888-E36DC92222FA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6E0408D1-DABF-FF93-79A0-944718356DF0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{CD1E20DF-8D63-E071-8D0F-861504AFCA95} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{FF27CEC0-1052-6349-1C2E-528E8B02C7B2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BED65CC7-B073-4BEF-88E6-6057B8E060FF}

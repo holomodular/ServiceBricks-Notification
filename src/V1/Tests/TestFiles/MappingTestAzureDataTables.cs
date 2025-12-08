@@ -13,10 +13,10 @@ namespace ServiceBricks.Xunit.Integration
         }
 
         [Fact]
-        public virtual Task ValidateAutomapperConfiguration()
+        public virtual Task ValidateMmapperConfiguration()
         {
-            var mapper = SystemManager.ServiceProvider.GetRequiredService<AutoMapper.IMapper>();
-            mapper.ConfigurationProvider.AssertConfigurationIsValid();
+            var mapper = SystemManager.ServiceProvider.GetRequiredService<IMapper>();
+
             return Task.CompletedTask;
         }
     }

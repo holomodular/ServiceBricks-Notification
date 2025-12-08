@@ -21,7 +21,7 @@ namespace WebApp
             services.AddServiceBricksLoggingPostgres(Configuration);
             services.AddServiceBricksCachePostgres(Configuration);
             services.AddServiceBricksNotificationPostgres(Configuration);
-            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
+            ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
         }

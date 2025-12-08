@@ -17,10 +17,6 @@ namespace ServiceBricks.Notification.MongoDb
         /// </summary>
         public NotificationMongoDbModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(NotificationMongoDbModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 new NotificationModule()

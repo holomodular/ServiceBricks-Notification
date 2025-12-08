@@ -1,24 +1,64 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification.MongoDb
+﻿namespace ServiceBricks.Notification.MongoDb
 {
     /// <summary>
     /// Mapping profile for the NotifyMessage domain object.
     /// </summary>
-    public partial class NotifyMessageMappingProfile : Profile
+    public partial class NotifyMessageMappingProfile
     {
         /// <summary>
-        /// Constructor.
+        /// Register the mapping
         /// </summary>
-        public NotifyMessageMappingProfile()
+        public static void Register(IMapperRegistry registry)
         {
-            // AI: Add mappings for the domain object to the DTO
-            CreateMap<NotifyMessageDto, NotifyMessage>()
-                .ForMember(x => x.CreateDate, y => y.Ignore())
-                .ForMember(x => x.Key, y => y.MapFrom(z => z.StorageKey));
+            registry.Register<NotifyMessage, NotifyMessageDto>(
+                (s, d) =>
+                {
+                    d.BccAddress = s.BccAddress;
+                    d.Body = s.Body;
+                    d.BodyHtml = s.BodyHtml;
+                    d.CcAddress = s.CcAddress;
+                    d.CreateDate = s.CreateDate;
+                    d.FromAddress = s.FromAddress;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsComplete;
+                    d.IsHtml = s.IsHtml;
+                    d.IsProcessing = s.IsProcessing;
+                    d.Priority = s.Priority;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.RetryCount = s.RetryCount;
+                    d.SenderType = s.SenderType;
+                    d.StorageKey = s.Key.ToString();
+                    d.Subject = s.Subject;
+                    d.ToAddress = s.ToAddress;
+                    d.UpdateDate = s.UpdateDate;
+                });
 
-            CreateMap<NotifyMessage, NotifyMessageDto>()
-                .ForMember(x => x.StorageKey, y => y.MapFrom(z => z.Key));
+            registry.Register<NotifyMessageDto, NotifyMessage>(
+                (s, d) =>
+                {
+                    d.BccAddress = s.BccAddress;
+                    d.Body = s.Body;
+                    d.BodyHtml = s.BodyHtml;
+                    d.CcAddress = s.CcAddress;
+                    //d.CreateDate ignore
+                    d.FromAddress = s.FromAddress;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsComplete;
+                    d.IsHtml = s.IsHtml;
+                    d.IsProcessing = s.IsProcessing;
+                    d.Key = s.StorageKey;
+                    d.Priority = s.Priority;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.RetryCount = s.RetryCount;
+                    d.SenderType = s.SenderType;
+                    d.Subject = s.Subject;
+                    d.ToAddress = s.ToAddress;
+                    d.UpdateDate = s.UpdateDate;
+                });
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification.EntityFrameworkCore
+﻿namespace ServiceBricks.Notification.EntityFrameworkCore
 {
     /// <summary>
     /// This is a REST API service for the NotifyMessage domain object.

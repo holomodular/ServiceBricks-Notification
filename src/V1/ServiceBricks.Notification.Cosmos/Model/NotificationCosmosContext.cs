@@ -44,7 +44,7 @@ namespace ServiceBricks.Notification.Cosmos
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-#if NET9_0
+#if NET8_0_OR_GREATER
             optionsBuilder.ConfigureWarnings(w => w.Ignore(CosmosEventId.SyncNotSupported));
 #endif
 

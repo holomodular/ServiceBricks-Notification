@@ -17,10 +17,6 @@ namespace ServiceBricks.Notification
         /// </summary>
         public NotificationModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(NotificationModule).Assembly
-            };
             DataTransferObjects = new List<Type>()
             {
                 typeof(NotifyMessageDto)

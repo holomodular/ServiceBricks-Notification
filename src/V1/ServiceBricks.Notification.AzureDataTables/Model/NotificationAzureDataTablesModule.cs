@@ -14,10 +14,6 @@ namespace ServiceBricks.Notification.AzureDataTables
         /// </summary>
         public NotificationAzureDataTablesModule()
         {
-            AutomapperAssemblies = new List<Assembly>()
-            {
-                typeof(NotificationAzureDataTablesModule).Assembly
-            };
             DependentModules = new List<IModule>()
             {
                 new NotificationModule()

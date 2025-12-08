@@ -8,7 +8,7 @@
         /// <summary>
         /// AppSettings key for the Notification options.
         /// </summary>
-        public const string APPSETTINGS_NOTIFICATION_OPTIONS = "ServiceBricks:Notification:Options";
+        public const string APPSETTINGS_SEND_OPTIONS = "ServiceBricks:Notification:Send";
 
         /// <summary>
         /// AppSettings key for the SMTP provider options.

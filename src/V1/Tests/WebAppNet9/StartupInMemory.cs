@@ -23,7 +23,7 @@ namespace WebApp
             services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksNotificationInMemory(Configuration);
             //services.AddServiceBricksNotificationSendGrid(Configuration);
-            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
+            ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
         }

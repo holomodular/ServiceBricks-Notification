@@ -1,39 +1,39 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification
+﻿namespace ServiceBricks.Notification
 {
     /// <summary>
     /// This is a mapping profile for the ApplicationSmsDto.
     /// </summary>
-    public partial class ApplicationSmsDtoMappingProfile : Profile
+    public partial class ApplicationSmsDtoMappingProfile
     {
         /// <summary>
-        /// Constructor.
+        /// Register the mapping
         /// </summary>
-        public ApplicationSmsDtoMappingProfile() : base()
+        public static void Register(IMapperRegistry registry)
         {
-            // AI: Create a automapper mapping for the ApplicationSmsDto and NotifyMessageDto.
-            CreateMap<ApplicationSmsDto, NotifyMessageDto>()
-                .ForMember(x => x.BccAddress, y => y.Ignore())
-                .ForMember(x => x.Body, y => y.Ignore())
-                .ForMember(x => x.BodyHtml, y => y.Ignore())
-                .ForMember(x => x.CcAddress, y => y.Ignore())
-                .ForMember(x => x.CreateDate, y => y.Ignore())
-                .ForMember(x => x.FromAddress, y => y.Ignore())
-                .ForMember(x => x.FutureProcessDate, y => y.MapFrom(z => z.FutureProcessDate))
-                .ForMember(x => x.IsComplete, y => y.Ignore())
-                .ForMember(x => x.IsError, y => y.Ignore())
-                .ForMember(x => x.IsHtml, y => y.Ignore())
-                .ForMember(x => x.IsProcessing, y => y.Ignore())
-                .ForMember(x => x.Priority, y => y.Ignore())
-                .ForMember(x => x.ProcessDate, y => y.Ignore())
-                .ForMember(x => x.ProcessResponse, y => y.Ignore())
-                .ForMember(x => x.RetryCount, y => y.Ignore())
-                .ForMember(x => x.SenderType, y => y.MapFrom(z => SenderType.SMS_TEXT))
-                .ForMember(x => x.StorageKey, y => y.MapFrom(z => z.StorageKey))
-                .ForMember(x => x.Subject, y => y.Ignore())
-                .ForMember(x => x.ToAddress, y => y.MapFrom(z => z.PhoneNumber))
-                .ForMember(x => x.UpdateDate, y => y.Ignore());
+            registry.Register<ApplicationSmsDto, NotifyMessageDto>(
+                (s, d) =>
+                {
+                    //d.BccAddress ignore
+                    d.Body = s.Message;
+                    //d.BodyHtml ignore
+                    //d.CcAddress ignore
+                    //d.CreateDate ignore
+                    //d.FromAddress ignore
+                    d.FutureProcessDate = s.FutureProcessDate.HasValue ? s.FutureProcessDate.Value : DateTimeOffset.UtcNow;
+                    //d.IsComplete ignore
+                    //d.IsError ignore
+                    //d.IsHtml = ignore
+                    //d.IsProcessing ignore
+                    //d.Priority = ignore
+                    //d.ProcessDate ignore
+                    //d.ProcessResponse ignore
+                    //d.RetryCount ignore
+                    d.SenderType = SenderType.SMS_TEXT;
+                    d.StorageKey = s.StorageKey;
+                    d.Subject = s.Message;
+                    d.ToAddress = s.PhoneNumber;
+                    //d.UpdateDate ignore
+                });
         }
     }
 }

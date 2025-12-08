@@ -73,6 +73,9 @@ namespace ServiceBricks.Notification.Cosmos
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
             services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
+            // AI: Register mappings
+            NotifyMessageMappingProfile.Register(MapperRegistry.Instance);
+
             // AI: Register business rules for the module
             DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
             DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance,

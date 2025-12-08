@@ -1,5 +1,5 @@
 ﻿using Asp.Versioning;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using ServiceBricks;
 using WebApp.Model;
 
@@ -9,15 +9,12 @@ namespace WebApp.Extensions
     {
         public static IServiceCollection AddCustomWebsite(this IServiceCollection services, IConfiguration Configuration)
         {
-            // Add to module registry
-            ModuleRegistry.Instance.Register(new WebAppModule());
-
             services.AddControllers();
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddCors();
 
-            // Add Authorization
+            // Add Authorization, disable all security policies
             services.AddAuthorization(options =>
             {
                 //Add Built-in Security Policies

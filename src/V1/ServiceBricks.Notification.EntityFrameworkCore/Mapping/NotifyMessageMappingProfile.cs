@@ -1,49 +1,66 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification.EntityFrameworkCore
+﻿namespace ServiceBricks.Notification.EntityFrameworkCore
 {
     /// <summary>
     /// Mapping profile for the NotifyMessage domain object.
     /// </summary>
-    public partial class NotifyMessageMappingProfile : Profile
+    public partial class NotifyMessageMappingProfile
     {
         /// <summary>
-        /// Constructor.
+        /// Register the mapping
         /// </summary>
-        public NotifyMessageMappingProfile()
+        public static void Register(IMapperRegistry registry)
         {
-            // AI: Add mappings for the domain object
-            CreateMap<NotifyMessageDto, NotifyMessage>()
-                .ForMember(x => x.CreateDate, y => y.Ignore())
-                .ForMember(x => x.Key, y => y.MapFrom<KeyResolver>());
+            registry.Register<NotifyMessage, NotifyMessageDto>(
+                (s, d) =>
+                {
+                    d.BccAddress = s.BccAddress;
+                    d.Body = s.Body;
+                    d.BodyHtml = s.BodyHtml;
+                    d.CcAddress = s.CcAddress;
+                    d.CreateDate = s.CreateDate;
+                    d.FromAddress = s.FromAddress;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsComplete;
+                    d.IsHtml = s.IsHtml;
+                    d.IsProcessing = s.IsProcessing;
+                    d.Priority = s.Priority;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.RetryCount = s.RetryCount;
+                    d.SenderType = s.SenderType;
+                    d.StorageKey = s.Key.ToString();
+                    d.Subject = s.Subject;
+                    d.ToAddress = s.ToAddress;
+                    d.UpdateDate = s.UpdateDate;
+                });
 
-            CreateMap<NotifyMessage, NotifyMessageDto>()
-                .ForMember(x => x.StorageKey, y => y.MapFrom(z => z.Key));
-        }
-
-        /// <summary>
-        /// Resolve the key.
-        /// </summary>
-        public class KeyResolver : IValueResolver<DataTransferObject, object, long>
-        {
-            /// <summary>
-            /// Resolve the key.
-            /// </summary>
-            /// <param name="source"></param>
-            /// <param name="destination"></param>
-            /// <param name="sourceMember"></param>
-            /// <param name="context"></param>
-            /// <returns></returns>
-            public long Resolve(DataTransferObject source, object destination, long sourceMember, ResolutionContext context)
-            {
-                if (string.IsNullOrEmpty(source.StorageKey))
-                    return 0;
-
-                long tempKey;
-                if (long.TryParse(source.StorageKey, out tempKey))
-                    return tempKey;
-                return 0;
-            }
+            registry.Register<NotifyMessageDto, NotifyMessage>(
+                (s, d) =>
+                {
+                    d.BccAddress = s.BccAddress;
+                    d.Body = s.Body;
+                    d.BodyHtml = s.BodyHtml;
+                    d.CcAddress = s.CcAddress;
+                    //d.CreateDate ignore
+                    d.FromAddress = s.FromAddress;
+                    d.FutureProcessDate = s.FutureProcessDate;
+                    d.IsComplete = s.IsComplete;
+                    d.IsError = s.IsComplete;
+                    d.IsHtml = s.IsHtml;
+                    d.IsProcessing = s.IsProcessing;
+                    long tempKey;
+                    if (long.TryParse(s.StorageKey, out tempKey))
+                        d.Key = tempKey;
+                    d.Priority = s.Priority;
+                    d.ProcessDate = s.ProcessDate;
+                    d.ProcessResponse = s.ProcessResponse;
+                    d.RetryCount = s.RetryCount;
+                    d.SenderType = s.SenderType;
+                    d.Subject = s.Subject;
+                    d.ToAddress = s.ToAddress;
+                    d.UpdateDate = s.UpdateDate;
+                });
         }
     }
 }

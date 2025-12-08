@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace ServiceBricks.Notification.AzureDataTables
+﻿namespace ServiceBricks.Notification.AzureDataTables
 {
     /// <summary>
     /// This is an API service for the NotifyMessageDto.

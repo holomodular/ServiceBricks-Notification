@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace ServiceBricks.Notification
 {
@@ -51,18 +52,19 @@ namespace ServiceBricks.Notification
 
             // AI: Perform logic
             var services = e.ServiceCollection;
-            var configuration = e.Configuration;
+            var config = e.Configuration;
+
+            // AI: Configure all options for the module
+            services.Configure<SendOptions>(config.GetSection(NotificationConstants.APPSETTINGS_SEND_OPTIONS));
+            services.Configure<SmtpOptions>(config.GetSection(NotificationConstants.APPSETTINGS_SMTP_PROVIDER_OPTIONS));
 
             // AI: Add hosted services for the module
-            services.AddHostedService<SendNotificationTimer>();
+            if (config.GetSection(NotificationConstants.APPSETTINGS_SEND_OPTIONS).GetValue<bool>(nameof(SendOptions.TimerEnabled)))
+                services.AddHostedService<SendNotificationTimer>();
 
             // AI: Add workers for tasks in the module
             services.AddScoped<SendNotificationTask.Worker>();
             services.AddScoped<NotifyMessageWorkService>();
-
-            // AI: Configure all options for the module
-            services.Configure<NotificationOptions>(configuration.GetSection(NotificationConstants.APPSETTINGS_NOTIFICATION_OPTIONS));
-            services.Configure<SmtpOptions>(configuration.GetSection(NotificationConstants.APPSETTINGS_SMTP_PROVIDER_OPTIONS));
 
             // AI: Add API Controllers for each DTO in the module
             services.AddScoped<IApiController<NotifyMessageDto>, NotifyMessageApiController>();
@@ -75,6 +77,12 @@ namespace ServiceBricks.Notification
             var smsProvider = services.Where(x => x.ServiceType == typeof(ISmsProvider)).FirstOrDefault();
             if (smsProvider == null)
                 services.AddScoped<ISmsProvider, ExampleSmsProvider>();
+
+            // AI: Register mappings
+            ApplicationEmailDtoMappingProfile.Register(MapperRegistry.Instance);
+            ApplicationSmsDtoMappingProfile.Register(MapperRegistry.Instance);
+            SenderTypeMappingProfile.Register(MapperRegistry.Instance);
+            NotifyMessageMappingProfile.Register(MapperRegistry.Instance);
 
             // AI: Register business rules for the module
             SendNotificationProcessRule.Register(BusinessRuleRegistry.Instance);

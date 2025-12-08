@@ -19,7 +19,7 @@ namespace WebApp
             services.AddServiceBricks(Configuration);
             services.AddServiceBricksCacheCosmos(Configuration);
             services.AddServiceBricksNotificationCosmos(Configuration);
-            ModuleRegistry.Instance.Register(new WebApp.Model.WebAppModule()); // Just for automapper registration
+            ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
             services.AddServiceBricksComplete(Configuration);
             services.AddCustomWebsite(Configuration);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ServiceBricks.Notification
 {
@@ -8,17 +9,22 @@ namespace ServiceBricks.Notification
     /// </summary>
     public partial class SendNotificationTimer : TaskTimerHostedService<SendNotificationTask.Detail, SendNotificationTask.Worker>
     {
+        private SendOptions _sendOptions;
+
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="serviceProvider"></param>
         /// <param name="logger"></param>
+        /// <param name="sendOptions"></param>
         public SendNotificationTimer(
             IServiceProvider serviceProvider,
-            ILoggerFactory logger) : base(serviceProvider, logger)
+            ILoggerFactory logger,
+            IOptions<SendOptions> sendOptions) : base(serviceProvider, logger)
         {
-            TimerTickInterval = TimeSpan.FromSeconds(10);
-            TimerDueTime = TimeSpan.FromSeconds(3);
+            _sendOptions = sendOptions.Value;
+            TimerTickInterval = TimeSpan.FromMilliseconds(_sendOptions.TimerIntervalMilliseconds);
+            TimerDueTime = TimeSpan.FromMilliseconds(_sendOptions.TimerDueMilliseconds);
         }
 
         /// <summary>

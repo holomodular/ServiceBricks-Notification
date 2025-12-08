@@ -65,6 +65,9 @@ namespace ServiceBricks.Notification.MongoDb
             services.AddScoped<IApiService<NotifyMessageDto>, NotifyMessageApiService>();
             services.AddScoped<INotifyMessageApiService, NotifyMessageApiService>();
 
+            // AI: Register mappings
+            NotifyMessageMappingProfile.Register(MapperRegistry.Instance);
+
             // AI: Add business rules for the module
             DomainCreateUpdateDateRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance);
             DomainDateTimeOffsetRule<NotifyMessage>.Register(BusinessRuleRegistry.Instance, nameof(NotifyMessage.FutureProcessDate), nameof(NotifyMessage.ProcessDate));
