@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<Version>1.4.0-c</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
-		<PackageId>ServiceBricks.Notification.Cosmos</PackageId>
-		<Title>ServiceBricks.Notification.Cosmos</Title>
-		<AssemblyTitle>ServiceBricks.Notification.Cosmos</AssemblyTitle>
+		<PackageId>ServiceBricks.Notification.Model</PackageId>
+		<Title>ServiceBricks.Notification.Model</Title>
+		<AssemblyTitle>ServiceBricks.Notification.Model</AssemblyTitle>
 		<Authors>holomodular</Authors>
 		<Company>HoloModular LLC</Company>
 		<Product>ServiceBricks</Product>
@@ -14,16 +14,16 @@
 		<Copyright>Copyright © 2025 HoloModular LLC. All Rights Reserved. Visit https://HoloModular.com to learn more.</Copyright>
 		<PackageProjectUrl>https://ServiceBricks.com</PackageProjectUrl>
 		<PackageIcon>logo.png</PackageIcon>
-		<PackageTags>servicebricks;notification;cosmos;cosmosdb</PackageTags>
+		<PackageTags>servicebricks;notification;model</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<SignAssembly>True</SignAssembly>
-		<AssemblyOriginatorKeyFile>Resource\ServiceBricks.Notification.Cosmos.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>Resource\ServiceBricks.Notification.Model.snk</AssemblyOriginatorKeyFile>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/holomodular/ServiceBricks-Notification</RepositoryUrl>
-		<IsPackable>False</IsPackable>
+		<RepositoryUrl>https://github.com/holomodular/ServiceBricks-Notification</RepositoryUrl>		
+		<IsPackable>True</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="Resource\readme.md" Pack="True" PackagePath="\" />
@@ -32,11 +32,9 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
+
 	<ItemGroup>
-		<ProjectReference Include="..\ServiceBricks.Notification.EntityFrameworkCore\ServiceBricks.Notification.EntityFrameworkCore.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Core" Version="1.4.0-c" />
+		<PackageReference Include="ServiceBricks" Version="1.4.0-c" />
 	</ItemGroup>
 	
 </Project>

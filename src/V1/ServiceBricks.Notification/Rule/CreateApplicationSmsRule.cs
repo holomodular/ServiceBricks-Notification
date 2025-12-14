@@ -7,18 +7,22 @@
     {
         private readonly INotifyMessageApiService _messageApiService;
         private readonly IMapper _mapper;
+        private readonly IBusinessRuleService _businessRuleService;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="messageApiService"></param>
         /// <param name="mapper"></param>
+        /// <param name="businessRuleService"></param>
         public CreateApplicationSmsRule(
             INotifyMessageApiService messageApiService,
-            IMapper mapper)
+            IMapper mapper,
+            IBusinessRuleService businessRuleService)
         {
             _mapper = mapper;
             _messageApiService = messageApiService;
+            _businessRuleService = businessRuleService;
             Priority = PRIORITY_NORMAL;
         }
 
@@ -67,6 +71,14 @@
             // AI: Map to the DTO
             var message = _mapper.Map<ApplicationSmsDto, NotifyMessageDto>(e.DomainObject);
 
+            // AI: Try to send the notification first
+            SendNotificationProcess sendNotificationProcess = new SendNotificationProcess(message);
+            var respProcess = _businessRuleService.ExecuteProcess(sendNotificationProcess);
+            message.IsComplete = respProcess.Success;
+            message.IsError = respProcess.Error;
+            message.ProcessDate = DateTimeOffset.UtcNow;
+            message.ProcessResponse = JsonSerializer.Instance.SerializeObject(respProcess);
+
             // AI: Call the API service to create the message
             var respCreate = _messageApiService.Create(message);
 
@@ -100,6 +112,14 @@
 
             // AI: Map to the DTO
             var message = _mapper.Map<ApplicationSmsDto, NotifyMessageDto>(e.DomainObject);
+
+            // AI: Try to send the notification first
+            SendNotificationProcess sendNotificationProcess = new SendNotificationProcess(message);
+            var respProcess = await _businessRuleService.ExecuteProcessAsync(sendNotificationProcess);
+            message.IsComplete = respProcess.Success;
+            message.IsError = respProcess.Error;
+            message.ProcessDate = DateTimeOffset.UtcNow;
+            message.ProcessResponse = JsonSerializer.Instance.SerializeObject(respProcess);
 
             // AI: Call the API service to create the message
             var respCreate = await _messageApiService.CreateAsync(message);

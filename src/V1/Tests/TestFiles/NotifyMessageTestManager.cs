@@ -49,7 +49,7 @@ namespace ServiceBricks.Xunit
 
             Assert.True(serviceDto.FromAddress == clientDto.FromAddress);
 
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
             {
                 if (clientDto.FutureProcessDate != DateTimeOffset.MinValue)
                 {
@@ -77,7 +77,7 @@ namespace ServiceBricks.Xunit
 
             Assert.True(serviceDto.Priority == clientDto.Priority);
 
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
             {
                 if (clientDto.ProcessDate != DateTimeOffset.MinValue)
                 {
@@ -104,7 +104,7 @@ namespace ServiceBricks.Xunit
             Assert.True(serviceDto.ToAddress == clientDto.ToAddress);
 
             //UpdateDateRule
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
                 Assert.True(serviceDto.UpdateDate > clientDto.UpdateDate); //Rule
             else
             {
@@ -166,18 +166,36 @@ namespace ServiceBricks.Xunit
 
         public override IApiClient<NotifyMessageDto> GetClient(IServiceProvider serviceProvider)
         {
+            var appconfig = serviceProvider.GetRequiredService<IConfiguration>();
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(appconfig)
+                .AddInMemoryCollection(new Dictionary<string, string?>
+                {
+                    { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":ReturnResponseObject", "false" },
+                })
+                .Build();
+
             return new NotifyMessageApiClient(
                 serviceProvider.GetRequiredService<ILoggerFactory>(),
                 serviceProvider.GetRequiredService<IHttpClientFactory>(),
-                serviceProvider.GetRequiredService<IConfiguration>());
+                config);
         }
 
         public override IApiClient<NotifyMessageDto> GetClientReturnResponse(IServiceProvider serviceProvider)
         {
+            var appconfig = serviceProvider.GetRequiredService<IConfiguration>();
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(appconfig)
+                .AddInMemoryCollection(new Dictionary<string, string?>
+                {
+                    { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":ReturnResponseObject", "true" },
+                })
+                .Build();
+
             return new NotifyMessageApiClient(
                 serviceProvider.GetRequiredService<ILoggerFactory>(),
                 serviceProvider.GetRequiredService<IHttpClientFactory>(),
-                serviceProvider.GetRequiredService<IConfiguration>());
+                config);
         }
 
         public override IApiService<NotifyMessageDto> GetService(IServiceProvider serviceProvider)
@@ -261,7 +279,7 @@ namespace ServiceBricks.Xunit
             Assert.True(serviceDto.ToAddress == clientDto.ToAddress);
 
             //UpdateDateRule
-            if (method == HttpMethod.Post || method == HttpMethod.Put)
+            if (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Patch)
                 Assert.True(serviceDto.UpdateDate > clientDto.UpdateDate); //Rule
             else
                 Assert.True(serviceDto.UpdateDate == clientDto.UpdateDate);

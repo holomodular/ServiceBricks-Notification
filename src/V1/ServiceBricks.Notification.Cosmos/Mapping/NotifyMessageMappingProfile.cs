@@ -52,7 +52,7 @@
                     Guid tempKey;
                     if (Guid.TryParse(s.StorageKey, out tempKey))
                         d.Key = tempKey;
-                    //d.PartitionKey ignore
+                    d.PartitionKey = d.CreateDate.ToString("yyyyMMdd");
                     d.Priority = s.Priority;
                     d.ProcessDate = s.ProcessDate;
                     d.ProcessResponse = s.ProcessResponse;

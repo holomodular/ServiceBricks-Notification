@@ -20,14 +20,5 @@
         /// </summary>
         public const string APPSETTING_CLIENT_APICONFIG = @"ServiceBricks:Notification:Client:Api";
 
-        /// <summary>
-        /// Multi-factor authentication provider for phone.
-        /// </summary>
-        public const string MFA_PROVIDER_PHONE = "Phone";
-
-        /// <summary>
-        /// Multi-factor authentication provider for email.
-        /// </summary>
-        public const string MFA_PROVIDER_EMAIL = "Email";
     }
 }

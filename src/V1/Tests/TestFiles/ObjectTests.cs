@@ -216,7 +216,8 @@ namespace ServiceBricks.Xunit
         {
             CreateApplicationEmailRule rule = new CreateApplicationEmailRule(
                 SystemManager.ServiceProvider.GetRequiredService<INotifyMessageApiService>(),
-                SystemManager.ServiceProvider.GetRequiredService<IMapper>());
+                SystemManager.ServiceProvider.GetRequiredService<IMapper>(),
+                SystemManager.ServiceProvider.GetRequiredService<IBusinessRuleService>());
 
             BusinessRuleContext context = new BusinessRuleContext();
             context.Object = new CreateApplicationEmailBroadcast(new ApplicationEmailDto()
@@ -241,7 +242,8 @@ namespace ServiceBricks.Xunit
         {
             CreateApplicationSmsRule rule = new CreateApplicationSmsRule(
                 SystemManager.ServiceProvider.GetRequiredService<INotifyMessageApiService>(),
-                SystemManager.ServiceProvider.GetRequiredService<IMapper>());
+                SystemManager.ServiceProvider.GetRequiredService<IMapper>(),
+                SystemManager.ServiceProvider.GetRequiredService<IBusinessRuleService>());
 
             BusinessRuleContext context = new BusinessRuleContext();
             context.Object = new CreateApplicationSmsBroadcast(new ApplicationSmsDto()

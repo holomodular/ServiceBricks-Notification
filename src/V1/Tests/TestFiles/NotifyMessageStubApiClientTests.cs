@@ -25,17 +25,19 @@ namespace ServiceBricks.Xunit
 
         public override IApiClient<NotifyMessageDto> GetClient(IServiceProvider serviceProvider)
         {
-            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            var newconfig = new Dictionary<string, string>()
+            var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["ServiceBricks:Notification:Client:Api:BaseServiceUrl"] = "https://localhost:7000/api/v1.0",
-            };
-            var config = configurationBuilder
-                .AddInMemoryCollection(newconfig).Build();
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":ReturnResponseObject", "false" },
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":DisableAuthentication", "false" },
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":TokenUrl", "https://localhost:7000/token" },
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":BaseServiceUrl", "https://localhost:7000/" },
+            })
+            .Build();
+
             var apioptions = new OptionsWrapper<ApiOptions>(new ApiOptions() { ReturnResponseObject = false });
             var apiservice = serviceProvider.GetRequiredService<INotifyMessageApiService>();
             var controller = new NotifyMessageApiController(apiservice, apioptions);
-            var options = new OptionsWrapper<ClientApiOptions>(new ClientApiOptions() { ReturnResponseObject = false, BaseServiceUrl = "https://localhost:7000/", TokenUrl = "https://localhost:7000/token" });
             var handler = new ApiClientTests.CustomGenericHttpClientHandler<NotifyMessageDto>(controller);
             var clientHandlerFactory = new NotifyMessageHttpClientFactory(handler);
             return new NotifyMessageApiClient(
@@ -48,19 +50,19 @@ namespace ServiceBricks.Xunit
 
         public override IApiClient<NotifyMessageDto> GetClientReturnResponse(IServiceProvider serviceProvider)
         {
-            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            var newconfig = new Dictionary<string, string>()
+            var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["ServiceBricks:Notification:Client:Api:BaseServiceUrl"] = "https://localhost:7000/api/v1.0",
-                ["ServiceBricks:Notification:Client:Api:ReturnResponseObject"] = "true",
-            };
-            var config = configurationBuilder
-                .AddInMemoryCollection(newconfig).Build();
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":ReturnResponseObject", "true" },
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":DisableAuthentication", "false" },
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":TokenUrl", "https://localhost:7000/token" },
+                            { ServiceBricksConstants.APPSETTING_CLIENT_APIOPTIONS + ":BaseServiceUrl", "https://localhost:7000/" },
+            })
+            .Build();
 
             var apioptions = new OptionsWrapper<ApiOptions>(new ApiOptions() { ReturnResponseObject = true });
             var apiservice = serviceProvider.GetRequiredService<INotifyMessageApiService>();
             var controller = new NotifyMessageApiController(apiservice, apioptions);
-
             var handler = new ApiClientTests.CustomGenericHttpClientHandler<NotifyMessageDto>(controller);
             var clientHandlerFactory = new NotifyMessageHttpClientFactory(handler);
             return new NotifyMessageApiClient(

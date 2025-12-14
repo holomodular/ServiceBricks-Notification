@@ -18,7 +18,7 @@ namespace ServiceBricks.Notification
             ILoggerFactory loggerFactory,
             IHttpClientFactory httpClientFactory,
             IConfiguration configuration)
-            : base(loggerFactory, httpClientFactory, configuration.GetApiConfig(NotificationConstants.APPSETTING_CLIENT_APICONFIG))
+            : base(loggerFactory, httpClientFactory, configuration.GetApiConfig(NotificationModelConstants.APPSETTING_CLIENT_APICONFIG))
         {
             ApiResource = @"Notification/NotifyMessage";
         }

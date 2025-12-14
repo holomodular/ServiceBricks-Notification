@@ -48,9 +48,8 @@
                     d.IsComplete = s.IsComplete;
                     d.IsError = s.IsComplete;
                     d.IsHtml = s.IsHtml;
-                    d.IsProcessing = s.IsProcessing;
-                    long tempKey;
-                    if (long.TryParse(s.StorageKey, out tempKey))
+                    d.IsProcessing = s.IsProcessing;                    
+                    if (long.TryParse(s.StorageKey, out var tempKey))
                         d.Key = tempKey;
                     d.Priority = s.Priority;
                     d.ProcessDate = s.ProcessDate;

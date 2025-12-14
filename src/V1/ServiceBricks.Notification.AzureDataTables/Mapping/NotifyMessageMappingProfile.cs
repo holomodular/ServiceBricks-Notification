@@ -60,27 +60,18 @@ namespace ServiceBricks.Notification.AzureDataTables
                     d.ProcessResponse = s.ProcessResponse;
                     d.RetryCount = s.RetryCount;
                     d.SenderType = s.SenderType;
+                    d.Subject = s.Subject;
+                    //d.Timestamp ignore
+                    d.ToAddress = s.ToAddress;
+                    d.UpdateDate = s.UpdateDate;
                     if (!string.IsNullOrEmpty(s.StorageKey))
                     {
                         string[] tempStorageKey = s.StorageKey.Split(StorageAzureDataTablesConstants.STORAGEKEY_DELIMITER);
                         if (tempStorageKey.Length >= 1)
                             d.PartitionKey = tempStorageKey[0];
-                        else
-                            d.PartitionKey = string.Empty;
                         if (tempStorageKey.Length >= 2)
                             d.RowKey = tempStorageKey[1];
-                        else
-                            d.RowKey = string.Empty;
                     }
-                    else
-                    {
-                        d.PartitionKey = string.Empty;
-                        d.RowKey = string.Empty;
-                    }
-                    d.Subject = s.Subject;
-                    //d.Timestamp ignore
-                    d.ToAddress = s.ToAddress;
-                    d.UpdateDate = s.UpdateDate;
                 });
         }
     }

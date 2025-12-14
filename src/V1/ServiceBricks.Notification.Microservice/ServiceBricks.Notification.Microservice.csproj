@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.4.0-a</Version>
+		<Version>1.4.0-c</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Notification.Microservice</PackageId>
 		<Title>ServiceBricks.Notification.Microservice</Title>
@@ -34,9 +34,9 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-a" />
-		<PackageReference Include="ServiceBricks.Core" Version="1.4.0-a" />
-		<PackageReference Include="SendGrid" Version="9.29.3" />
+		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-c" />
+		<PackageReference Include="ServiceBricks.Core" Version="1.4.0-c" />
+		<PackageReference Include="ServiceBricks.Notification.Model" Version="1.4.0-c" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ServiceBricks.Notification\ServiceBricks.Notification.csproj" PrivateAssets="All">
@@ -74,10 +74,6 @@
 		<ProjectReference Include="..\ServiceBricks.Notification.SqlServer\ServiceBricks.Notification.SqlServer.csproj" PrivateAssets="All">
 			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
 			<IncludeAssets>ServiceBricks.Notification.SqlServer.dll</IncludeAssets>
-		</ProjectReference>
-		<ProjectReference Include="..\ServiceBricks.Notification.SendGrid\ServiceBricks.Notification.SendGrid.csproj" PrivateAssets="All">
-			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-			<IncludeAssets>ServiceBricks.Notification.SendGrid.dll</IncludeAssets>
 		</ProjectReference>
 	</ItemGroup>
 	<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">

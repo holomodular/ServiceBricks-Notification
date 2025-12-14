@@ -85,7 +85,7 @@ namespace ServiceBricks.Notification
                 return response;
             }
 
-            // Copy the object to avoid changing the original
+            // AI: Copy the object to avoid changing the original
             NotifyMessageDto msg = new NotifyMessageDto();
             msg = _mapper.Map(p.DomainObject, msg);
 

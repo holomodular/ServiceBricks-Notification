@@ -139,6 +139,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppNet10", "src\V1\Tests\WebAppNet10\WebAppNet10.csproj", "{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBricks.Notification.Model", "src\V1\ServiceBricks.Notification.Model\ServiceBricks.Notification.Model.csproj", "{331BE04F-8EDA-4945-A0BA-BAB39FCE6C96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -393,6 +395,10 @@ Global
 		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55FA1428-DD3A-2F2B-74DD-4C7F1F7D7CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331BE04F-8EDA-4945-A0BA-BAB39FCE6C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331BE04F-8EDA-4945-A0BA-BAB39FCE6C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331BE04F-8EDA-4945-A0BA-BAB39FCE6C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331BE04F-8EDA-4945-A0BA-BAB39FCE6C96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
