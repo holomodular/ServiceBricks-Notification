@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification;
 using ServiceBricks.Notification.Postgres;
-using ServiceBricks.Cache.Postgres;
+using ServiceBricks.Cache.InMemory;
 
 namespace ServiceBricks.Xunit
 {
@@ -18,7 +18,7 @@ namespace ServiceBricks.Xunit
             base.CustomConfigureServices(services);
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksCachePostgres(Configuration);
+            services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksNotificationPostgres(Configuration);
             services.AddServiceBricksComplete(Configuration);
 

@@ -1,3 +1,8 @@
+# 1.4.0-d
+- Moved email and sms provider interfaces to Model package
+- Removed SendGrid from Microservice package (standalone)
+- Verified all tests run successfully for all providers and versions
+
 # 1.4.0-c
 - Create new ServiceBricks.Notification.Model package and include DTOs, clients and contracts
 

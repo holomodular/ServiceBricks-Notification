@@ -11,6 +11,8 @@
 	  <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="7.1.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.20" />
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.2" />
+	  <PackageReference Include="ServiceBricks.Logging.Microservice" Version="1.4.0-d" />
+	  <PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-d" />
   </ItemGroup>
 
   <ItemGroup>

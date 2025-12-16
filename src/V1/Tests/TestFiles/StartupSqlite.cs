@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBricks.Notification;
 using ServiceBricks.Notification.Sqlite;
-using ServiceBricks.Cache.Sqlite;
+using ServiceBricks.Cache.InMemory;
 
 namespace ServiceBricks.Xunit
 {
@@ -18,7 +18,7 @@ namespace ServiceBricks.Xunit
             base.CustomConfigureServices(services);
             services.AddSingleton(Configuration);
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksCacheSqlite(Configuration);
+            services.AddServiceBricksCacheInMemory(Configuration);
             services.AddServiceBricksNotificationSqlite(Configuration);
             services.AddServiceBricksComplete(Configuration);
 
