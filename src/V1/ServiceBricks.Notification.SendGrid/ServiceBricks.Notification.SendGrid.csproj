@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.4.0-d</Version>
+		<Version>1.4.0-e</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Notification.SendGrid</PackageId>
 		<Title>ServiceBricks.Notification.SendGrid</Title>
@@ -32,8 +32,9 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
-	<ItemGroup>		
-		<PackageReference Include="ServiceBricks.Notification.Model" Version="1.4.0-d" />
+	<ItemGroup>
+		 <PackageReference Include="ServiceBricks.Notification.Model" Version="1.4.0-e" />
+		<!-- <ProjectReference Include="..\ServiceBricks.Notification.Model\ServiceBricks.Notification.Model.csproj" /> -->
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="SendGrid" Version="9.29.3" />

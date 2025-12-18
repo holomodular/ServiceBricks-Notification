@@ -10,9 +10,8 @@
 	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.1" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
-		<PackageReference Include="ServiceBricks.Logging.Microservice" Version="1.4.0-d" />
-		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-d" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />		
+		<PackageReference Include="ServiceBricks.Cache.Microservice" Version="1.4.0-e" />
 	</ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,5 @@
 using ServiceBricks;
 using ServiceBricks.Cache.Cosmos;
-using ServiceBricks.Logging.Cosmos;
 using ServiceBricks.Notification.Cosmos;
 using WebApp.Extensions;
 
@@ -18,7 +17,6 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingCosmos(Configuration);
             services.AddServiceBricksCacheCosmos(Configuration);
             services.AddServiceBricksNotificationCosmos(Configuration);
             ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);

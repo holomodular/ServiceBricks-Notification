@@ -1,3 +1,7 @@
+# 1.4.0-e
+- Minor fixes
+- New test home page
+
 # 1.4.0-d
 - Moved email and sms provider interfaces to Model package
 - Removed SendGrid from Microservice package (standalone)

@@ -1,7 +1,6 @@
 using ServiceBricks;
 using ServiceBricks.Notification.AzureDataTables;
 using ServiceBricks.Cache.AzureDataTables;
-using ServiceBricks.Logging.AzureDataTables;
 using WebApp.Extensions;
 
 namespace WebApp
@@ -18,7 +17,6 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingAzureDataTables(Configuration);
             services.AddServiceBricksCacheAzureDataTables(Configuration);
             services.AddServiceBricksNotificationAzureDataTables(Configuration);
             ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);

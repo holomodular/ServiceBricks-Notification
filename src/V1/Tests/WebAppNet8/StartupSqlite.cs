@@ -1,6 +1,5 @@
 using ServiceBricks;
 using ServiceBricks.Cache.Sqlite;
-using ServiceBricks.Logging.Sqlite;
 using ServiceBricks.Notification.Sqlite;
 using WebApp.Extensions;
 
@@ -18,7 +17,6 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingSqlite(Configuration);
             services.AddServiceBricksCacheSqlite(Configuration);
             services.AddServiceBricksNotificationSqlite(Configuration);
             ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);

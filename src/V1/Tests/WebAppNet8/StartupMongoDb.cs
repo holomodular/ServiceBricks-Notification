@@ -1,6 +1,5 @@
 using ServiceBricks;
 using ServiceBricks.Cache.MongoDb;
-using ServiceBricks.Logging.MongoDb;
 using ServiceBricks.Notification.MongoDb;
 using WebApp.Extensions;
 
@@ -18,7 +17,6 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingMongoDb(Configuration);
             services.AddServiceBricksCacheMongoDb(Configuration);
             services.AddServiceBricksNotificationMongoDb(Configuration);
             ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);

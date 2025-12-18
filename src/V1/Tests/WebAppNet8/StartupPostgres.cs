@@ -1,6 +1,5 @@
 using ServiceBricks;
 using ServiceBricks.Cache.Postgres;
-using ServiceBricks.Logging.Postgres;
 using ServiceBricks.Notification.Postgres;
 using WebApp.Extensions;
 
@@ -18,7 +17,6 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingPostgres(Configuration);
             services.AddServiceBricksCachePostgres(Configuration);
             services.AddServiceBricksNotificationPostgres(Configuration);
             ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);

@@ -1,7 +1,6 @@
 using ServiceBricks;
 using ServiceBricks.Cache.SqlServer;
 using ServiceBricks.Notification.SqlServer;
-using ServiceBricks.Logging.SqlServer;
 using WebApp.Extensions;
 
 namespace WebApp
@@ -18,7 +17,6 @@ namespace WebApp
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBricks(Configuration);
-            services.AddServiceBricksLoggingSqlServer(Configuration);
             services.AddServiceBricksCacheSqlServer(Configuration);
             services.AddServiceBricksNotificationSqlServer(Configuration);
             ProblemDetailsMappingProfile.Register(MapperRegistry.Instance);
