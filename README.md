@@ -1,4 +1,4 @@
-![ServiceBricks Logo](https://github.com/holomodular/ServiceBricks/blob/main/Logo.png)  
+![ServiceBricks Logo](https://raw.githubusercontent.com/holomodular/ServiceBricks/main/Logo.png)   
 
 [![NuGet version](https://badge.fury.io/nu/ServiceBricks.Notification.Microservice.svg)](https://badge.fury.io/nu/ServiceBricks.Notification.Microservice)
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/holomodular-support/e48b40f2064d0b0a359109f864c3aff7/raw/servicebricksnotification-codecoverage.json)
@@ -8,30 +8,37 @@
 
 ## Overview
 
-This repository contains a notification microservice built using the ServiceBricks foundation.
-The notification microservice is responsible for send emails and SMS messages from the system.
-It provides a background task to process notify messages, along with retry, should external providers not be available.
-It also subscribes to service bus messages for email and sms broadcasts, so that the security microservice and others have a default mechanism to send notifications from the system.
+This repository contains the notification microservice built using the ServiceBricks foundation.
+The notification microservice is responsible for sending emails and SMS messages from the system.
+It provides a background task to process notify messages, along with retry, should external providers not be available when being sent.
+It subscribes to service bus messages for email and sms broadcasts, so that the security microservice and others have a default mechanism to send notifications from the system.
 
 ### Supported Providers
 By default, dependency injection is registered with a dummy email and sms provider that does not send any message but simply logs them using an ILogger<> inteface.
-You must explicitly add a line of code to register the providers below.
+You must explicitly add a line of code and configurations to register the providers below. 
+You can quickly build your own providers by including the **ServiceBricks.Notification.Model** NuGet package and implementing the IEmailProvider and ISmsProvider interfaces.
 
 
 #### Email
 
 * SendGrid - Nuget Package - ServiceBricks.Notification.SendGrid
 
+Add ServiceBricks:Notification:SendGrid:ApiKey to your appsettings.config
 ```csharp
+using ServiceBricks.Notification.SendGrid;
 services.AddServiceBricksNotificationSendGrid();
 ```
 
-* Smtp  - Included in ServiceBricks.Notification
+* SMTP  - Included in ServiceBricks.Notification
 
+See config below
 ```csharp
 services.AddScoped<IEmailProvider, SmtpEmailProvider>();
 ```
 
+#### SMS
+
+Coming soon! Or build your own as needed.
 
 ## Data Transfer Objects
 
@@ -40,9 +47,20 @@ Used to store a notification message. It additionally contains properties to sup
 
 ```csharp
 
-public class NotifyMessageDto : DataTransferObject
-{
-    public int SenderTypeKey { get; set; }
+public class NotifyMessageDto : DataTransferObject, IDpWorkProcess
+{    
+    public string SenderType { get; set; }
+    public virtual bool IsHtml { get; set; }
+    public virtual string Priority { get; set; }
+    public virtual string Subject { get; set; }
+    public virtual string BccAddress { get; set; }
+    public virtual string CcAddress { get; set; }
+    public virtual string ToAddress { get; set; }
+    public virtual string FromAddress { get; set; }
+    public virtual string Body { get; set; }
+    public virtual string BodyHtml { get; set; }
+
+    // IDpWorkProcess related
     public bool IsError { get; set; }
     public bool IsComplete { get; set; }
     public int RetryCount { get; set; }
@@ -53,15 +71,6 @@ public class NotifyMessageDto : DataTransferObject
     public string ProcessResponse { get; set; }
     public bool IsProcessing { get; set; }
 
-    public virtual bool IsHtml { get; set; }
-    public virtual string Priority { get; set; }
-    public virtual string Subject { get; set; }
-    public virtual string BccAddress { get; set; }
-    public virtual string CcAddress { get; set; }
-    public virtual string ToAddress { get; set; }
-    public virtual string FromAddress { get; set; }
-    public virtual string Body { get; set; }
-    public virtual string BodyHtml { get; set; }
 }
 
 ```
@@ -70,12 +79,13 @@ public class NotifyMessageDto : DataTransferObject
 
 ### SendNotificationProcess
 This process is used to send a notify message. The SendNotificationProcessRule class implements the functionality to send an email or sms sendertype.
+You can register new rules to handle new sender types or unregister the existing rule and build your own.
 
 
 ## Background Tasks and Timers
 
 ### SendNotificationTimer class
-This background timer runs every 10 seconds, with an initial delay of 1 second. Executes the SendNotificationTask.
+A background timer can be enabled, with an initial delay and interval, that executes the SendNotificationTask.
 
 [View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTimer.cs)
 
@@ -90,7 +100,8 @@ This background task invokes the [NotifyMessageWorkService](https://github.com/h
 ### CreateApplicationEmailBroadcast
 This microservice subscribes to the CreateApplicationEmailBroadcast message.
 It is associated to the [CreateApplicationEmailRule](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Rule/CreateApplicationEmailRule.cs) Business Rule.
-When receiving the message, it will simply create a record in storage and allow the background process to pick it up to process it.
+When receiving the message from service bus, it will attempt to send the notification first, then store the process disposition before creating the message in storage. This reduces the reliance on the timer for sending messages and sends messages immediately when received.
+
 ```csharp
 
     public class CreateApplicationEmailBroadcast : DomainBroadcast<ApplicationEmailDto>
@@ -106,7 +117,7 @@ When receiving the message, it will simply create a record in storage and allow 
 ### CreateApplicationSmsBroadcast
 This microservice subscribes to the CreateApplicationSmsBroadcast message.
 It is associated to the [CreateApplicationSmsRule](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Rule/CreateApplicationSmsRule.cs) Business Rule.
-When receiving the message, it will simply create a record in storage and allow the background process to pick it up to process it.
+When receiving the message from service bus, it will attempt to send the notification first, then store the process disposition before creating the message in storage. This reduces the reliance on the timer for sending messages and sends messages immediately when received.
 ```csharp
 
     public class CreateApplicationSmsBroadcast : DomainBroadcast<ApplicationSmsDto>
@@ -132,27 +143,29 @@ When receiving the message, it will simply create a record in storage and allow 
 
     // Notification Microservice Settings
     "Notification": {
-      "Options": {
-        // Default from address for email and sms, if not specified when created
-        "EmailFromDefault": "support@servicebricks.com",
-        "SmsFromDefault": "1234567890",
-    
-        // when in development mode, emails and sms messages will be sent to only these addresses
-        "IsDevelopment": true,
-        "DevelopmentEmailTo": "developer@servicebricks.com",
-        "DevelopmentSmsTo": "1111111111"
+
+      // Send Notification Process
+      "Send": {
+          "TimerEnabled": false,
+          "TimerIntervalMilliseconds": 7000,
+          "TimerDueMilliseconds": 1000,
+          "EmailFromDefault": "support@servicebricks.com",
+          "SmsFromDefault": "1234567890",
+          "IsDevelopment": false,
+          "DevelopmentEmailTo": "developer@servicebricks.com",
+          "DevelopmentSmsTo": "1234567890"
       },
-    
-      // SMTP Email settings
+
+      // SMTP provider
       "Smtp": {
-        "EmailServer": "yourserver.com",
-        "EmailPort": 123,
-        "EmailEnableSsl": true,
-        "EmailUsername": "username",
-        "EmailPassword": "password"
+          "EmailServer": "yourserver.com",
+          "EmailPort": 123,
+          "EmailEnableSsl": true,
+          "EmailUsername": "username",
+          "EmailPassword": "password"
       },
     
-      // SendGrid Integration
+      // ServiceBricks.Notification.SendGrid NuGet Package
       "SendGrid": {
         "ApiKey": "SendGridApiKey"
       }
@@ -165,5 +178,5 @@ When receiving the message, it will simply create a record in storage and allow 
 # About ServiceBricks
 
 ServiceBricks is the cornerstone for building a microservices foundation.
-Visit http://ServiceBricks.com to learn more.
+Visit https://ServiceBricks.com to learn more.
 
