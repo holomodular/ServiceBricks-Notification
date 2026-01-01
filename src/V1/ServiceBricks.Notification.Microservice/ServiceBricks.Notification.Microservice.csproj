@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.4.0-e</Version>
+		<Version>1.4.0</Version>
 		<Description>The open source microservices platform. Visit https://ServiceBricks.com to learn more.</Description>
 		<PackageId>ServiceBricks.Notification.Microservice</PackageId>
 		<Title>ServiceBricks.Notification.Microservice</Title>
@@ -34,9 +34,9 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ServiceBricks.Cache.Model" Version="1.4.0-e" />
-		<PackageReference Include="ServiceBricks.Core" Version="1.4.0-e" />
-		<PackageReference Include="ServiceBricks.Notification.Model" Version="1.4.0-e" />
+		<PackageReference Include="ServiceBricks.Cache.Model" Version="1.4.0" />
+		<PackageReference Include="ServiceBricks.Core" Version="1.4.0" />
+		<PackageReference Include="ServiceBricks.Notification.Model" Version="1.4.0" />
 		<!-- <ProjectReference Include="..\ServiceBricks.Notification.Model\ServiceBricks.Notification.Model.csproj" /> -->
 	</ItemGroup>
 	<ItemGroup>

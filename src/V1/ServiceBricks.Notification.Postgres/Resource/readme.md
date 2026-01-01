@@ -1,64 +1,182 @@
-﻿![ServiceBricks Logo](https://raw.githubusercontent.com/holomodular/ServiceBricks/main/Logo.png)  
+﻿![ServiceBricks Logo](https://raw.githubusercontent.com/holomodular/ServiceBricks/main/Logo.png)   
 
-[![NuGet version](https://badge.fury.io/nu/ServiceBricks.svg)](https://badge.fury.io/nu/ServiceBricks)
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/holomodular-support/bdb5c7c570a7a88ffb3efb3505273e34/raw/servicebricks-codecoverage.json)
+[![NuGet version](https://badge.fury.io/nu/ServiceBricks.Notification.Microservice.svg)](https://badge.fury.io/nu/ServiceBricks.Notification.Microservice)
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/holomodular-support/e48b40f2064d0b0a359109f864c3aff7/raw/servicebricksnotification-codecoverage.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-389DA0.svg)](https://opensource.org/licenses/MIT)
 
-# ServiceBricks: The Microservices Foundation
+# ServiceBricks Notification Microservice
 
 ## Overview
 
-[ServiceBricks](https://ServiceBricks.com) is a powerful microservices platform designed to streamline the development, deployment, and maintenance of distributed systems using artificial intelligence. 
-Leveraging Domain-Driven Design (DDD), Event-Driven Architecture (EDA), and a host of advanced features, ServiceBricks empowers teams to create scalable, customizable services tailored to specific business domains.
+This repository contains the notification microservice built using the ServiceBricks foundation.
+The notification microservice is responsible for sending emails and SMS messages from the system.
+It provides a background task to process notify messages, along with retry, should external providers not be available when being sent.
+It subscribes to service bus messages for email and sms broadcasts, so that the security microservice and others have a default mechanism to send notifications from the system.
 
-## Why ServiceBricks?
-
-* **Artificial Intelligence:** Use our online generator to create production-grade microservices in seconds using only a single human sentence as input.
-* **Advanced Architecture:** Provides the core architectural patterns, implementation, standardization, and governance for your microservices.
-* **REST APIs:** Expose standardized, secure REST APIs to manage your data.
-* **Storage Agnostic:** Interchangeably supports relational, document, cloud or embedded database engines
-* **Seamless Integration:** Switch storage providers without impacting microservice operations and avoid vendor lock-in.
-
-
-## Major Features
-
-* **Artificial Intelligence Integration:** Use large language models to build, query and manipulate your microservice data using simple human input.
-* **Generics:** Extensive use of generics, allowing the compiler to generate most of the required source code.
-* **REST API Services:** Templated, repository-based services for quickly exposing standard CRUD+QPV (Query, Patch, Validate) methods or custom methods.
-* **[ServiceQuery Integration](https://github.com/holomodular/ServiceQuery):** Supports standardized, polyglot, dynamic data querying for all database engines.
-* **[Business Rule Engine](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/BusinessRuleEngine.md):** Polymorphic techniques to build reusable business logic.
-* **[Domain-Driven Design (DDD)](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/FlowOfData.md) & [Event-Driven Architecture (EDA)](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/EventDrivenArchitecture.md):** Customize business logic for any supported object and method.
-* **[Background Processing](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/BackgroundTasks.md):** Supports asynchronous processes, tasks, and rules.
-* **[Relational, Document, Cloud and Embedded Database Support](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/SupportedDatabaseEngines.md):** Works standard with Azure Data Tables, Cosmos DB, InMemory, MongoDB, Postgres, SQLite, SQL Server and more.
-* **[Service Bus Engine](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/BroadcastsAndServiceBus.md):** Supports broadcasts of system data with InMemory and Azure Service Bus.
-* **[Classic or Modern REST API Design](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/ClassicVsModernRestApi.md):** Choose between Classic or Modern modes, with various response formats.
-* **[NuGet Packages](https://github.com/holomodular/ServiceBricks-Documentation/blob/main/V1/NuGet.md):** Quickly build new services and applications.
-* **Testing Framework:** Comprehensive Xunit test framework for robust unit and integration testing with thousands of tests available.
-* **Open Source:** All referenced assemblies are open source and licensed under MIT or an equivalent license.
+### Supported Providers
+By default, dependency injection is registered with a dummy email and sms provider that does not send any message but simply logs them using an ILogger<> inteface.
+You must explicitly add a line of code and configurations to register the providers below. 
+You can quickly build your own providers by including the **ServiceBricks.Notification.Model** NuGet package and implementing the IEmailProvider and ISmsProvider interfaces.
 
 
-## Getting Started with Examples
+#### Email
 
-Explore our [ServiceBricks-Examples](https://github.com/holomodular/ServiceBricks-Examples) repository for practical examples on hosting and deploying your ServiceBricks foundation. From single, monolithic web applications to distributed, multi-deployment, containerized web applications, these examples provide the building blocks to create and scale your own foundations quickly.
+* SendGrid - Nuget Package - ServiceBricks.Notification.SendGrid
 
-## Documentation
+Add ServiceBricks:Notification:SendGrid:ApiKey to your appsettings.config
+```csharp
+using ServiceBricks.Notification.SendGrid;
+services.AddServiceBricksNotificationSendGrid();
+```
 
-Check out our [ServiceBricks-Documentation](https://github.com/holomodular/ServiceBricks-Documentation) repository for comprehensive documentation on the platform, including guides on using all components and developing your own microservices.
+* SMTP  - Included in ServiceBricks.Notification
 
-## Official Pre-Built Microservices
+See config below
+```csharp
+services.AddScoped<IEmailProvider, SmtpEmailProvider>();
+```
 
-Get started quickly with our pre-built microservices:
+#### SMS
 
-* [ServiceBricks-Cache](https://github.com/holomodular/ServiceBricks-Cache): Generic data storage microservice with a built in expiration process and a distributed semaphore for cache-level locking for multi-instance deployments.
-* [ServiceBricks-Logging](https://github.com/holomodular/ServiceBricks-Logging): Service-scoped or centralized logging and a web request auditing microservice.
-* [ServiceBricks-Notification](https://github.com/holomodular/ServiceBricks-Notification): Notification and delivery for emails and SMS messages.
-* [ServiceBricks-Security](https://github.com/holomodular/ServiceBricks-Security): Authentication, authorization, and application security with JWT bearer token support for multi-instance deployments.
-* [ServiceBricks-Work](https://github.com/holomodular/ServiceBricks-Work): Work queue microservice for reliable, event-driven background processing.
+Coming soon! Or build your own as needed.
 
-## Trademarks
+## Data Transfer Objects
 
-“ServiceBricks”, "ServiceQuery" and “HoloModular” are trademarks of HoloModular LLC. The MIT License covers code only; it does not grant rights to use our trademarks, logos, or brand assets (including in modified or redistributed versions) without permission.
+### NotifyMessageDto - Admin Policy
+Used to store a notification message. It additionally contains properties to support the IDpWorkProcess and WorkService for processing the table like a work queue.
 
-## About
+```csharp
 
-ServiceBricks is owned and maintained by HoloModular LLC and authored by Danny Logsdon (Founder). Visit our websites at https://HoloModular.com, https://ServiceBricks.com or https://www.linkedin.com/in/danlogsdon to learn more.
+public class NotifyMessageDto : DataTransferObject, IDpWorkProcess
+{    
+    public string SenderType { get; set; }
+    public virtual bool IsHtml { get; set; }
+    public virtual string Priority { get; set; }
+    public virtual string Subject { get; set; }
+    public virtual string BccAddress { get; set; }
+    public virtual string CcAddress { get; set; }
+    public virtual string ToAddress { get; set; }
+    public virtual string FromAddress { get; set; }
+    public virtual string Body { get; set; }
+    public virtual string BodyHtml { get; set; }
+
+    // IDpWorkProcess related
+    public bool IsError { get; set; }
+    public bool IsComplete { get; set; }
+    public int RetryCount { get; set; }
+    public DateTimeOffset FutureProcessDate { get; set; }
+    public DateTimeOffset CreateDate { get; set; }
+    public DateTimeOffset UpdateDate { get; set; }
+    public DateTimeOffset ProcessDate { get; set; }
+    public string ProcessResponse { get; set; }
+    public bool IsProcessing { get; set; }
+
+}
+
+```
+
+## Business Events and Processes
+
+### SendNotificationProcess
+This process is used to send a notify message. The SendNotificationProcessRule class implements the functionality to send an email or sms sendertype.
+You can register new rules to handle new sender types or unregister the existing rule and build your own.
+
+
+## Background Tasks and Timers
+
+### SendNotificationTimer class
+A background timer can be enabled, with an initial delay and interval, that executes the SendNotificationTask.
+
+[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTimer.cs)
+
+### SendNotificationTask class
+This background task invokes the [NotifyMessageWorkService](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTask.cs)
+
+[View Source](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Background/SendNotificationTask.cs)
+
+
+## Service Bus
+
+### CreateApplicationEmailBroadcast
+This microservice subscribes to the CreateApplicationEmailBroadcast message.
+It is associated to the [CreateApplicationEmailRule](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Rule/CreateApplicationEmailRule.cs) Business Rule.
+When receiving the message from service bus, it will attempt to send the notification first, then store the process disposition before creating the message in storage. This reduces the reliance on the timer for sending messages and sends messages immediately when received.
+
+```csharp
+
+    public class CreateApplicationEmailBroadcast : DomainBroadcast<ApplicationEmailDto>
+    {
+        public CreateApplicationEmailBroadcast(ApplicationEmailDto obj)
+        {
+            DomainObject = obj;
+        }
+    }
+
+```
+
+### CreateApplicationSmsBroadcast
+This microservice subscribes to the CreateApplicationSmsBroadcast message.
+It is associated to the [CreateApplicationSmsRule](https://github.com/holomodular/ServiceBricks-Notification/blob/main/src/V1/ServiceBricks.Notification/Rule/CreateApplicationSmsRule.cs) Business Rule.
+When receiving the message from service bus, it will attempt to send the notification first, then store the process disposition before creating the message in storage. This reduces the reliance on the timer for sending messages and sends messages immediately when received.
+```csharp
+
+    public class CreateApplicationSmsBroadcast : DomainBroadcast<ApplicationSmsDto>
+    {
+        public CreateApplicationSmsBroadcast(ApplicationSmsDto obj)
+        {
+            DomainObject = obj;
+        }
+    }
+
+```
+
+## Additional
+
+
+## Application Settings
+
+```json
+
+{
+  // ServiceBricks Settings
+  "ServiceBricks":{
+
+    // Notification Microservice Settings
+    "Notification": {
+
+      // Send Notification Process
+      "Send": {
+          "TimerEnabled": false,
+          "TimerIntervalMilliseconds": 7000,
+          "TimerDueMilliseconds": 1000,
+          "EmailFromDefault": "support@servicebricks.com",
+          "SmsFromDefault": "1234567890",
+          "IsDevelopment": false,
+          "DevelopmentEmailTo": "developer@servicebricks.com",
+          "DevelopmentSmsTo": "1234567890"
+      },
+
+      // SMTP provider
+      "Smtp": {
+          "EmailServer": "yourserver.com",
+          "EmailPort": 123,
+          "EmailEnableSsl": true,
+          "EmailUsername": "username",
+          "EmailPassword": "password"
+      },
+    
+      // ServiceBricks.Notification.SendGrid NuGet Package
+      "SendGrid": {
+        "ApiKey": "SendGridApiKey"
+      }
+    }
+  }
+}
+
+```
+
+# About ServiceBricks
+
+ServiceBricks is the cornerstone for building a microservices foundation.
+Visit https://ServiceBricks.com to learn more.
+
